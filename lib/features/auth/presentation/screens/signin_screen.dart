@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_ecommerce/common/auth_passwordfield.dart';
 import 'package:kitchen_ecommerce/common/auth_textfield.dart';
+import 'package:kitchen_ecommerce/common/button.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 
 class SigninScreen extends StatelessWidget {
@@ -32,8 +33,8 @@ class SigninScreen extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: height * 0.23,
-                bottom: height * 0.23,
+                top: height * 0.22,
+                bottom: height * 0.22,
                 left: 30,
                 right: 30,
                 child: LayoutBuilder(
@@ -52,79 +53,70 @@ class SigninScreen extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          spacing: conHeight * 0.02,
-                          children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Sign up with your account!",
-                                style: TextStyle(
-                                  fontSize: conHeight * 0.04,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: conHeight * 0.01),
-                            Text(
-                              "Email",
-                              style: TextStyle(fontWeight: FontWeight.w500),
-                            ),
-                            AuthTextfield(hintText: "Email"),
-
-                            Text(
-                              "Password",
-                              style: TextStyle(fontWeight: FontWeight.w500),
-                            ),
-                            AuthPasswordfield(hintText: "Password"),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                "Forgot Password?",
-                                style: TextStyle(
-                                  color: ComColors.secColor,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: conHeight * 0.02),
-                            SizedBox(
-                              width: double.infinity,
-                              height: conHeight * 0.1,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: ComColors.priColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            spacing: conHeight * 0.02,
+                            children: [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Sign up with your account!",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                child: Text(
-                                  "Sign In",
-                                  style: TextStyle(color: Colors.white),
-                                ),
                               ),
-                            ),
-                            SizedBox(height: conHeight * 0.05),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              spacing: 5,
-                              children: [
-                                Text("Don't have an account?"),
-                                Text(
-                                  "Sign Up",
+                              SizedBox(height: conHeight * 0.01),
+                              Text(
+                                "Email",
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              AuthTextfield(hintText: "Email"),
+
+                              Text(
+                                "Password",
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              AuthPasswordfield(hintText: "Password"),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  "Forgot Password?",
                                   style: TextStyle(
                                     color: ComColors.secColor,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
+                              ),
+                              SizedBox(height: conHeight * 0.02),
+                              SizedBox(
+                                width: double.infinity,
+                                height: 55,
+                                child: ComButton(),
+                              ),
+                              SizedBox(height: conHeight * 0.05),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                spacing: 5,
+                                children: [
+                                  Text("Don't have an account?"),
+                                  Text(
+                                    "Sign Up",
+                                    style: TextStyle(
+                                      color: ComColors.secColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );
