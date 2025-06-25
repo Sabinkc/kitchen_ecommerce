@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen_ecommerce/features/auth/presentation/screens/signin_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:kitchen_ecommerce/features/auth/view/screens/signin_screen.dart';
 
 void main(List<String> args) {
-  runApp(MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,9 +16,13 @@ class MyApp extends StatelessWidget {
       top: false,
       bottom: true,
       child: MaterialApp(
-        theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+        theme: ThemeData(
+          textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
+          scaffoldBackgroundColor: Colors.white,
+        ),
+
         debugShowCheckedModeBanner: false,
-        home: SigninScreen(),
+        home: const SigninScreen(),
       ),
     );
   }

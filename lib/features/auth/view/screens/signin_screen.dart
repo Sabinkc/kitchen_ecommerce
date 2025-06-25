@@ -5,7 +5,8 @@ import 'package:kitchen_ecommerce/common/auth_passwordfield.dart';
 import 'package:kitchen_ecommerce/common/auth_textfield.dart';
 import 'package:kitchen_ecommerce/common/button.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
-import 'package:kitchen_ecommerce/features/auth/presentation/screens/signup_screen.dart';
+import 'package:kitchen_ecommerce/features/auth/view/screens/signup_screen.dart';
+import 'package:kitchen_ecommerce/features/dashboard/view/screens/landing_screen.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});
@@ -49,7 +50,7 @@ class SigninScreen extends StatelessWidget {
                           boxShadow: [
                             BoxShadow(
                               color: ComColors.priColor,
-                              offset: Offset(0, 0),
+                              offset: const Offset(0, 0),
                               spreadRadius: -4,
                               blurRadius: 10,
                             ),
@@ -59,14 +60,14 @@ class SigninScreen extends StatelessWidget {
                         ),
                         child: SingleChildScrollView(
                           child: Padding(
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               spacing: conHeight * 0.02,
                               children: [
-                                Align(
+                                const Align(
                                   alignment: Alignment.center,
                                   child: Text(
                                     "Sign in with your account!",
@@ -77,17 +78,20 @@ class SigninScreen extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: conHeight * 0.01),
-                                Text(
+                                const Text(
                                   "Email",
                                   style: TextStyle(fontWeight: FontWeight.w500),
                                 ),
-                                AuthTextfield(hintText: "Email"),
+                                const AuthTextfield(
+                                  hintText: "Email",
+                                  prefixIcon: Icons.email_outlined,
+                                ),
 
-                                Text(
+                                const Text(
                                   "Password",
                                   style: TextStyle(fontWeight: FontWeight.w500),
                                 ),
-                                AuthPasswordfield(hintText: "Password"),
+                                const AuthPasswordfield(hintText: "Password"),
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
@@ -102,19 +106,31 @@ class SigninScreen extends StatelessWidget {
                                 SizedBox(
                                   width: double.infinity,
                                   height: 55,
-                                  child: ComButton(),
+                                  child: ComButton(
+                                    onPressed: () {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        CupertinoPageRoute(
+                                          builder: (context) => const LandingScreen(),
+                                        ),
+                                        (route) => false,
+                                      );
+                                    },
+                                    name: "Sign In",
+                                  ),
                                 ),
                                 SizedBox(height: conHeight * 0.05),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   spacing: 5,
                                   children: [
-                                    Text("Don't have an account?"),
+                                    const Text("Don't have an account?"),
                                     InkWell(
                                       onTap: () => Navigator.pushReplacement(
                                         context,
                                         CupertinoPageRoute(
-                                          builder: (context) => SignupScreen(),
+                                          builder: (context) =>
+                                              const SignupScreen(),
                                         ),
                                       ),
                                       child: Text(

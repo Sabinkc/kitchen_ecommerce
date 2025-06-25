@@ -10,13 +10,15 @@ class AuthPasswordfield extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
-        prefixIcon: Icon(Icons.visibility_outlined),
+        hintStyle: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+        prefixIcon: const Icon(Icons.lock_outlined),
         prefixIconColor: Colors.grey,
+        suffixIcon: const Icon(Icons.visibility_outlined),
+        suffixIconColor: Colors.grey,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(width: 2, color: ComColors.secColor),
         ),
-        enabledBorder: OutlineInputBorder(
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 2, color: Colors.grey),
         ),
       ),
