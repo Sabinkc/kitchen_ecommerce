@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: 10,
               children: [
-                const SizedBox(width: 0),
+                SizedBox(width: 0),
                 Container(
                   height: 40,
                   width: 40,
@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
             ),
             actions: [
               Padding(
-                padding: const EdgeInsets.only(right: 20),
+                padding: EdgeInsets.only(right: 20),
                 child: Container(
                   height: 40,
                   width: 40,
@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 spacing: height * 0.02,
