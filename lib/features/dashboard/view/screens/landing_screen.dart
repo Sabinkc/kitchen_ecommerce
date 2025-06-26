@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
-import 'package:kitchen_ecommerce/features/auth/view/screens/home_screen.dart';
+import 'package:kitchen_ecommerce/features/dashboard/view/screens/home_screen.dart';
 import 'package:kitchen_ecommerce/features/cart/view/screens/cart_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/favourites/view/screens/favourite_screen.dart';

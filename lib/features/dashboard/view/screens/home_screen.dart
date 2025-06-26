@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kitchen_ecommerce/common/button.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:badges/badges.dart' as b;
-import 'package:kitchen_ecommerce/features/auth/model/model_list.dart';
+import 'package:kitchen_ecommerce/features/dashboard/model/model_list.dart';
+import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
+import 'package:kitchen_ecommerce/features/dashboard/view/screens/productdetail_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,7 +25,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: 10,
               children: [
-                SizedBox(width: 0),
+                const SizedBox(width: 0),
                 Container(
                   height: 40,
                   width: 40,
@@ -43,7 +46,7 @@ class HomeScreen extends StatelessWidget {
             ),
             actions: [
               Padding(
-                padding: EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.only(right: 20),
                 child: Container(
                   height: 40,
                   width: 40,
@@ -64,7 +67,7 @@ class HomeScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 spacing: height * 0.02,
@@ -283,9 +286,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   GridView.builder(
                     shrinkWrap: true,
-                    padding: EdgeInsets.zero,
+                    padding: const EdgeInsets.only(top: 0, bottom: 100),
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 10,
+                    itemCount: ProductDetails.dashBotImg.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           childAspectRatio: 0.80,
@@ -294,33 +297,45 @@ class HomeScreen extends StatelessWidget {
                           mainAxisSpacing: 10,
                         ),
                     itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: ComColors.lightGrey,
-                          borderRadius: BorderRadius.circular(8),
+                      return InkWell(
+                        onTap: () => Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => ProductdetailScreen(),
+                          ),
                         ),
-                        child: Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                padding: const EdgeInsets.all(6),
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                                child: Icon(
-                                  Icons.favorite_outline,
-                                  color: ComColors.priLightColor,
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: ComColors.lightGrey,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: Icon(
+                                    Icons.favorite_outline,
+                                    color: ComColors.priLightColor,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Image.asset(
-                              "assets/images/tap.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ],
+                              Hero(
+                                tag: "hero_tag$index",
+
+                                child: Image.asset(
+                                  "assets/images/${ProductDetails.dashBotImg[index]}",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },

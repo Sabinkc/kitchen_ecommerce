@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget {
       bottom: true,
       child: MaterialApp(
         theme: ThemeData(
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
           textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
           scaffoldBackgroundColor: Colors.white,
         ),
-
         debugShowCheckedModeBanner: false,
         home: const SigninScreen(),
       ),
