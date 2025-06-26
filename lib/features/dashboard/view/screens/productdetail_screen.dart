@@ -213,10 +213,75 @@ class ProductdetailScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(top: height * 0.02),
+                    child: InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              height: height * 0.5,
+                            );
+                          },
+                        );
+                      },
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            spacing: 5,
+                            children: [
+                              Icon(Icons.new_releases_outlined),
+                              Text("Features", style: TextStyle(fontSize: 16)),
+                            ],
+                          ),
+                          Icon(Icons.arrow_forward_ios, size: 18),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Divider(height: 0, color: Colors.grey[300]),
+                  InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            height: height * 0.5,
+                          );
+                        },
+                      );
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          spacing: 5,
+                          children: [
+                            Icon(Icons.info_outline),
+                            Text(
+                              "Specifications",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                        Icon(Icons.arrow_forward_ios, size: 18),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 200),
+            const SizedBox(height: 20),
           ],
         ),
       ),
