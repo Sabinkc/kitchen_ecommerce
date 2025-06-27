@@ -1,19 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitchen_ecommerce/common/button.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:badges/badges.dart' as b;
+import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/model_list.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/productdetail_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final height = MediaQuery.sizeOf(context).height;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -299,13 +302,17 @@ class HomeScreen extends StatelessWidget {
                         ),
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: () => Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) =>
-                                ProductDetailScreen(prodIndex: index),
-                          ),
-                        ),
+                        onTap: () {
+                          // final detRefR = ref.read(productDetController);
+                          // detRefR.resetProdImg();
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) =>
+                                  ProductDetailScreen(prodIndex: index),
+                            ),
+                          );
+                        },
                         child: LayoutBuilder(
                           builder: (context, conCons) {
                             final conHeght = conCons.maxHeight;

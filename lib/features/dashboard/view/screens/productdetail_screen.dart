@@ -4,7 +4,6 @@ import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
-import 'package:string_to_color/string_to_color.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
   final int prodIndex;
@@ -22,9 +21,11 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
 
     Future.delayed(Duration.zero, () {
       final detRefR = ref.read(productDetController);
+      detRefR.resetProdImg();
       detRefR.clearImgIndex();
       detRefR.clearColIndex();
       detRefR.prodImages = products[widget.prodIndex].imgMap.values.first;
+      detRefR.imgColor = products[widget.prodIndex].imgMap.keys.first;
     });
   }
 
@@ -73,405 +74,431 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          spacing: height * 0.02,
-          children: [
-            Container(
-              height: height * 0.35,
-              width: double.infinity,
-              decoration: BoxDecoration(color: ComColors.lightGrey),
-              child: Hero(
-                tag: "hero_tag${widget.prodIndex}",
-                child: Image.asset(
-                  "assets/images/${detRef.prodImages[detRef.imgIndex]}",
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+      body: detRefR.prodImages.isEmpty
+          ? Center(child: CircularProgressIndicator(color: ComColors.secColor))
+          : SingleChildScrollView(
               child: Column(
-                spacing: height * 0.015,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: height * 0.02,
                 children: [
-                  SizedBox(
-                    height: height * 0.1,
+                  Container(
+                    height: height * 0.35,
                     width: double.infinity,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: detRef.prodImages.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: InkWell(
-                            onTap: () {
-                              ref
-                                  .read(productDetController)
-                                  .updateImgInd(index);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: index == detRef.imgIndex
-                                      ? ComColors.secColor
-                                      : Colors.white,
-                                  width: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.asset(
-                                  // "assets/images/${images[index]}",
-                                  "assets/images/${detRef.prodImages[index]}",
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        products[widget.prodIndex].category,
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    decoration: BoxDecoration(color: ComColors.lightGrey),
+                    child: Hero(
+                      tag: "hero_tag${widget.prodIndex}",
+                      child: Image.asset(
+                        "assets/images/${detRef.prodImages[detRef.imgIndex]}",
                       ),
-                      const Row(
-                        spacing: 5,
-                        children: [
-                          Icon(Icons.star, color: Colors.yellow),
-                          Text(
-                            "4.5",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-
-                  Text(
-                    products[widget.prodIndex].prodName,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                  Text(
-                    "Product Details",
-                    style: TextStyle(
-                      color: ComColors.secColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    products[widget.prodIndex].productDetails,
-                    style: const TextStyle(color: Colors.grey),
-                  ),
-                  Divider(color: Colors.grey[300]),
-                  const Row(
-                    spacing: 4,
-                    children: [
-                      Text(
-                        "Select Color:",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        'White',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                    child: ListView.builder(
-                      itemCount: products[widget.prodIndex].imgMap.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final prodColor = products[widget.prodIndex].imgMap.keys
-                            .elementAt(index);
-                        return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5),
-                          child: InkWell(
-                            onTap: () {
-                              detRefR.updateColInd(index);
-                              detRefR.clearImgIndex();
-                              detRefR.updateProdImg(
-                                products[widget.prodIndex].imgMap.keys
-                                    .elementAt(index),
-                                widget.prodIndex,
-                              );
-                            },
-                            child: Container(
-                              height: 25,
-                              width: 25,
-                              decoration: BoxDecoration(
-                                // color: colorConverter.colorFromString("red"),
-                                border: detRef.colIndex == index
-                                    ? Border.all(
-                                        color: colorConverter.colorFromString(
-                                          prodColor,
-                                        ),
-                                      )
-                                    : Border.all(color: Colors.transparent),
-                                shape: BoxShape.circle,
-                              ),
-                              alignment: Alignment.center,
-                              child: Container(
-                                height: 15,
-                                width: 15,
-                                decoration: BoxDecoration(
-                                  color: colorConverter.colorFromString(
-                                    prodColor,
-                                  ),
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: height * 0.02),
-                    child: InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              height: height * 0.5,
-                              child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      spacing: height * 0.015,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: height * 0.1,
+                          width: double.infinity,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: detRef.prodImages.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 10,
+                                  horizontal: 5,
                                 ),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Text(
-                                          "Features",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                child: InkWell(
+                                  onTap: () {
+                                    ref
+                                        .read(productDetController)
+                                        .updateImgInd(index);
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: index == detRef.imgIndex
+                                            ? ComColors.secColor
+                                            : Colors.white,
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.asset(
+                                        // "assets/images/${images[index]}",
+                                        "assets/images/${detRef.prodImages[index]}",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              products[widget.prodIndex].category,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Row(
+                              spacing: 5,
+                              children: [
+                                const Icon(Icons.star, color: Colors.yellow),
+                                Text(
+                                  products[widget.prodIndex].rating,
+                                  style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+
+                        Text(
+                          products[widget.prodIndex].prodName,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                        Text(
+                          "Product Details",
+                          style: TextStyle(
+                            color: ComColors.secColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          products[widget.prodIndex].productDetails,
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                        Divider(color: Colors.grey[300]),
+                        Row(
+                          spacing: 4,
+                          children: [
+                            const Text(
+                              "Select Color:",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              detRef.imgColor,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                          child: ListView.builder(
+                            itemCount: products[widget.prodIndex].imgMap.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              final prodColor = products[widget.prodIndex]
+                                  .imgMap
+                                  .keys
+                                  .elementAt(index);
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                child: InkWell(
+                                  onTap: () {
+                                    detRefR.updateColInd(index);
+                                    detRefR.clearImgIndex();
+                                    detRefR.updateProdImg(
+                                      products[widget.prodIndex].imgMap.keys
+                                          .elementAt(index),
+                                      widget.prodIndex,
+                                    );
+                                    detRefR.updateImgCol(
+                                      products[widget.prodIndex].imgMap.keys
+                                          .elementAt(index),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    decoration: BoxDecoration(
+                                      // color: colorConverter.colorFromString("red"),
+                                      border: detRef.colIndex == index
+                                          ? Border.all(
+                                              color: colorConverter
+                                                  .colorFromString(prodColor),
+                                            )
+                                          : Border.all(
+                                              color: Colors.transparent,
+                                            ),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: BoxDecoration(
+                                        color: colorConverter.colorFromString(
+                                          prodColor,
                                         ),
-                                        InkWell(
-                                          onTap: () => Navigator.pop(context),
-                                          child: const Icon(
-                                            Icons.cancel_outlined,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: height * 0.02),
+                          child: InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    height: height * 0.5,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 10,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              const Text(
+                                                "Features",
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              InkWell(
+                                                onTap: () =>
+                                                    Navigator.pop(context),
+                                                child: const Icon(
+                                                  Icons.cancel_outlined,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: height * 0.02),
+                                          Expanded(
+                                            child: ListView.builder(
+                                              itemCount:
+                                                  products[widget.prodIndex]
+                                                      .features
+                                                      .length,
+                                              itemBuilder: (context, index) {
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        vertical: 5,
+                                                      ),
+                                                  child: Row(
+                                                    spacing: 5,
+                                                    children: [
+                                                      const Text(
+                                                        "➜",
+                                                        style: TextStyle(
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        products[widget
+                                                                .prodIndex]
+                                                            .features[index],
+                                                        style: const TextStyle(
+                                                          color: Colors.grey,
+                                                          fontSize: 18,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  spacing: 5,
+                                  children: [
+                                    Icon(Icons.new_releases_outlined),
+                                    Text(
+                                      "Features",
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                                Icon(Icons.arrow_forward_ios, size: 18),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Divider(height: 0, color: Colors.grey[300]),
+                        InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  height: height * 0.5,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 20,
+                                      vertical: 10,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      spacing: height * 0.01,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              "Specifications",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () =>
+                                                  Navigator.pop(context),
+                                              child: const Icon(
+                                                Icons.cancel_outlined,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        // SizedBox(height: height * 0.01),
+                                        Expanded(
+                                          child: ListView.builder(
+                                            itemCount:
+                                                products[widget.prodIndex]
+                                                    .specifications
+                                                    .length,
+                                            itemBuilder: (context, index) {
+                                              final specMap =
+                                                  products[widget.prodIndex]
+                                                      .specifications;
+                                              final key = specMap.keys
+                                                  .elementAt(index);
+                                              final value =
+                                                  specMap[key] ??
+                                                  "Not available";
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                    ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      key,
+                                                      style: const TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      spacing: 5,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        const Text(
+                                                          "➜",
+                                                          style: TextStyle(
+                                                            color: Colors.grey,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          value,
+                                                          style:
+                                                              const TextStyle(
+                                                                color:
+                                                                    Colors.grey,
+                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: height * 0.02),
-                                    Expanded(
-                                      child: ListView.builder(
-                                        itemCount: products[widget.prodIndex]
-                                            .features
-                                            .length,
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              vertical: 5,
-                                            ),
-                                            child: Row(
-                                              spacing: 5,
-                                              children: [
-                                                const Text(
-                                                  "➜",
-                                                  style: TextStyle(
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  products[widget.prodIndex]
-                                                      .features[index],
-                                                  style: const TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 18,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                  ),
+                                );
+                              },
                             );
                           },
-                        );
-                      },
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            spacing: 5,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Icon(Icons.new_releases_outlined),
-                              Text("Features", style: TextStyle(fontSize: 16)),
-                            ],
-                          ),
-                          Icon(Icons.arrow_forward_ios, size: 18),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Divider(height: 0, color: Colors.grey[300]),
-                  InkWell(
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            height: height * 0.5,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 10,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                spacing: height * 0.01,
+                              Row(
+                                spacing: 5,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text(
-                                        "Specifications",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () => Navigator.pop(context),
-                                        child: const Icon(
-                                          Icons.cancel_outlined,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  // SizedBox(height: height * 0.01),
-                                  Expanded(
-                                    child: ListView.builder(
-                                      itemCount: products[widget.prodIndex]
-                                          .specifications
-                                          .length,
-                                      itemBuilder: (context, index) {
-                                        final specMap =
-                                            products[widget.prodIndex]
-                                                .specifications;
-                                        final key = specMap.keys.elementAt(
-                                          index,
-                                        );
-                                        final value =
-                                            specMap[key] ?? "Not available";
-                                        return Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 5,
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                key,
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              Row(
-                                                spacing: 5,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  const Text(
-                                                    "➜",
-                                                    style: TextStyle(
-                                                      color: Colors.grey,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    value,
-                                                    style: const TextStyle(
-                                                      color: Colors.grey,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
+                                  Icon(Icons.info_outline),
+                                  Text(
+                                    "Specifications",
+                                    style: TextStyle(fontSize: 16),
                                   ),
                                 ],
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          spacing: 5,
-                          children: [
-                            Icon(Icons.info_outline),
-                            Text(
-                              "Specifications",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
+                              Icon(Icons.arrow_forward_ios, size: 18),
+                            ],
+                          ),
                         ),
-                        Icon(Icons.arrow_forward_ios, size: 18),
                       ],
                     ),
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
 
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: height * 0.01),

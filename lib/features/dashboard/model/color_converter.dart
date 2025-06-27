@@ -5,6 +5,8 @@ class ColorConverter {
     switch (color.toLowerCase()) {
       case "grey":
         return Colors.grey;
+      case "green":
+        return Colors.green;
       case "red":
         return Colors.red;
       case 'white':

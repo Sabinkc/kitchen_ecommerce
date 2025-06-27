@@ -18,6 +18,7 @@ class ProductDetailScreenModel extends ChangeNotifier {
 
   void updateImgCol(String value) {
     imgColor = value;
+    logger.log("updated color: $imgColor");
     notifyListeners();
   }
 
