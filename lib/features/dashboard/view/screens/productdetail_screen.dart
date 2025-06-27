@@ -270,8 +270,38 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                       ],
                                     ),
                                     SizedBox(height: height * 0.02),
-                                    const Text(
-                                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                                    Expanded(
+                                      child: ListView.builder(
+                                        itemCount: products[widget.prodIndex]
+                                            .features
+                                            .length,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 5,
+                                            ),
+                                            child: Row(
+                                              spacing: 5,
+                                              children: [
+                                                const Text(
+                                                  "➜",
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  products[widget.prodIndex]
+                                                      .features[index],
+                                                  style: const TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 18,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -335,74 +365,59 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: height * 0.01),
-                                  const Text(
-                                    "Material Used",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Row(
-                                      spacing: 5,
-                                      children: [
-                                        Text(
-                                          "➜",
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                        Text(
-                                          "Stainless Steel",
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Text(
-                                    "Size",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Row(
-                                      spacing: 5,
-                                      children: [
-                                        Text(
-                                          "➜",
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                        Text(
-                                          "4 inch",
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Text(
-                                    "Installation",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 10),
-                                    child: Row(
-                                      spacing: 5,
-                                      children: [
-                                        Text(
-                                          "➜",
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                        Text(
-                                          "Installation process",
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ],
+                                  // SizedBox(height: height * 0.01),
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: products[widget.prodIndex]
+                                          .specifications
+                                          .length,
+                                      itemBuilder: (context, index) {
+                                        final specMap =
+                                            products[widget.prodIndex]
+                                                .specifications;
+                                        final key = specMap.keys.elementAt(
+                                          index,
+                                        );
+                                        final value =
+                                            specMap[key] ?? "Not available";
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 5,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                key,
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              Row(
+                                                spacing: 5,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  const Text(
+                                                    "➜",
+                                                    style: TextStyle(
+                                                      color: Colors.grey,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    value,
+                                                    style: const TextStyle(
+                                                      color: Colors.grey,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
                                 ],
@@ -458,7 +473,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Total Price",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -467,7 +482,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                   ),
                   Text(
                     "Rs.${products[widget.prodIndex].price}",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

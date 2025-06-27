@@ -1,43 +1,111 @@
+class ProductDetailModel {
+  final String prodName;
+  final String img;
+  final List<String> imgList;
+  final String category;
+  final String productDetails;
+  final String price;
+  final List<String> features;
+  final Map<String, String> specifications; // New specifications field
+
+  ProductDetailModel({
+    required this.prodName,
+    required this.img,
+    required this.imgList,
+    required this.category,
+    required this.productDetails,
+    required this.price,
+    required this.features,
+    required this.specifications,
+  });
+}
+
 final List<ProductDetailModel> products = [
   ProductDetailModel(
     prodName: "Deck Mount Kitchen Sink Faucets",
     img: "faucets_white.png",
     imgList: ["faucets_white.png", "faucets_yellow.webp", "faucets_black.webp"],
     category: "Faucets",
-    productDetails: "Deck mounting kitchen faucet with sleek finish.",
+    productDetails:
+        "High-quality deck-mount kitchen faucet with satin finish and dual handles for precise temperature control. Built with corrosion-resistant brass and ceramic cartridges to prevent leaks and ensure lifelong performance.",
     price: "100",
+    features: [
+      "Satin finish",
+      "Dual-handle",
+      "Brass body",
+      "Ceramic cartridges",
+    ],
+    specifications: {
+      "Material": "Solid brass",
+      "Installation Type": "Deck mount",
+      "Hole Size": "1.25–1.5 in diameter",
+      "Supply Line": "3/8 in compression, 20 in length",
+      "Spout Height": "10 in",
+    },
   ),
   ProductDetailModel(
     prodName: "Round Handshowers",
     img: "shower_white.png",
     imgList: ["shower_white.png", "shower_black.webp"],
     category: "Shower",
-    productDetails: "Round hand-shower ideal for modern bathrooms.",
+    productDetails:
+        "Ergonomic round hand shower offering three spray modes—massage, rain, and mist—plus anti-clog silicone nozzles and universal fittings for easy installation in any bathroom.",
     price: "60",
+    features: ["3 spray modes", "Silicone nozzles", "Ergonomic grip"],
+    specifications: {
+      "Material": "ABS plastic",
+      "Connection": "1/2\" NPT",
+      "Hose Length": "60 in",
+      "Water Pressure": "20–80 psi",
+    },
   ),
   ProductDetailModel(
     prodName: "Single Bowl Farmhouse Kitchen Sinks",
     img: "sink_white.png",
     imgList: ["sink_white.png", "sink_black.webp", "sink_green.webp"],
     category: "Sinks",
-    productDetails: "Single bowl farmhouse kitchen sink, sturdy and stylish.",
+    productDetails:
+        "Durable single-bowl farmhouse sink crafted from 18‑gauge stainless steel, featuring sound‑dampening pads, undermount design, and generous capacity for large pots and pans.",
     price: "250",
+    features: ["18‑gauge steel", "Noise insulation", "Rust-resistant"],
+    specifications: {
+      "Material": "18‑gauge stainless steel",
+      "Mount Type": "Under-mount",
+      "Bowl Depth": "10 in",
+      "Dimensions": "33 x 22 in",
+    },
   ),
   ProductDetailModel(
     prodName: "Under Mount Kitchen Sinks",
     img: "kitchen_item.png",
     imgList: ["kitchen_item.png"],
     category: "Sinks",
-    productDetails: "Under-mount kitchen sink for a seamless countertop look.",
+    productDetails:
+        "Under-mount sink with polished interior and reinforced rim. Generous basin depth lets you clean oversized pots efficiently, while its smooth edges simplify countertop integration.",
     price: "220",
+    features: ["Reinforced rim", "Polished interior", "Deep basin"],
+    specifications: {
+      "Material": "Stainless steel",
+      "Mount Type": "Under-mount",
+      "Bowl Depth": "9 in",
+      "Dimensions": "30 x 18 in",
+    },
   ),
   ProductDetailModel(
     prodName: "Stainless Steel Water Tap",
     img: "tap.png",
     imgList: ["tap.png"],
     category: "Taps",
-    productDetails: "Durable stainless steel water tap with modern design.",
+    productDetails:
+        "Contemporary stainless steel water tap featuring a single-lever ball valve for drip-free control and a 360° swivel spout for convenience and flexibility.",
     price: "40",
+    features: ["Single-lever", "Swivel spout", "Ball valve"],
+    specifications: {
+      "Material": "304 stainless steel",
+      "Spout Reach": "8 in",
+      "Valve Type": "Ball valve",
+      "Mount Type": "Single-hole",
+    },
   ),
   ProductDetailModel(
     prodName: "Medium Size Trash Cans",
@@ -48,41 +116,47 @@ final List<ProductDetailModel> products = [
       "trashcan_black.webp",
     ],
     category: "Trash Cans",
-    productDetails: "Medium size trash can with lid, easy to clean.",
+    productDetails:
+        "Medium-capacity trash can with secure snap-on lid, smooth finishes for easy cleaning, and heavy-duty plastic body designed for everyday kitchen use.",
     price: "30",
+    features: ["Snap-on lid", "Easy-clean finish", "Durable plastic"],
+    specifications: {
+      "Material": "Polyethylene",
+      "Capacity": "35 gal",
+      "Dimensions": "16 x 16 x 24 in",
+      "Use": "Indoor/outdoor",
+    },
   ),
   ProductDetailModel(
     prodName: "Flush Mount Lighting Larges",
     img: "light1.png",
     imgList: ["light1.png"],
     category: "Lighting",
-    productDetails: "Flush-mount ceiling light for large rooms.",
+    productDetails:
+        "Energy-efficient LED ceiling fixture with acrylic diffused cover and low-profile design—ideal for large living spaces seeking uniform, eye-friendly lighting.",
     price: "80",
+    features: ["LED panel", "Diffused light", "Low-profile"],
+    specifications: {
+      "Power": "18 W",
+      "Lumens": "1500 lm",
+      "Color Temp": "4000K",
+      "Diameter": "14 in",
+    },
   ),
   ProductDetailModel(
     prodName: "Small Size Sink Flangers",
     img: "flanger_white.png",
     imgList: ["flanger_white.png", "flanger_yellow.webp", "flanger_black.webp"],
     category: "Flangers",
-    productDetails: "Small sink flange connector fitting, robust build.",
+    productDetails:
+        "Compact sink flange fitting made from corrosion-resistant metal with standard threading, quick snap-on installation, and secure sealing to prevent leaks.",
     price: "15",
+    features: ["Corrosion-resistant", "Standard threading", "Leak seal"],
+    specifications: {
+      "Material": "Zinc alloy",
+      "Thread Size": "1 1/2 in",
+      "Use": "Kitchen sink flange",
+      "Seal Type": "Rubber gasket",
+    },
   ),
 ];
-
-class ProductDetailModel {
-  final String prodName;
-  final String img;
-  final List<String> imgList;
-  final String category;
-  final String productDetails;
-  final String price;
-
-  ProductDetailModel({
-    required this.prodName,
-    required this.img,
-    required this.imgList,
-    required this.category,
-    required this.productDetails,
-    required this.price,
-  });
-}
