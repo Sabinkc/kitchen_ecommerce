@@ -2,18 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
+import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
 
-class ProductdetailScreen extends ConsumerWidget {
-  ProductdetailScreen({super.key});
-
-  final List<String> images = [
-    "trashcan_white.png",
-    "trashcan_grey.webp",
-    "trashcan_black.webp",
-  ];
+class ProductDetailScreen extends ConsumerStatefulWidget {
+  final int prodIndex;
+  const ProductDetailScreen({super.key, required this.prodIndex});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState();
+}
+
+class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () {
+      ref.read(productDetController).clearImgIndex();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final detRef = ref.watch(productDetController);
     return Scaffold(
@@ -63,8 +74,10 @@ class ProductdetailScreen extends ConsumerWidget {
               width: double.infinity,
               decoration: BoxDecoration(color: ComColors.lightGrey),
               child: Hero(
-                tag: "hero_tag6",
-                child: Image.asset("assets/images/${images[detRef.imgIndex]}"),
+                tag: "hero_tag${widget.prodIndex}",
+                child: Image.asset(
+                  "assets/images/${products[widget.prodIndex].imgList[detRef.imgIndex]}",
+                ),
               ),
             ),
             Padding(
@@ -78,7 +91,7 @@ class ProductdetailScreen extends ConsumerWidget {
                     width: double.infinity,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: images.length,
+                      itemCount: products[widget.prodIndex].imgList.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -101,7 +114,8 @@ class ProductdetailScreen extends ConsumerWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
-                                  "assets/images/${images[index]}",
+                                  // "assets/images/${images[index]}",
+                                  "assets/images/${products[widget.prodIndex].imgList[index]}",
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -111,17 +125,17 @@ class ProductdetailScreen extends ConsumerWidget {
                       },
                     ),
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Trash Can",
-                        style: TextStyle(
+                        products[widget.prodIndex].category,
+                        style: const TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Row(
+                      const Row(
                         spacing: 5,
                         children: [
                           Icon(Icons.star, color: Colors.yellow),
@@ -137,9 +151,12 @@ class ProductdetailScreen extends ConsumerWidget {
                     ],
                   ),
 
-                  const Text(
-                    "Stainless Steel Trash Can",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  Text(
+                    products[widget.prodIndex].prodName,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
 
                   Text(
@@ -150,9 +167,9 @@ class ProductdetailScreen extends ConsumerWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    style: TextStyle(color: Colors.grey),
+                  Text(
+                    products[widget.prodIndex].productDetails,
+                    style: const TextStyle(color: Colors.grey),
                   ),
                   Divider(color: Colors.grey[300]),
                   const Row(
@@ -226,6 +243,39 @@ class ProductdetailScreen extends ConsumerWidget {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               height: height * 0.5,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 10,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          "Features",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () => Navigator.pop(context),
+                                          child: const Icon(
+                                            Icons.cancel_outlined,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: height * 0.02),
+                                    const Text(
+                                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                                    ),
+                                  ],
+                                ),
+                              ),
                             );
                           },
                         );
@@ -257,6 +307,107 @@ class ProductdetailScreen extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             height: height * 0.5,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 10,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                spacing: height * 0.01,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "Specifications",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () => Navigator.pop(context),
+                                        child: const Icon(
+                                          Icons.cancel_outlined,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: height * 0.01),
+                                  const Text(
+                                    "Material Used",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Row(
+                                      spacing: 5,
+                                      children: [
+                                        Text(
+                                          "➜",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                        Text(
+                                          "Stainless Steel",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Text(
+                                    "Size",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Row(
+                                      spacing: 5,
+                                      children: [
+                                        Text(
+                                          "➜",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                        Text(
+                                          "4 inch",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Text(
+                                    "Installation",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Row(
+                                      spacing: 5,
+                                      children: [
+                                        Text(
+                                          "➜",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                        Text(
+                                          "Installation process",
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           );
                         },
                       );
@@ -302,7 +453,7 @@ class ProductdetailScreen extends ConsumerWidget {
           spacing: 30,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Flexible(
+            Flexible(
               flex: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -314,7 +465,10 @@ class ProductdetailScreen extends ConsumerWidget {
                       color: Colors.grey,
                     ),
                   ),
-                  Text("Rs.120", style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(
+                    "Rs.${products[widget.prodIndex].price}",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             ),

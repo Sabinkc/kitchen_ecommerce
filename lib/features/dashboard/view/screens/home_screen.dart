@@ -288,7 +288,8 @@ class HomeScreen extends StatelessWidget {
                     shrinkWrap: true,
                     padding: const EdgeInsets.only(top: 0, bottom: 100),
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: ProductDetails.dashBotImg.length,
+                    // itemCount: ProductDetails.dashBotImg.length,
+                    itemCount: products.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                           childAspectRatio: 0.80,
@@ -301,41 +302,65 @@ class HomeScreen extends StatelessWidget {
                         onTap: () => Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => ProductdetailScreen(),
+                            builder: (context) =>
+                                ProductDetailScreen(prodIndex: index),
                           ),
                         ),
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: ComColors.lightGrey,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                  ),
-                                  child: Icon(
-                                    Icons.favorite_outline,
-                                    color: ComColors.priLightColor,
-                                  ),
-                                ),
+                        child: LayoutBuilder(
+                          builder: (context, conCons) {
+                            final conHeght = conCons.maxHeight;
+                            return Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: ComColors.lightGrey,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              Hero(
-                                tag: "hero_tag$index",
+                              child: Column(
+                                spacing: conHeght * 0.02,
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                      ),
+                                      child: Icon(
+                                        Icons.favorite_outline,
+                                        color: ComColors.priLightColor,
+                                      ),
+                                    ),
+                                  ),
+                                  Hero(
+                                    tag: "hero_tag$index",
 
-                                child: Image.asset(
-                                  "assets/images/${ProductDetails.dashBotImg[index]}",
-                                  fit: BoxFit.cover,
-                                ),
+                                    child: Image.asset(
+                                      // "assets/images/${ProductDetails.dashBotImg[index]}",
+                                      "assets/images/${products[index].img}",
+                                      height: conHeght * 0.5,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      // ProductDetails.dashProdName[index],
+                                      products[index].prodName,
+                                      maxLines: 2,
+                                      textAlign: TextAlign.left,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            );
+                          },
                         ),
                       );
                     },

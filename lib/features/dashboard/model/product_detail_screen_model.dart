@@ -6,4 +6,9 @@ class ProductDetailScreenModel extends ChangeNotifier {
     imgIndex = index;
     notifyListeners();
   }
+
+  void clearImgIndex() {
+    imgIndex = 0;
+    notifyListeners();
+  }
 }
