@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
+import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
+import 'package:string_to_color/string_to_color.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
   final int prodIndex;
@@ -19,14 +21,20 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     super.initState();
 
     Future.delayed(Duration.zero, () {
-      ref.read(productDetController).clearImgIndex();
+      final detRefR = ref.read(productDetController);
+      detRefR.clearImgIndex();
+      detRefR.clearColIndex();
+      detRefR.prodImages = products[widget.prodIndex].imgMap.values.first;
     });
   }
+
+  final colorConverter = ColorConverter();
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
     final detRef = ref.watch(productDetController);
+    final detRefR = ref.read(productDetController);
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -76,7 +84,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
               child: Hero(
                 tag: "hero_tag${widget.prodIndex}",
                 child: Image.asset(
-                  "assets/images/${products[widget.prodIndex].imgList[detRef.imgIndex]}",
+                  "assets/images/${detRef.prodImages[detRef.imgIndex]}",
                 ),
               ),
             ),
@@ -91,7 +99,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                     width: double.infinity,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: products[widget.prodIndex].imgList.length,
+                      itemCount: detRef.prodImages.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -115,7 +123,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
                                   // "assets/images/${images[index]}",
-                                  "assets/images/${products[widget.prodIndex].imgList[index]}",
+                                  "assets/images/${detRef.prodImages[index]}",
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -192,43 +200,56 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                       ),
                     ],
                   ),
-                  Row(
-                    spacing: 10,
-                    children: [
-                      Container(
-                        height: 25,
-                        width: 25,
-                        decoration: const BoxDecoration(
-                          color: Colors.grey,
-                          shape: BoxShape.circle,
-                        ),
-                        alignment: Alignment.center,
-                        child: Container(
-                          height: 15,
-                          width: 15,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
+                  SizedBox(
+                    height: 30,
+                    child: ListView.builder(
+                      itemCount: products[widget.prodIndex].imgMap.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final prodColor = products[widget.prodIndex].imgMap.keys
+                            .elementAt(index);
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: InkWell(
+                            onTap: () {
+                              detRefR.updateColInd(index);
+                              detRefR.clearImgIndex();
+                              detRefR.updateProdImg(
+                                products[widget.prodIndex].imgMap.keys
+                                    .elementAt(index),
+                                widget.prodIndex,
+                              );
+                            },
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                // color: colorConverter.colorFromString("red"),
+                                border: detRef.colIndex == index
+                                    ? Border.all(
+                                        color: colorConverter.colorFromString(
+                                          prodColor,
+                                        ),
+                                      )
+                                    : Border.all(color: Colors.transparent),
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: Alignment.center,
+                              child: Container(
+                                height: 15,
+                                width: 15,
+                                decoration: BoxDecoration(
+                                  color: colorConverter.colorFromString(
+                                    prodColor,
+                                  ),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Container(
-                        height: 25,
-                        width: 25,
-                        decoration: const BoxDecoration(
-                          color: Colors.deepPurple,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      Container(
-                        height: 25,
-                        width: 25,
-                        decoration: const BoxDecoration(
-                          color: Colors.black,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ],
+                        );
+                      },
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: height * 0.02),
