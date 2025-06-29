@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
-import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
   final int prodIndex;
@@ -39,7 +38,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     final detRef = ref.watch(productDetController);
     final detRefR = ref.read(productDetController);
     final botmProdRef = ref.watch(botmProdController);
-    // final botmProdRefR = ref.read(botmProdController);
+    final botmProdRefR = ref.read(botmProdController);
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -84,16 +83,44 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
               child: Column(
                 spacing: height * 0.02,
                 children: [
-                  Container(
-                    height: height * 0.35,
-                    width: double.infinity,
-                    decoration: BoxDecoration(color: ComColors.lightGrey),
-                    child: Hero(
-                      tag: "hero_tag${widget.prodIndex}",
-                      child: Image.asset(
-                        "assets/images/${detRef.prodImages[detRef.imgIndex]}",
+                  Stack(
+                    children: [
+                      Container(
+                        height: height * 0.35,
+                        width: double.infinity,
+                        decoration: BoxDecoration(color: ComColors.lightGrey),
+                        child: Hero(
+                          tag: "hero_tag${widget.prodIndex}",
+                          child: Image.asset(
+                            "assets/images/${detRef.prodImages[detRef.imgIndex]}",
+                          ),
+                        ),
                       ),
-                    ),
+                      if (botmProdRef.botmProducts[widget.prodIndex].isOffer ==
+                          true)
+                        Positioned(
+                          top: 10,
+                          right: 0,
+
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: ComColors.darkRed,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(4),
+                                bottomLeft: Radius.circular(4),
+                              ),
+                            ),
+                            child: Text(
+                              "${botmProdRef.botmProducts[widget.prodIndex].discountPercent}% Off",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -106,7 +133,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                           width: double.infinity,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: detRef.prodImages.length,
+                            itemCount: detRefR.prodImages.length,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -218,13 +245,13 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                         SizedBox(
                           height: 30,
                           child: ListView.builder(
-                            itemCount: botmProdRef
+                            itemCount: botmProdRefR
                                 .botmProducts[widget.prodIndex]
                                 .imgMap
                                 .length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              final prodColor = botmProdRef
+                              final prodColor = botmProdRefR
                                   .botmProducts[widget.prodIndex]
                                   .imgMap
                                   .keys
@@ -238,16 +265,16 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                     detRefR.updateColInd(index);
                                     detRefR.clearImgIndex();
                                     detRefR.updateProdImg(
-                                      botmProdRef
+                                      botmProdRefR
                                           .botmProducts[widget.prodIndex]
                                           .imgMap
                                           .keys
                                           .elementAt(index),
                                       widget.prodIndex,
-                                      botmProdRef.botmProducts,
+                                      botmProdRefR.botmProducts,
                                     );
                                     detRefR.updateImgCol(
-                                      botmProdRef
+                                      botmProdRefR
                                           .botmProducts[widget.prodIndex]
                                           .imgMap
                                           .keys
@@ -554,10 +581,48 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                       color: Colors.grey,
                     ),
                   ),
-                  Text(
-                    "Rs.${botmProdRef.botmProducts[widget.prodIndex].price}",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  // Text(
+                  //   "Rs.${botmProdRef.botmProducts[widget.prodIndex].price}",
+                  //   style: const TextStyle(fontWeight: FontWeight.bold),
+                  // ),
+                  botmProdRef.botmProducts[widget.prodIndex].isOffer == true
+                      ? Row(
+                          children: [
+                            Text(
+                              "Rs.",
+                              style: TextStyle(color: ComColors.priLightColor),
+                            ),
+                            Text(
+                              "${botmProdRef.botmProducts[widget.prodIndex].price}",
+                              style: TextStyle(
+                                decoration: TextDecoration.lineThrough,
+                                decorationColor: Colors.grey,
+                                fontWeight: FontWeight.bold,
+                                color: ComColors.priLightColor,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              "${botmProdRef.botmProducts[widget.prodIndex].priceAfterDis}",
+                              style: TextStyle(
+                                color: ComColors.priLightColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            Text(
+                              "Rs.",
+                              style: TextStyle(color: ComColors.priLightColor),
+                            ),
+                            Text(
+                              "${botmProdRef.botmProducts[widget.prodIndex].price}",
+                              style: TextStyle(color: ComColors.priLightColor),
+                            ),
+                          ],
+                        ),
                 ],
               ),
             ),

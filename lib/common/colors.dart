@@ -6,4 +6,5 @@ class ComColors {
   static Color secColor = const Color(0xFF88BDF2);
   static Color secLightColor = const Color(0xFFBDDDFC);
   static Color lightGrey = Colors.grey[200]!;
+  static Color darkRed = Colors.red[300]!;
 }

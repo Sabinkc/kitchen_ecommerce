@@ -73,8 +73,8 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                   ),
                   child: Icon(
                     lanRef.selIndex == 1
-                        ? Icons.shopping_bag
-                        : Icons.shopping_bag_outlined,
+                        ? Icons.shopping_cart
+                        : Icons.shopping_cart_outlined,
                     color: lanRef.selIndex == 1
                         ? ComColors.priLightColor
                         : Colors.white,

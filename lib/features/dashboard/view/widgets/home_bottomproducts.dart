@@ -5,6 +5,8 @@ import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/model_list.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/productdetail_screen.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class HomeBottomproducts extends ConsumerWidget {
   const HomeBottomproducts({super.key});
@@ -68,7 +70,7 @@ class HomeBottomproducts extends ConsumerWidget {
           // itemCount: ProductDetails.dashBotImg.length,
           itemCount: botProdRef.botmProducts.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 0.80,
+            childAspectRatio: 0.70,
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
@@ -89,7 +91,7 @@ class HomeBottomproducts extends ConsumerWidget {
                 builder: (context, conCons) {
                   final conHeght = conCons.maxHeight;
                   return Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       color: ComColors.lightGrey,
                       borderRadius: BorderRadius.circular(8),
@@ -97,43 +99,151 @@ class HomeBottomproducts extends ConsumerWidget {
                     child: Column(
                       spacing: conHeght * 0.02,
                       children: [
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                              ),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Container(
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: Icon(
+                                    Icons.favorite_outline,
+                                    color: ComColors.priLightColor,
+                                  ),
+                                ),
+                              ),
                             ),
-                            child: Icon(
-                              Icons.favorite_outline,
-                              color: ComColors.priLightColor,
+                            botProdRefR.botmProducts[index].isOffer == true
+                                ? Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: ComColors.darkRed,
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4),
+                                        bottomLeft: Radius.circular(4),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "${botProdRef.botmProducts[index].discountPercent}% Off",
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Hero(
+                            tag: "hero_tag$index",
+
+                            child: Image.asset(
+                              // "assets/images/${ProductDetails.dashBotImg[index]}",
+                              "assets/images/${botProdRef.botmProducts[index].img}",
+                              height: conHeght * 0.5,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
-                        Hero(
-                          tag: "hero_tag$index",
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              // ProductDetails.dashProdName[index],
+                              botProdRef.botmProducts[index].prodName,
+                              maxLines: 1,
+                              textAlign: TextAlign.left,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 16,
 
-                          child: Image.asset(
-                            // "assets/images/${ProductDetails.dashBotImg[index]}",
-                            "assets/images/${botProdRef.botmProducts[index].img}",
-                            height: conHeght * 0.5,
-                            fit: BoxFit.cover,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            // ProductDetails.dashProdName[index],
-                            botProdRef.botmProducts[index].prodName,
-                            maxLines: 2,
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 16,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              botProdRefR.botmProducts[index].isOffer == true
+                                  ? Row(
+                                      children: [
+                                        Text(
+                                          "Rs.",
+                                          style: TextStyle(
+                                            fontSize: conHeght * 0.07,
+                                            color: ComColors.priLightColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          "${botProdRef.botmProducts[index].price}",
+                                          style: TextStyle(
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                            decorationColor: Colors.grey,
+                                            fontSize: conHeght * 0.07,
+                                            color: ComColors.priLightColor,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        Text(
+                                          "${botProdRef.botmProducts[index].priceAfterDis}",
+                                          style: TextStyle(
+                                            fontSize: conHeght * 0.07,
+                                            color: ComColors.priLightColor,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : Row(
+                                      children: [
+                                        Text(
+                                          "Rs.",
+                                          style: TextStyle(
+                                            fontSize: conHeght * 0.07,
+                                            color: ComColors.priLightColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          "${botProdRef.botmProducts[index].price}",
+                                          style: TextStyle(
+                                            fontSize: conHeght * 0.07,
+                                            color: ComColors.priLightColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                              InkWell(
+                                onTap: () {
+                                  showTopSnackBar(
+                                    displayDuration: const Duration(
+                                      milliseconds: 500,
+                                    ),
+                                    Overlay.of(context),
+                                    CustomSnackBar.success(
+                                      backgroundColor: ComColors.secColor,
 
-                              fontWeight: FontWeight.w500,
-                            ),
+                                      message:
+                                          "Item added to cart successfully!",
+                                    ),
+                                  );
+                                },
+                                child: const Icon(Icons.shopping_cart_outlined),
+                              ),
+                            ],
                           ),
                         ),
                       ],

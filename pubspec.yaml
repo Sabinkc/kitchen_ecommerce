@@ -43,6 +43,8 @@ dependencies:
   string_to_color: ^2.0.0
   flutter_screenutil: ^5.9.3
   carousel_slider: ^5.1.1
+  top_snackbar_flutter: ^3.3.0
+  
 
 dev_dependencies:
   flutter_test:

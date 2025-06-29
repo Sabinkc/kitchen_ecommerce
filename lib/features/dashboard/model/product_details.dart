@@ -9,6 +9,9 @@ class ProductDetailModel {
   final List<String> features;
   final Map<String, String> specifications;
   final String rating;
+  bool? isOffer = false;
+  int? discountPercent = 0;
+  String? priceAfterDis;
 
   ProductDetailModel({
     required this.id,
@@ -21,6 +24,9 @@ class ProductDetailModel {
     required this.features,
     required this.specifications,
     required this.rating,
+    this.priceAfterDis,
+    this.isOffer,
+    this.discountPercent,
   });
 }
 
@@ -226,6 +232,9 @@ final List<ProductDetailModel> products = [
 
 final List<ProductDetailModel> offerProducts = [
   ProductDetailModel(
+    isOffer: true,
+    discountPercent: 20,
+    priceAfterDis: "12",
     id: 1,
     prodName: "Small Size Sink Flangers",
     img: "flanger_white.png",
@@ -248,6 +257,9 @@ final List<ProductDetailModel> offerProducts = [
   ),
 
   ProductDetailModel(
+    isOffer: true,
+    discountPercent: 30,
+    priceAfterDis: "21",
     id: 2,
     prodName: "Medium Size Trash Cans",
     img: "trashcan_white.png",

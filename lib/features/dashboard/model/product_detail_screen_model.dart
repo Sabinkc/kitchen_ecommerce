@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
 
 class ProductDetailScreenModel extends ChangeNotifier {
   int imgIndex = 0;
