@@ -18,7 +18,7 @@ class ProductDetailScreenModel extends ChangeNotifier {
 
   void updateImgCol(String value) {
     imgColor = value;
-    logger.log("updated color: $imgColor");
+    // logger.log("updated color: $imgColor");
     notifyListeners();
   }
 
@@ -43,7 +43,7 @@ class ProductDetailScreenModel extends ChangeNotifier {
   void updateProdImg(String color, int index) {
     final imgMap = products[index].imgMap;
     prodImages = imgMap[color] ?? [];
-    logger.log("updated images in detail screen: $prodImages");
+    // logger.log("updated images in detail screen: $prodImages");
     notifyListeners();
   }
 

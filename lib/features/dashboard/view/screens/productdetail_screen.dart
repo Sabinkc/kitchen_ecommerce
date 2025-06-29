@@ -15,6 +15,7 @@ class ProductDetailScreen extends ConsumerStatefulWidget {
 }
 
 class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
+  final colorConverter = ColorConverter();
   @override
   void initState() {
     super.initState();
@@ -28,8 +29,6 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
       detRefR.imgColor = products[widget.prodIndex].imgMap.keys.first;
     });
   }
-
-  final colorConverter = ColorConverter();
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +215,9 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                   .keys
                                   .elementAt(index);
                               return Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 5),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 5,
+                                ),
                                 child: InkWell(
                                   onTap: () {
                                     detRefR.updateColInd(index);

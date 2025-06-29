@@ -1,4 +1,5 @@
 class ProductDetailModel {
+  final int id;
   final String prodName;
   final String img;
   final Map<String, List<String>> imgMap;
@@ -10,6 +11,7 @@ class ProductDetailModel {
   final String rating;
 
   ProductDetailModel({
+    required this.id,
     required this.prodName,
     required this.img,
     required this.imgMap,
@@ -24,6 +26,7 @@ class ProductDetailModel {
 
 final List<ProductDetailModel> products = [
   ProductDetailModel(
+    id: 1,
     prodName: "Deck Mount Kitchen Sink Faucets",
     img: "faucets_white.png",
     imgMap: {
@@ -55,6 +58,7 @@ final List<ProductDetailModel> products = [
     rating: "4.5",
   ),
   ProductDetailModel(
+    id: 2,
     prodName: "Round Handshowers",
     img: "shower_white.png",
     imgMap: {
@@ -87,6 +91,7 @@ final List<ProductDetailModel> products = [
   ),
 
   ProductDetailModel(
+    id: 3,
     prodName: "Single Bowl Farmhouse Kitchen Sinks",
     img: "sink_white.png",
     imgMap: {
@@ -114,6 +119,7 @@ final List<ProductDetailModel> products = [
     rating: "4.0",
   ),
   ProductDetailModel(
+    id: 4,
     prodName: "Under Mount Kitchen Sinks",
     img: "kitchen_item.png",
     imgMap: {
@@ -133,6 +139,7 @@ final List<ProductDetailModel> products = [
     rating: "3.9",
   ),
   ProductDetailModel(
+    id: 5,
     prodName: "Stainless Steel Water Tap",
     img: "tap.png",
     imgMap: {
@@ -152,6 +159,7 @@ final List<ProductDetailModel> products = [
     rating: "4.7",
   ),
   ProductDetailModel(
+    id: 6,
     prodName: "Medium Size Trash Cans",
     img: "trashcan_white.png",
     imgMap: {
@@ -174,6 +182,7 @@ final List<ProductDetailModel> products = [
     rating: "4.1",
   ),
   ProductDetailModel(
+    id: 7,
     prodName: "Flush Mount Lighting Larges",
     img: "light1.png",
     imgMap: {
@@ -193,6 +202,7 @@ final List<ProductDetailModel> products = [
     rating: "3.7",
   ),
   ProductDetailModel(
+    id: 8,
     prodName: "Small Size Sink Flangers",
     img: "flanger_white.png",
     imgMap: {
@@ -211,5 +221,190 @@ final List<ProductDetailModel> products = [
       "Seal Type": "Rubber gasket",
     },
     rating: "3.5",
+  ),
+];
+
+final List<ProductDetailModel> offerProducts = [
+  ProductDetailModel(
+    id: 1,
+    prodName: "Small Size Sink Flangers",
+    img: "flanger_white.png",
+    imgMap: {
+      "white": ["flanger_white.png", "flanger_white.webp"],
+      "yellow": ["flanger_yellow.webp"],
+    },
+    category: "Flangers",
+    productDetails:
+        "Compact sink flange fitting made from corrosion-resistant metal with standard threading, quick snap-on installation, and secure sealing to prevent leaks.",
+    price: "15",
+    features: ["Corrosion-resistant", "Standard threading", "Leak seal"],
+    specifications: {
+      "Material": "Zinc alloy",
+      "Thread Size": "1 1/2 in",
+      "Use": "Kitchen sink flange",
+      "Seal Type": "Rubber gasket",
+    },
+    rating: "3.5",
+  ),
+
+  ProductDetailModel(
+    id: 2,
+    prodName: "Medium Size Trash Cans",
+    img: "trashcan_white.png",
+    imgMap: {
+      "white": ["trashcan_white.png", "trashcan_white.webp"],
+      "grey": ["trashcan_grey.webp"],
+      "black": ["trashcan_black.webp"],
+    },
+
+    category: "Trash Cans",
+    productDetails:
+        "Medium-capacity trash can with secure snap-on lid, smooth finishes for easy cleaning, and heavy-duty plastic body designed for everyday kitchen use.",
+    price: "30",
+    features: ["Snap-on lid", "Easy-clean finish", "Durable plastic"],
+    specifications: {
+      "Material": "Polyethylene",
+      "Capacity": "35 gal",
+      "Dimensions": "16 x 16 x 24 in",
+      "Use": "Indoor/outdoor",
+    },
+    rating: "4.1",
+  ),
+];
+
+final List<ProductDetailModel> newArrivals = [
+  ProductDetailModel(
+    id: 1,
+    prodName: "Single Bowl Farmhouse Kitchen Sinks",
+    img: "sink_white.png",
+    imgMap: {
+      "white": [
+        "sink_white.png",
+        "sink_white2.webp",
+        "sink_white3.webp",
+        "sink_white4.webp",
+      ],
+      "green": ["sink_green.webp", "sink_green2.webp", "sink_green3.webp"],
+      "black": ["sink_black.webp", "sink_black2.webp", "sink_black3.webp"],
+    },
+
+    category: "Sinks",
+    productDetails:
+        "Durable single-bowl farmhouse sink crafted from 18‑gauge stainless steel, featuring sound‑dampening pads, undermount design, and generous capacity for large pots and pans.",
+    price: "250",
+    features: ["18‑gauge steel", "Noise insulation", "Rust-resistant"],
+    specifications: {
+      "Material": "18‑gauge stainless steel",
+      "Mount Type": "Under-mount",
+      "Bowl Depth": "10 in",
+      "Dimensions": "33 x 22 in",
+    },
+    rating: "4.0",
+  ),
+  ProductDetailModel(
+    id: 2,
+    prodName: "Under Mount Kitchen Sinks",
+    img: "kitchen_item.png",
+    imgMap: {
+      "white": ["kitchen_item.png"],
+    },
+    category: "Sinks",
+    productDetails:
+        "Under-mount sink with polished interior and reinforced rim. Generous basin depth lets you clean oversized pots efficiently, while its smooth edges simplify countertop integration.",
+    price: "220",
+    features: ["Reinforced rim", "Polished interior", "Deep basin"],
+    specifications: {
+      "Material": "Stainless steel",
+      "Mount Type": "Under-mount",
+      "Bowl Depth": "9 in",
+      "Dimensions": "30 x 18 in",
+    },
+    rating: "3.9",
+  ),
+  ProductDetailModel(
+    id: 3,
+    prodName: "Stainless Steel Water Tap",
+    img: "tap.png",
+    imgMap: {
+      "white": ["tap.png"],
+    },
+    category: "Taps",
+    productDetails:
+        "Contemporary stainless steel water tap featuring a single-lever ball valve for drip-free control and a 360° swivel spout for convenience and flexibility.",
+    price: "40",
+    features: ["Single-lever", "Swivel spout", "Ball valve"],
+    specifications: {
+      "Material": "304 stainless steel",
+      "Spout Reach": "8 in",
+      "Valve Type": "Ball valve",
+      "Mount Type": "Single-hole",
+    },
+    rating: "4.7",
+  ),
+];
+
+final List<ProductDetailModel> popularProd = [
+  ProductDetailModel(
+    id: 1,
+    prodName: "Stainless Steel Water Tap",
+    img: "tap.png",
+    imgMap: {
+      "white": ["tap.png"],
+    },
+    category: "Taps",
+    productDetails:
+        "Contemporary stainless steel water tap featuring a single-lever ball valve for drip-free control and a 360° swivel spout for convenience and flexibility.",
+    price: "40",
+    features: ["Single-lever", "Swivel spout", "Ball valve"],
+    specifications: {
+      "Material": "304 stainless steel",
+      "Spout Reach": "8 in",
+      "Valve Type": "Ball valve",
+      "Mount Type": "Single-hole",
+    },
+    rating: "4.7",
+  ),
+];
+
+final List<ProductDetailModel> bestSellers = [
+  ProductDetailModel(
+    id: 1,
+    prodName: "Under Mount Kitchen Sinks",
+    img: "kitchen_item.png",
+    imgMap: {
+      "white": ["kitchen_item.png"],
+    },
+    category: "Sinks",
+    productDetails:
+        "Under-mount sink with polished interior and reinforced rim. Generous basin depth lets you clean oversized pots efficiently, while its smooth edges simplify countertop integration.",
+    price: "220",
+    features: ["Reinforced rim", "Polished interior", "Deep basin"],
+    specifications: {
+      "Material": "Stainless steel",
+      "Mount Type": "Under-mount",
+      "Bowl Depth": "9 in",
+      "Dimensions": "30 x 18 in",
+    },
+    rating: "3.9",
+  ),
+  ProductDetailModel(
+    id: 2,
+    prodName: "Stainless Steel Water Tap",
+    img: "tap.png",
+    imgMap: {
+      "white": ["tap.png"],
+    },
+    category: "Taps",
+    productDetails:
+        "Contemporary stainless steel water tap featuring a single-lever ball valve for drip-free control and a 360° swivel spout for convenience and flexibility.",
+    price: "40",
+    features: ["Single-lever", "Swivel spout", "Ball valve"],
+    specifications: {
+      "Material": "304 stainless steel",
+      "Spout Reach": "8 in",
+      "Valve Type": "Ball valve",
+      "Mount Type": "Single-hole",
+    },
+    rating: "4.7",
   ),
 ];
