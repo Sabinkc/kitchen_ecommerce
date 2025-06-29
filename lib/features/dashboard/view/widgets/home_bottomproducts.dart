@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/model_list.dart';
-import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/productdetail_screen.dart';
 
 class HomeBottomproducts extends ConsumerWidget {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
-import 'dart:developer' as logger;
 
 class ProductDetailScreenModel extends ChangeNotifier {
   int imgIndex = 0;
@@ -40,8 +39,8 @@ class ProductDetailScreenModel extends ChangeNotifier {
 
   List<String> prodImages = [];
 
-  void updateProdImg(String color, int index) {
-    final imgMap = products[index].imgMap;
+  void updateProdImg(String color, int index, List prod) {
+    final imgMap = prod[index].imgMap;
     prodImages = imgMap[color] ?? [];
     // logger.log("updated images in detail screen: $prodImages");
     notifyListeners();

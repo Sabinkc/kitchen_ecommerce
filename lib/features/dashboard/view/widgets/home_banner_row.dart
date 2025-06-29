@@ -1,14 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/button.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeBannerRow extends ConsumerWidget {
-  HomeBannerRow({super.key});
+  const HomeBannerRow({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +19,7 @@ class HomeBannerRow extends ConsumerWidget {
         CarouselSlider(
           items: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
@@ -81,7 +80,7 @@ class HomeBannerRow extends ConsumerWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,
@@ -144,7 +143,7 @@ class HomeBannerRow extends ConsumerWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 10,

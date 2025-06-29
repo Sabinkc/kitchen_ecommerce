@@ -22,11 +22,14 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
 
     Future.delayed(Duration.zero, () {
       final detRefR = ref.read(productDetController);
+      final botmProdRefR = ref.read(botmProdController);
       detRefR.resetProdImg();
       detRefR.clearImgIndex();
       detRefR.clearColIndex();
-      detRefR.prodImages = products[widget.prodIndex].imgMap.values.first;
-      detRefR.imgColor = products[widget.prodIndex].imgMap.keys.first;
+      detRefR.prodImages =
+          botmProdRefR.botmProducts[widget.prodIndex].imgMap.values.first;
+      detRefR.imgColor =
+          botmProdRefR.botmProducts[widget.prodIndex].imgMap.keys.first;
     });
   }
 
@@ -35,6 +38,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     final height = MediaQuery.sizeOf(context).height;
     final detRef = ref.watch(productDetController);
     final detRefR = ref.read(productDetController);
+    final botmProdRef = ref.watch(botmProdController);
+    // final botmProdRefR = ref.read(botmProdController);
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -141,7 +146,9 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              products[widget.prodIndex].category,
+                              botmProdRef
+                                  .botmProducts[widget.prodIndex]
+                                  .category,
                               style: const TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold,
@@ -152,7 +159,9 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                               children: [
                                 const Icon(Icons.star, color: Colors.yellow),
                                 Text(
-                                  products[widget.prodIndex].rating,
+                                  botmProdRef
+                                      .botmProducts[widget.prodIndex]
+                                      .rating,
                                   style: const TextStyle(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.bold,
@@ -164,7 +173,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                         ),
 
                         Text(
-                          products[widget.prodIndex].prodName,
+                          botmProdRef.botmProducts[widget.prodIndex].prodName,
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -180,7 +189,9 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                           ),
                         ),
                         Text(
-                          products[widget.prodIndex].productDetails,
+                          botmProdRef
+                              .botmProducts[widget.prodIndex]
+                              .productDetails,
                           style: const TextStyle(color: Colors.grey),
                         ),
                         Divider(color: Colors.grey[300]),
@@ -207,10 +218,14 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                         SizedBox(
                           height: 30,
                           child: ListView.builder(
-                            itemCount: products[widget.prodIndex].imgMap.length,
+                            itemCount: botmProdRef
+                                .botmProducts[widget.prodIndex]
+                                .imgMap
+                                .length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              final prodColor = products[widget.prodIndex]
+                              final prodColor = botmProdRef
+                                  .botmProducts[widget.prodIndex]
                                   .imgMap
                                   .keys
                                   .elementAt(index);
@@ -223,12 +238,19 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                     detRefR.updateColInd(index);
                                     detRefR.clearImgIndex();
                                     detRefR.updateProdImg(
-                                      products[widget.prodIndex].imgMap.keys
+                                      botmProdRef
+                                          .botmProducts[widget.prodIndex]
+                                          .imgMap
+                                          .keys
                                           .elementAt(index),
                                       widget.prodIndex,
+                                      botmProdRef.botmProducts,
                                     );
                                     detRefR.updateImgCol(
-                                      products[widget.prodIndex].imgMap.keys
+                                      botmProdRef
+                                          .botmProducts[widget.prodIndex]
+                                          .imgMap
+                                          .keys
                                           .elementAt(index),
                                     );
                                   },
@@ -307,10 +329,11 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                           SizedBox(height: height * 0.02),
                                           Expanded(
                                             child: ListView.builder(
-                                              itemCount:
-                                                  products[widget.prodIndex]
-                                                      .features
-                                                      .length,
+                                              itemCount: botmProdRef
+                                                  .botmProducts[widget
+                                                      .prodIndex]
+                                                  .features
+                                                  .length,
                                               itemBuilder: (context, index) {
                                                 return Padding(
                                                   padding:
@@ -327,7 +350,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                                         ),
                                                       ),
                                                       Text(
-                                                        products[widget
+                                                        botmProdRef
+                                                            .botmProducts[widget
                                                                 .prodIndex]
                                                             .features[index],
                                                         style: const TextStyle(
@@ -411,14 +435,15 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                         // SizedBox(height: height * 0.01),
                                         Expanded(
                                           child: ListView.builder(
-                                            itemCount:
-                                                products[widget.prodIndex]
-                                                    .specifications
-                                                    .length,
+                                            itemCount: botmProdRef
+                                                .botmProducts[widget.prodIndex]
+                                                .specifications
+                                                .length,
                                             itemBuilder: (context, index) {
-                                              final specMap =
-                                                  products[widget.prodIndex]
-                                                      .specifications;
+                                              final specMap = botmProdRef
+                                                  .botmProducts[widget
+                                                      .prodIndex]
+                                                  .specifications;
                                               final key = specMap.keys
                                                   .elementAt(index);
                                               final value =
@@ -530,7 +555,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                     ),
                   ),
                   Text(
-                    "Rs.${products[widget.prodIndex].price}",
+                    "Rs.${botmProdRef.botmProducts[widget.prodIndex].price}",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],

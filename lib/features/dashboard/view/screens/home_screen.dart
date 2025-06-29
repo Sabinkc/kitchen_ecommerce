@@ -26,9 +26,9 @@ class HomeScreen extends ConsumerWidget {
                 children: [
                   SizedBox(height: height * 0.005),
                   const HomeSearchRow(),
-                  HomeBannerRow(),
-                  HomeCategoryrow(),
-                  HomeBottomproducts(),
+                  const HomeBannerRow(),
+                  const HomeCategoryrow(),
+                  const HomeBottomproducts(),
                 ],
               ),
             ),
