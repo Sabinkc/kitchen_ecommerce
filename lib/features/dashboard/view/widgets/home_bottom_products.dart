@@ -19,7 +19,6 @@ class HomeBottomproducts extends ConsumerWidget {
     final botProdRef = ref.watch(botmProdController);
     final botProdRefR = ref.read(botmProdController);
     final detRefR = ref.read(productDetController);
-    final cartRef = ref.watch(cartController);
     final cartRefR = ref.read(cartController);
     return Column(
       spacing: height * 0.02,
