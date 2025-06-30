@@ -93,6 +93,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                           tag: "hero_tag${widget.prodIndex}",
                           child: Image.asset(
                             "assets/images/${detRef.prodImages[detRef.imgIndex]}",
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

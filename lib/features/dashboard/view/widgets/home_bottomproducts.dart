@@ -16,6 +16,7 @@ class HomeBottomproducts extends ConsumerWidget {
     final height = MediaQuery.sizeOf(context).height;
     final botProdRef = ref.watch(botmProdController);
     final botProdRefR = ref.read(botmProdController);
+    final detRefR = ref.read(productDetController);
     return Column(
       spacing: height * 0.02,
       children: [
@@ -80,6 +81,8 @@ class HomeBottomproducts extends ConsumerWidget {
               onTap: () {
                 // final detRefR = ref.read(productDetController);
                 // detRefR.resetProdImg();
+                detRefR.prodImages =
+                    botProdRefR.botmProducts[index].imgMap.values.first;
                 Navigator.push(
                   context,
                   CupertinoPageRoute(
@@ -146,7 +149,6 @@ class HomeBottomproducts extends ConsumerWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Hero(
                             tag: "hero_tag$index",
-
                             child: Image.asset(
                               // "assets/images/${ProductDetails.dashBotImg[index]}",
                               "assets/images/${botProdRef.botmProducts[index].img}",
@@ -198,7 +200,7 @@ class HomeBottomproducts extends ConsumerWidget {
                                             color: ComColors.priLightColor,
                                           ),
                                         ),
-                                        const SizedBox(width: 5),
+                                        SizedBox(width: 5),
                                         Text(
                                           "${botProdRef.botmProducts[index].priceAfterDis}",
                                           style: TextStyle(
