@@ -1,14 +1,18 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
+import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends ConsumerWidget {
   const CartScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartRef = ref.watch(cartController);
+    final cartRefR = ref.read(cartController);
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -42,7 +46,7 @@ class CartScreen extends StatelessWidget {
               padding: EdgeInsetsGeometry.symmetric(vertical: 8.h),
               child: ListView.builder(
                 padding: const EdgeInsets.all(0),
-                itemCount: 5,
+                itemCount: cartRefR.cartItems.length,
                 itemBuilder: (context, index) {
                   return Slidable(
                     key: const Key(""),
@@ -95,7 +99,7 @@ class CartScreen extends StatelessWidget {
                                       children: [
                                         Positioned(
                                           child: Image.asset(
-                                            "assets/images/light1.png",
+                                            "assets/images/${cartRef.cartItems[index].img}",
                                             fit: BoxFit.cover,
                                             width: 100.w,
                                             height: 80.h,
@@ -120,16 +124,16 @@ class CartScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
-                                      "White Light",
+                                    Text(
+                                      cartRef.cartItems[index].prodName,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    const Text(
-                                      "Light",
+                                    Text(
+                                      cartRef.cartItems[index].category,
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
@@ -137,8 +141,8 @@ class CartScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    const Text(
-                                      "Rs.70",
+                                    Text(
+                                      "Rs.${cartRef.cartItems[index].price}",
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
@@ -155,38 +159,55 @@ class CartScreen extends StatelessWidget {
                                 ),
                                 child: Align(
                                   alignment: Alignment.bottomCenter,
-                                  child: Row(
-                                    spacing: 5.w,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
                                       Container(
-                                        // padding: EdgeInsets.all(1.r),
+                                        height: 20.r,
+                                        width: 20.r,
                                         decoration: BoxDecoration(
-                                          color: ComColors.lightGrey,
-                                          borderRadius: BorderRadius.circular(
-                                            5.r,
+                                          border: Border.all(
+                                            color: ComColors.lightGrey,
+                                            width: 1.r,
                                           ),
-                                        ),
-                                        child: const Icon(Icons.remove),
-                                      ),
-                                      Text(
-                                        "1",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15.sp,
+                                          color: Colors.yellow,
+                                          shape: BoxShape.circle,
                                         ),
                                       ),
-                                      Container(
-                                        // padding: EdgeInsets.all(1.r),
-                                        decoration: BoxDecoration(
-                                          color: ComColors.priLightColor,
-                                          borderRadius: BorderRadius.circular(
-                                            5.r,
+                                      Row(
+                                        spacing: 5.w,
+                                        children: [
+                                          Container(
+                                            // padding: EdgeInsets.all(1.r),
+                                            decoration: BoxDecoration(
+                                              color: ComColors.lightGrey,
+                                              borderRadius:
+                                                  BorderRadius.circular(5.r),
+                                            ),
+                                            child: const Icon(Icons.remove),
                                           ),
-                                        ),
-                                        child: const Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                        ),
+                                          Text(
+                                            "1",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15.sp,
+                                            ),
+                                          ),
+                                          Container(
+                                            // padding: EdgeInsets.all(1.r),
+                                            decoration: BoxDecoration(
+                                              color: ComColors.priLightColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5.r),
+                                            ),
+                                            child: const Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

@@ -228,6 +228,153 @@ final List<ProductDetailModel> products = [
     },
     rating: "3.5",
   ),
+  // ProductDetailModel(
+  //   id: 9,
+  //   prodName: "Sofa",
+  //   img: "sofa_grey.webp",
+  //   imgMap: {
+  //     "grey": [
+  //       "sofa_grey.webp",
+  //       "sofa_grey2.webp",
+  //       "sofa_grey3.webp",
+  //       "sofa_grey4.webp",
+  //     ],
+  //   },
+  //   category: "Furniture",
+  //   productDetails:
+  //       "Modern grey upholstered sofa with high-density foam cushions and wooden legs.",
+  //   price: "450",
+  //   features: ["4-seat", "High-density foam", "Wooden legs"],
+  //   specifications: {
+  //     "Upholstery": "Fabric",
+  //     "Seats": "4",
+  //     "Assembly": "Required",
+  //   },
+  //   rating: "4.4",
+  // ),
+  // ProductDetailModel(
+  //   id: 10,
+  //   prodName: "Table",
+  //   img: "table_white.webp",
+  //   imgMap: {
+  //     "white": ["table_white.webp", "table_white2.webp"],
+  //   },
+  //   category: "Furniture",
+  //   productDetails:
+  //       "Sleek modern white dining table with durable laminate top and steel legs.",
+  //   price: "200",
+  //   features: ["Laminate top", "Steel legs"],
+  //   specifications: {"Material": "Laminate", "Length": "150 cm", "Seats": "4"},
+  //   rating: "4.2",
+  // ),
+  // ProductDetailModel(
+  //   id: 11,
+  //   prodName: "White Bedframe",
+  //   img: "bedframe_white.webp",
+  //   imgMap: {
+  //     "white": [
+  //       "bedframe_white.webp",
+  //       "bedframe_white2.webp",
+  //       "bedframe_white3.webp",
+  //     ],
+  //   },
+  //   category: "Furniture",
+  //   productDetails:
+  //       "White wooden bedframe with headboard paneling, fits queen size mattress.",
+  //   price: "350",
+  //   features: ["Wooden frame", "Headboard"],
+  //   specifications: {
+  //     "Material": "Wood",
+  //     "Size": "Queen",
+  //     "Assembly": "Required",
+  //   },
+  //   rating: "4.3",
+  // ),
+  // ProductDetailModel(
+  //   id: 12,
+  //   prodName: "White Bedside Table",
+  //   img: "beside_table_white.webp",
+  //   imgMap: {
+  //     "white": ["beside_table_white.webp"],
+  //   },
+  //   category: "Furniture",
+  //   productDetails:
+  //       "Compact white bedside table with drawer and storage shelf.",
+  //   price: "80",
+  //   features: ["Drawer", "Open shelf"],
+  //   specifications: {"Material": "MDF", "Drawers": "1", "Height": "60 cm"},
+  //   rating: "4.1",
+  // ),
+  // ProductDetailModel(
+  //   id: 13,
+  //   prodName: "White Cleaner",
+  //   img: "cleaner_white.webp",
+  //   imgMap: {
+  //     "white": ["cleaner_white.webp"],
+  //   },
+  //   category: "Home Appliances",
+  //   productDetails:
+  //       "Portable white vacuum cleaner with HEPA filter and long-reach hose.",
+  //   price: "120",
+  //   features: ["HEPA filter", "Portable"],
+  //   specifications: {"Power": "1200 W", "Weight": "3 kg"},
+  //   rating: "4.0",
+  // ),
+  // ProductDetailModel(
+  //   id: 14,
+  //   prodName: "Black Mirror",
+  //   img: "mirror_black.webp",
+  //   imgMap: {
+  //     "black": [
+  //       "mirror_black.webp",
+  //       "mirror_black2.webp",
+  //       "mirror_black3.webp",
+  //       "mirror_black4.webp",
+  //     ],
+  //   },
+  //   category: "Decor",
+  //   productDetails: "Large framed black wall mirror in sleek metal design.",
+  //   price: "150",
+  //   features: ["Framed", "Wall mount"],
+  //   specifications: {"Frame": "Metal", "Diameter": "80 cm"},
+  //   rating: "4.5",
+  // ),
+  // ProductDetailModel(
+  //   id: 15,
+  //   prodName: "White Mirror",
+  //   img: "mirror_white.webp",
+  //   imgMap: {
+  //     "white": [
+  //       "mirror_white.webp",
+  //       "mirror_white2.webp",
+  //       "mirror_white3.webp",
+  //     ],
+  //   },
+  //   category: "Decor",
+  //   productDetails: "Elegant white round wall mirror with minimalist frame.",
+  //   price: "140",
+  //   features: ["Round", "Wall mount"],
+  //   specifications: {"Frame": "Wood", "Diameter": "80 cm"},
+  //   rating: "4.4",
+  // ),
+  // ProductDetailModel(
+  //   id: 16,
+  //   prodName: "White Pillow",
+  //   img: "pillow_white.webp",
+  //   imgMap: {
+  //     "white": [
+  //       "pillow_white.webp",
+  //       "pillow_white2.webp",
+  //       "pillow_white3.webp",
+  //     ],
+  //   },
+  //   category: "Home Textiles",
+  //   productDetails: "Plush white decorative pillow with soft cotton cover.",
+  //   price: "30",
+  //   features: ["Cotton cover", "Plush"],
+  //   specifications: {"Material": "Cotton", "Size": "45×45 cm"},
+  //   rating: "4.3",
+  // ),
 ];
 
 final List<ProductDetailModel> offerProducts = [

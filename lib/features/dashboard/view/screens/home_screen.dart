@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/home_banner_row.dart';
-import 'package:kitchen_ecommerce/features/dashboard/view/widgets/home_bottomproducts.dart';
+import 'package:kitchen_ecommerce/features/dashboard/view/widgets/home_bottom_products.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/home_categoryrow.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/home_searchrow.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/home_topbar.dart';
