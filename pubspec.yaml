@@ -44,6 +44,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   carousel_slider: ^5.1.1
   top_snackbar_flutter: ^3.3.0
+  dotted_line: ^3.2.3
+  flutter_slidable: ^4.0.0
   
 
 dev_dependencies:

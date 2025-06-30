@@ -81,6 +81,7 @@ class HomeBottomproducts extends ConsumerWidget {
               onTap: () {
                 // final detRefR = ref.read(productDetController);
                 // detRefR.resetProdImg();
+                //this fix hero animation problem
                 detRefR.prodImages =
                     botProdRefR.botmProducts[index].imgMap.values.first;
                 Navigator.push(
@@ -200,7 +201,7 @@ class HomeBottomproducts extends ConsumerWidget {
                                             color: ComColors.priLightColor,
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Text(
                                           "${botProdRef.botmProducts[index].priceAfterDis}",
                                           style: TextStyle(
