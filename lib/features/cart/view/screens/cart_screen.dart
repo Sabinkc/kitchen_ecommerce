@@ -388,7 +388,7 @@ class CartScreen extends ConsumerWidget {
                               ),
                             ),
                             Text(
-                              "Rs.100",
+                              "Rs.${cartRef.getSubTotal()}",
                               style: TextStyle(
                                 // color: ComColors.priLightColor,
                                 fontSize: 16.sp,
@@ -426,7 +426,7 @@ class CartScreen extends ConsumerWidget {
                               ),
                             ),
                             Text(
-                              "Rs.10",
+                              "Rs.${cartRef.getDiscount()}",
                               style: TextStyle(
                                 // color: ComColors.priLightColor,
                                 fontSize: 16.sp,
@@ -453,7 +453,7 @@ class CartScreen extends ConsumerWidget {
                               ),
                             ),
                             Text(
-                              "Rs.140",
+                              "Rs.${cartRef.getTotal()}",
                               style: TextStyle(
                                 // color: ComColors.priLightColor,
                                 fontSize: 16.sp,

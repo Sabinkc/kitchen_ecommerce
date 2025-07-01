@@ -34,4 +34,37 @@ class CartModelProvider extends ChangeNotifier {
     cartItems.clear();
     notifyListeners();
   }
+
+  int getSubTotal() {
+    int subTotal = 0;
+    int itemTotal;
+    int i;
+    for (i = 0; i < cartItems.length; i++) {
+      itemTotal =
+          double.parse(cartItems[i].price).toInt() * cartItems[i].quantity;
+      subTotal = itemTotal + subTotal;
+    }
+    return subTotal;
+  }
+
+  int getDiscount() {
+    int disc = 0;
+    for (int i = 0; i < cartItems.length; i++) {
+      disc =
+          disc +
+          ((cartItems[i].discountPercent / 100) *
+                  double.parse(cartItems[i].price).toInt() *
+                  cartItems[i].quantity)
+              .toInt();
+    }
+    return disc;
+  }
+
+  int getTotal() {
+    int delivery = 50;
+    int subTotal = getSubTotal();
+    int disc = getDiscount();
+    int total = subTotal - disc + delivery;
+    return total;
+  }
 }
