@@ -65,14 +65,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.6"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      sha256: ba631d1c7f7bef6b729a622b7b752645a2d076dba9976925b8f25725a30e1ee6
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.8"
   dotted_line:
     dependency: "direct main"
     description:
@@ -97,14 +89,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  floating_bottom_navigation_bar:
-    dependency: "direct main"
-    description:
-      name: floating_bottom_navigation_bar
-      sha256: "2ecffcb10841c8bf1a084adaef544ecd5451577b31bd80767e6bab1875c941a6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.5.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -368,14 +352,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.1"
-  string_to_color:
-    dependency: "direct main"
-    description:
-      name: string_to_color
-      sha256: cb33e3fd98c3005ac088bd2f3eac5fef9fac5a36ca7364766087cdbd9ca6f1a7
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   term_glyph:
     dependency: transitive
     description:

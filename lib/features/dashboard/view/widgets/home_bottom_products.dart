@@ -2,13 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
-import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart';
-import 'package:kitchen_ecommerce/features/cart/model/cart_item_model.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/model_list.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/product_detail_screen.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:kitchen_ecommerce/features/dashboard/view/widgets/add_to_cart_bottom_sheet.dart';
 
 class HomeBottomproducts extends ConsumerWidget {
   const HomeBottomproducts({super.key});
@@ -19,7 +16,7 @@ class HomeBottomproducts extends ConsumerWidget {
     final botProdRef = ref.watch(botmProdController);
     final botProdRefR = ref.read(botmProdController);
     final detRefR = ref.read(productDetController);
-    final cartRefR = ref.read(cartController);
+
     return Column(
       spacing: height * 0.02,
       children: [
@@ -234,41 +231,14 @@ class HomeBottomproducts extends ConsumerWidget {
                                     ),
                               InkWell(
                                 onTap: () {
-                                  cartRefR.addToCart(
-                                    CartItemModel(
-                                      id: botProdRef.botmProducts[index].id,
-                                      prodName: botProdRef
-                                          .botmProducts[index]
-                                          .prodName,
-                                      img: botProdRef.botmProducts[index].img,
-                                      category: botProdRef
-                                          .botmProducts[index]
-                                          .category,
-                                      price:
-                                          botProdRef.botmProducts[index].price,
-                                      quantity: 1,
-                                      isOffer: botProdRef
-                                          .botmProducts[index]
-                                          .isOffer,
-                                      discountPercent: botProdRef
-                                          .botmProducts[index]
-                                          .discountPercent,
-                                      priceAfterDis: botProdRef
-                                          .botmProducts[index]
-                                          .priceAfterDis,
-                                    ),
-                                  );
-                                  showTopSnackBar(
-                                    displayDuration: const Duration(
-                                      milliseconds: 500,
-                                    ),
-                                    Overlay.of(context),
-                                    CustomSnackBar.success(
-                                      backgroundColor: ComColors.secColor,
-
-                                      message:
-                                          "Item added to cart successfully!",
-                                    ),
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (context) {
+                                      return AddToCartBottomSheet(
+                                        prodIndex: index,
+                                      );
+                                    },
                                   );
                                 },
                                 child: const Icon(Icons.shopping_cart_outlined),

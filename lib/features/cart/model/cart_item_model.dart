@@ -4,10 +4,12 @@ class CartItemModel {
   final String img;
   final String category;
   final String price;
-  final int quantity;
-  final bool? isOffer;
-  final int? discountPercent;
-  final String? priceAfterDis;
+  int quantity;
+  final String color;
+  final bool isOffer;
+  final int discountPercent;
+  final String priceAfterDis;
+  bool isSelected;
 
   CartItemModel({
     required this.id,
@@ -16,9 +18,11 @@ class CartItemModel {
     required this.category,
     required this.price,
     required this.quantity,
-    this.priceAfterDis,
-    this.isOffer,
-    this.discountPercent,
+    required this.color,
+    required this.priceAfterDis,
+    required this.isOffer,
+    required this.discountPercent,
+    required this.isSelected,
   });
 
   @override
@@ -29,9 +33,10 @@ class CartItemModel {
         'category: "$category", '
         'price: $price, '
         'quantity: $quantity, '
-        'isOffer: ${isOffer ?? false}, '
-        'discountPercent: ${discountPercent ?? 0}, '
-        'priceAfterDis: ${priceAfterDis ?? "N/A"}'
+        'color: $color,'
+        'isOffer: $isOffer, '
+        'discountPercent: $discountPercent, '
+        'priceAfterDis: $priceAfterDis'
         ')';
   }
 }

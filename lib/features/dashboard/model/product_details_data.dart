@@ -9,9 +9,9 @@ class ProductDetailModel {
   final List<String> features;
   final Map<String, String> specifications;
   final String rating;
-  bool? isOffer = false;
-  int? discountPercent = 0;
-  String? priceAfterDis;
+  bool isOffer = false;
+  int discountPercent = 0;
+  String priceAfterDis;
 
   ProductDetailModel({
     required this.id,
@@ -24,14 +24,16 @@ class ProductDetailModel {
     required this.features,
     required this.specifications,
     required this.rating,
-    this.priceAfterDis,
-    this.isOffer,
-    this.discountPercent,
+    required this.priceAfterDis,
+    required this.isOffer,
+    required this.discountPercent,
   });
 }
 
 final List<ProductDetailModel> products = [
   ProductDetailModel(
+    isOffer: false,
+
     id: 1,
     prodName: "Deck Mount Kitchen Sink Faucets",
     img: "faucets_white.png",
@@ -48,6 +50,8 @@ final List<ProductDetailModel> products = [
     productDetails:
         "High-quality deck-mount kitchen faucet with satin finish and dual handles for precise temperature control. Built with corrosion-resistant brass and ceramic cartridges to prevent leaks and ensure lifelong performance.",
     price: "100",
+    discountPercent: 0,
+    priceAfterDis: "100",
     features: [
       "Satin finish",
       "Dual-handle",
@@ -86,6 +90,9 @@ final List<ProductDetailModel> products = [
     productDetails:
         "Ergonomic round hand shower offering three spray modes—massage, rain, and mist—plus anti-clog silicone nozzles and universal fittings for easy installation in any bathroom.",
     price: "60",
+    isOffer: false,
+    priceAfterDis: "60",
+    discountPercent: 0,
     features: ["3 spray modes", "Silicone nozzles", "Ergonomic grip"],
     specifications: {
       "Material": "ABS plastic",
@@ -115,6 +122,9 @@ final List<ProductDetailModel> products = [
     productDetails:
         "Durable single-bowl farmhouse sink crafted from 18‑gauge stainless steel, featuring sound‑dampening pads, undermount design, and generous capacity for large pots and pans.",
     price: "250",
+    isOffer: false,
+    priceAfterDis: "250",
+    discountPercent: 0,
     features: ["18‑gauge steel", "Noise insulation", "Rust-resistant"],
     specifications: {
       "Material": "18‑gauge stainless steel",
@@ -135,6 +145,9 @@ final List<ProductDetailModel> products = [
     productDetails:
         "Under-mount sink with polished interior and reinforced rim. Generous basin depth lets you clean oversized pots efficiently, while its smooth edges simplify countertop integration.",
     price: "220",
+    priceAfterDis: "220",
+    isOffer: false,
+    discountPercent: 0,
     features: ["Reinforced rim", "Polished interior", "Deep basin"],
     specifications: {
       "Material": "Stainless steel",
@@ -155,6 +168,9 @@ final List<ProductDetailModel> products = [
     productDetails:
         "Contemporary stainless steel water tap featuring a single-lever ball valve for drip-free control and a 360° swivel spout for convenience and flexibility.",
     price: "40",
+    priceAfterDis: "40",
+    discountPercent: 0,
+    isOffer: false,
     features: ["Single-lever", "Swivel spout", "Ball valve"],
     specifications: {
       "Material": "304 stainless steel",
@@ -178,6 +194,9 @@ final List<ProductDetailModel> products = [
     productDetails:
         "Medium-capacity trash can with secure snap-on lid, smooth finishes for easy cleaning, and heavy-duty plastic body designed for everyday kitchen use.",
     price: "30",
+    priceAfterDis: "30",
+    discountPercent: 0,
+    isOffer: false,
     features: ["Snap-on lid", "Easy-clean finish", "Durable plastic"],
     specifications: {
       "Material": "Polyethylene",
@@ -198,6 +217,9 @@ final List<ProductDetailModel> products = [
     productDetails:
         "Energy-efficient LED ceiling fixture with acrylic diffused cover and low-profile design—ideal for large living spaces seeking uniform, eye-friendly lighting.",
     price: "80",
+    priceAfterDis: "80",
+    discountPercent: 0,
+    isOffer: false,
     features: ["LED panel", "Diffused light", "Low-profile"],
     specifications: {
       "Power": "18 W",
@@ -219,6 +241,9 @@ final List<ProductDetailModel> products = [
     productDetails:
         "Compact sink flange fitting made from corrosion-resistant metal with standard threading, quick snap-on installation, and secure sealing to prevent leaks.",
     price: "15",
+    priceAfterDis: "15",
+    discountPercent: 0,
+    isOffer: false,
     features: ["Corrosion-resistant", "Standard threading", "Leak seal"],
     specifications: {
       "Material": "Zinc alloy",
@@ -382,7 +407,7 @@ final List<ProductDetailModel> offerProducts = [
     isOffer: true,
     discountPercent: 20,
     priceAfterDis: "12",
-    id: 1,
+    id: 9,
     prodName: "Small Size Sink Flangers",
     img: "flanger_white.png",
     imgMap: {
@@ -407,7 +432,7 @@ final List<ProductDetailModel> offerProducts = [
     isOffer: true,
     discountPercent: 30,
     priceAfterDis: "21",
-    id: 2,
+    id: 10,
     prodName: "Medium Size Trash Cans",
     img: "trashcan_white.png",
     imgMap: {
@@ -433,7 +458,7 @@ final List<ProductDetailModel> offerProducts = [
 
 final List<ProductDetailModel> newArrivals = [
   ProductDetailModel(
-    id: 1,
+    id: 13,
     prodName: "Single Bowl Farmhouse Kitchen Sinks",
     img: "sink_white.png",
     imgMap: {
@@ -451,6 +476,9 @@ final List<ProductDetailModel> newArrivals = [
     productDetails:
         "Durable single-bowl farmhouse sink crafted from 18‑gauge stainless steel, featuring sound‑dampening pads, undermount design, and generous capacity for large pots and pans.",
     price: "250",
+    priceAfterDis: "250",
+    discountPercent: 0,
+    isOffer: false,
     features: ["18‑gauge steel", "Noise insulation", "Rust-resistant"],
     specifications: {
       "Material": "18‑gauge stainless steel",
@@ -461,7 +489,7 @@ final List<ProductDetailModel> newArrivals = [
     rating: "4.0",
   ),
   ProductDetailModel(
-    id: 2,
+    id: 14,
     prodName: "Under Mount Kitchen Sinks",
     img: "kitchen_item.png",
     imgMap: {
@@ -471,6 +499,9 @@ final List<ProductDetailModel> newArrivals = [
     productDetails:
         "Under-mount sink with polished interior and reinforced rim. Generous basin depth lets you clean oversized pots efficiently, while its smooth edges simplify countertop integration.",
     price: "220",
+    priceAfterDis: "220",
+    discountPercent: 0,
+    isOffer: false,
     features: ["Reinforced rim", "Polished interior", "Deep basin"],
     specifications: {
       "Material": "Stainless steel",
@@ -481,7 +512,7 @@ final List<ProductDetailModel> newArrivals = [
     rating: "3.9",
   ),
   ProductDetailModel(
-    id: 3,
+    id: 15,
     prodName: "Stainless Steel Water Tap",
     img: "tap.png",
     imgMap: {
@@ -491,6 +522,9 @@ final List<ProductDetailModel> newArrivals = [
     productDetails:
         "Contemporary stainless steel water tap featuring a single-lever ball valve for drip-free control and a 360° swivel spout for convenience and flexibility.",
     price: "40",
+    priceAfterDis: "40",
+    discountPercent: 0,
+    isOffer: false,
     features: ["Single-lever", "Swivel spout", "Ball valve"],
     specifications: {
       "Material": "304 stainless steel",
@@ -504,7 +538,7 @@ final List<ProductDetailModel> newArrivals = [
 
 final List<ProductDetailModel> popularProd = [
   ProductDetailModel(
-    id: 1,
+    id: 16,
     prodName: "Stainless Steel Water Tap",
     img: "tap.png",
     imgMap: {
@@ -514,6 +548,9 @@ final List<ProductDetailModel> popularProd = [
     productDetails:
         "Contemporary stainless steel water tap featuring a single-lever ball valve for drip-free control and a 360° swivel spout for convenience and flexibility.",
     price: "40",
+    priceAfterDis: "40",
+    discountPercent: 0,
+    isOffer: false,
     features: ["Single-lever", "Swivel spout", "Ball valve"],
     specifications: {
       "Material": "304 stainless steel",
@@ -527,7 +564,7 @@ final List<ProductDetailModel> popularProd = [
 
 final List<ProductDetailModel> bestSellers = [
   ProductDetailModel(
-    id: 1,
+    id: 17,
     prodName: "Under Mount Kitchen Sinks",
     img: "kitchen_item.png",
     imgMap: {
@@ -537,6 +574,9 @@ final List<ProductDetailModel> bestSellers = [
     productDetails:
         "Under-mount sink with polished interior and reinforced rim. Generous basin depth lets you clean oversized pots efficiently, while its smooth edges simplify countertop integration.",
     price: "220",
+    priceAfterDis: "220",
+    discountPercent: 0,
+    isOffer: false,
     features: ["Reinforced rim", "Polished interior", "Deep basin"],
     specifications: {
       "Material": "Stainless steel",
@@ -547,7 +587,7 @@ final List<ProductDetailModel> bestSellers = [
     rating: "3.9",
   ),
   ProductDetailModel(
-    id: 2,
+    id: 18,
     prodName: "Stainless Steel Water Tap",
     img: "tap.png",
     imgMap: {
@@ -557,6 +597,9 @@ final List<ProductDetailModel> bestSellers = [
     productDetails:
         "Contemporary stainless steel water tap featuring a single-lever ball valve for drip-free control and a 360° swivel spout for convenience and flexibility.",
     price: "40",
+    priceAfterDis: "40",
+    discountPercent: 0,
+    isOffer: false,
     features: ["Single-lever", "Swivel spout", "Ball valve"],
     specifications: {
       "Material": "304 stainless steel",

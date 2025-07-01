@@ -5,9 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart';
+import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class CartScreen extends ConsumerWidget {
-  const CartScreen({super.key});
+  CartScreen({super.key});
+  final colorConverter = ColorConverter();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,13 +31,27 @@ class CartScreen extends ConsumerWidget {
         actions: [
           Padding(
             padding: EdgeInsetsGeometry.only(right: 12.w),
-            child: Container(
-              padding: EdgeInsets.all(8.h),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: ComColors.lightGrey,
+            child: InkWell(
+              onTap: () {
+                cartRefR.clearCartItems();
+                showTopSnackBar(
+                  displayDuration: const Duration(milliseconds: 500),
+                  Overlay.of(context),
+                  CustomSnackBar.success(
+                    backgroundColor: ComColors.secColor,
+
+                    message: "Cart items cleared successfully!",
+                  ),
+                );
+              },
+              child: Container(
+                padding: EdgeInsets.all(8.h),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: ComColors.lightGrey,
+                ),
+                child: const Icon(Icons.delete_outline),
               ),
-              child: const Icon(Icons.delete_outline),
             ),
           ),
         ],
@@ -121,6 +139,40 @@ class CartScreen extends ConsumerWidget {
                                                   color: ComColors.secColor,
                                                 ),
                                               ),
+                                              if (cartRef
+                                                  .cartItems[index]
+                                                  .isOffer)
+                                                Positioned(
+                                                  top: 5.h,
+                                                  right: 0,
+                                                  child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(4),
+                                                    decoration: BoxDecoration(
+                                                      color: ComColors.darkRed,
+                                                      borderRadius:
+                                                          const BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                  4,
+                                                                ),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                  4,
+                                                                ),
+                                                          ),
+                                                    ),
+                                                    child: Text(
+                                                      "${cartRef.cartItems[index].discountPercent}% Off",
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.white,
+                                                        fontSize: 7.sp,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
                                             ],
                                           ),
                                         ),
@@ -151,14 +203,50 @@ class CartScreen extends ConsumerWidget {
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          Text(
-                                            "Rs.${cartRef.cartItems[index].price}",
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
+                                          cartRefR.cartItems[index].isOffer ==
+                                                  true
+                                              ? Row(
+                                                  children: [
+                                                    const Text("Rs."),
+                                                    Text(
+                                                      cartRef
+                                                          .cartItems[index]
+                                                          .price,
+                                                      style: const TextStyle(
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                        decorationColor:
+                                                            Colors.grey,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 5),
+                                                    Text(
+                                                      cartRef
+                                                          .cartItems[index]
+                                                          .priceAfterDis,
+                                                    ),
+                                                  ],
+                                                )
+                                              : Row(
+                                                  children: [
+                                                    const Text("Rs."),
+                                                    Text(
+                                                      cartRef
+                                                          .cartItems[index]
+                                                          .price,
+                                                    ),
+                                                  ],
+                                                ),
+                                          // cartRefR.cartItems[index].isOffer?
+                                          // Text(
+                                          //   "Rs.${cartRef.cartItems[index].price}",
+                                          //   maxLines: 1,
+                                          //   overflow: TextOverflow.ellipsis,
+                                          //   style: const TextStyle(
+                                          //     fontWeight: FontWeight.bold,
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),
@@ -183,46 +271,69 @@ class CartScreen extends ConsumerWidget {
                                                   color: ComColors.lightGrey,
                                                   width: 1.r,
                                                 ),
-                                                color: Colors.yellow,
+                                                color: colorConverter
+                                                    .colorFromString(
+                                                      cartRef
+                                                          .cartItems[index]
+                                                          .color,
+                                                    ),
                                                 shape: BoxShape.circle,
                                               ),
                                             ),
                                             Row(
                                               spacing: 5.w,
                                               children: [
-                                                Container(
-                                                  // padding: EdgeInsets.all(1.r),
-                                                  decoration: BoxDecoration(
-                                                    color: ComColors.lightGrey,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          5.r,
-                                                        ),
-                                                  ),
-                                                  child: const Icon(
-                                                    Icons.remove,
+                                                InkWell(
+                                                  onTap: () {
+                                                    cartRefR.decreaseCartQuant(
+                                                      index,
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    // padding: EdgeInsets.all(1.r),
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          ComColors.lightGrey,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            5.r,
+                                                          ),
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.remove,
+                                                    ),
                                                   ),
                                                 ),
                                                 Text(
-                                                  "1",
+                                                  cartRef
+                                                      .cartItems[index]
+                                                      .quantity
+                                                      .toString(),
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 15.sp,
                                                   ),
                                                 ),
-                                                Container(
-                                                  // padding: EdgeInsets.all(1.r),
-                                                  decoration: BoxDecoration(
-                                                    color:
-                                                        ComColors.priLightColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          5.r,
-                                                        ),
-                                                  ),
-                                                  child: const Icon(
-                                                    Icons.add,
-                                                    color: Colors.white,
+                                                InkWell(
+                                                  onTap: () {
+                                                    cartRefR.increaseCartQuant(
+                                                      index,
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    // padding: EdgeInsets.all(1.r),
+                                                    decoration: BoxDecoration(
+                                                      color: ComColors
+                                                          .priLightColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            5.r,
+                                                          ),
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.add,
+                                                      color: Colors.white,
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -356,7 +467,7 @@ class CartScreen extends ConsumerWidget {
                           width: double.infinity,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: ComColors.priColor,
+                              backgroundColor: ComColors.priLightColor,
                             ),
                             onPressed: () {},
                             child: Text(

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
+import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart';
+import 'package:kitchen_ecommerce/features/cart/model/cart_item_model.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ProductDetailScreen extends ConsumerStatefulWidget {
   final int prodIndex;
@@ -39,6 +43,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     final detRefR = ref.read(productDetController);
     final botmProdRef = ref.watch(botmProdController);
     final botmProdRefR = ref.read(botmProdController);
+    final cartRefR = ref.read(cartController);
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -630,7 +635,41 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
             Flexible(
               flex: 4,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  cartRefR.addToCart(
+                    CartItemModel(
+                      id: botmProdRefR.botmProducts[widget.prodIndex].id,
+                      prodName:
+                          botmProdRefR.botmProducts[widget.prodIndex].prodName,
+                      // img: botmProdRefR.botmProducts[widget.prodIndex].img,
+                      img: detRef.prodImages[0],
+                      category:
+                          botmProdRefR.botmProducts[widget.prodIndex].category,
+                      price: botmProdRefR.botmProducts[widget.prodIndex].price,
+                      quantity: 1,
+                      isOffer:
+                          botmProdRefR.botmProducts[widget.prodIndex].isOffer,
+                      discountPercent: botmProdRefR
+                          .botmProducts[widget.prodIndex]
+                          .discountPercent,
+                      priceAfterDis: botmProdRefR
+                          .botmProducts[widget.prodIndex]
+                          .priceAfterDis,
+                      isSelected: true,
+                      color: detRefR.imgColor,
+                    ),
+                  );
+                  Navigator.pop(context);
+                  showTopSnackBar(
+                    displayDuration: const Duration(milliseconds: 500),
+                    Overlay.of(context),
+                    CustomSnackBar.success(
+                      backgroundColor: ComColors.secColor,
+
+                      message: "Item added to cart successfully!",
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ComColors.priLightColor,
                 ),

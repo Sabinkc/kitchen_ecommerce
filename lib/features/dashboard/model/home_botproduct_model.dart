@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen_ecommerce/features/dashboard/model/product_details.dart';
+import 'package:kitchen_ecommerce/features/dashboard/model/product_details_data.dart';
 
 class HomeBotproductModel extends ChangeNotifier {
   int botProdIndex = 0;

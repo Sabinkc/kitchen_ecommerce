@@ -17,7 +17,7 @@ class LandingScreen extends ConsumerStatefulWidget {
 class _LandingScreenState extends ConsumerState<LandingScreen> {
   final List<Widget> screens = [
     const HomeScreen(),
-    const CartScreen(),
+    CartScreen(),
     const FavouriteScreen(),
     const SettingsScreen(),
   ];
