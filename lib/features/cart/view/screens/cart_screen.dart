@@ -33,16 +33,28 @@ class CartScreen extends ConsumerWidget {
             padding: EdgeInsetsGeometry.only(right: 12.w),
             child: InkWell(
               onTap: () {
-                cartRefR.clearCartItems();
-                showTopSnackBar(
-                  displayDuration: const Duration(milliseconds: 500),
-                  Overlay.of(context),
-                  CustomSnackBar.success(
-                    backgroundColor: ComColors.secColor,
+                if (cartRefR.cartItems.isEmpty) {
+                  showTopSnackBar(
+                    displayDuration: const Duration(milliseconds: 500),
+                    Overlay.of(context),
+                    CustomSnackBar.info(
+                      backgroundColor: ComColors.priLightColor,
 
-                    message: "Cart items cleared successfully!",
-                  ),
-                );
+                      message: "No items available in cart!",
+                    ),
+                  );
+                } else {
+                  cartRefR.clearCartItems();
+                  showTopSnackBar(
+                    displayDuration: const Duration(milliseconds: 500),
+                    Overlay.of(context),
+                    CustomSnackBar.success(
+                      backgroundColor: ComColors.priLightColor,
+
+                      message: "Cart items cleared successfully!",
+                    ),
+                  );
+                }
               },
               child: Container(
                 padding: EdgeInsets.all(8.h),
@@ -57,7 +69,104 @@ class CartScreen extends ConsumerWidget {
         ],
       ),
       body: cartRefR.cartItems.isEmpty
-          ? const Center(child: Text("No items in cart"))
+          ? Center(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: 30.w,
+                  right: 30.w,
+                  top: 10.h,
+                  bottom: 100.h,
+                ),
+                child: Column(
+                  spacing: 40.h,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Your Cart is Empty",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35.sp,
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(15.r),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.shopping_bag_outlined,
+                            size: 100.r,
+                            color: Colors.grey,
+                          ),
+                          Text(
+                            "Nothing to show here right now",
+                            style: TextStyle(
+                              // fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                              fontSize: 17.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      spacing: 15.w,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.r),
+                                side: BorderSide(color: ComColors.priColor),
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: Text(
+                              "Check Whishlist",
+                              style: TextStyle(
+                                color: ComColors.priColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ComColors.priLightColor,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.r),
+                                side: BorderSide(
+                                  color: ComColors.priLightColor,
+                                ),
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: const Text(
+                              "Start Searching",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
           : Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -469,7 +578,20 @@ class CartScreen extends ConsumerWidget {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: ComColors.priLightColor,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              cartRefR.clearCartItems();
+                              showTopSnackBar(
+                                displayDuration: const Duration(
+                                  milliseconds: 500,
+                                ),
+                                Overlay.of(context),
+                                CustomSnackBar.success(
+                                  backgroundColor: ComColors.priLightColor,
+
+                                  message: "Checkout successful!",
+                                ),
+                              );
+                            },
                             child: Text(
                               "Proceed to chekout",
                               style: TextStyle(

@@ -28,6 +28,25 @@ class ProductDetailModel {
     required this.isOffer,
     required this.discountPercent,
   });
+
+  @override
+  String toString() {
+    return 'ProductDetailModel('
+        '  id: $id,'
+        '  prodName: $prodName,'
+        '  img: $img,'
+        '  imgMap: $imgMap,'
+        '  category: $category,'
+        '  productDetails: $productDetails,'
+        '  price: $price,'
+        '  features: $features,'
+        '  specifications: $specifications,'
+        '  rating: $rating,'
+        '  isOffer: $isOffer,'
+        '  discountPercent: $discountPercent,'
+        '  priceAfterDis: $priceAfterDis'
+        ')';
+  }
 }
 
 final List<ProductDetailModel> products = [

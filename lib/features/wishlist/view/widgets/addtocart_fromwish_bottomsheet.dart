@@ -6,19 +6,21 @@ import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart'
 import 'package:kitchen_ecommerce/features/cart/model/cart_item_model.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
+import 'package:kitchen_ecommerce/features/wishlist/controller/wishlist_controller.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class AddToCartBottomSheet extends ConsumerStatefulWidget {
+class AddToCartFromWishBottomSheet extends ConsumerStatefulWidget {
   final int prodIndex;
-  const AddToCartBottomSheet({super.key, required this.prodIndex});
+  const AddToCartFromWishBottomSheet({super.key, required this.prodIndex});
 
   @override
-  ConsumerState<AddToCartBottomSheet> createState() =>
+  ConsumerState<AddToCartFromWishBottomSheet> createState() =>
       _AddToCartBottomSheetState();
 }
 
-class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
+class _AddToCartBottomSheetState
+    extends ConsumerState<AddToCartFromWishBottomSheet> {
   final colorConverter = ColorConverter();
   @override
   void initState() {
@@ -26,14 +28,13 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
 
     Future.delayed(Duration.zero, () {
       final detRefR = ref.read(productDetController);
-      final botmProdRefR = ref.read(botmProdController);
+      final wishRefR = ref.read(wishListController);
       detRefR.resetProdImg();
       detRefR.clearImgIndex();
       detRefR.clearColIndex();
       detRefR.prodImages =
-          botmProdRefR.botmProducts[widget.prodIndex].imgMap.values.first;
-      detRefR.imgColor =
-          botmProdRefR.botmProducts[widget.prodIndex].imgMap.keys.first;
+          wishRefR.wishList[widget.prodIndex].imgMap.values.first;
+      detRefR.imgColor = wishRefR.wishList[widget.prodIndex].imgMap.keys.first;
     });
   }
 
@@ -42,8 +43,8 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
     final height = MediaQuery.sizeOf(context).height;
     final detRef = ref.watch(productDetController);
     final detRefR = ref.read(productDetController);
-    final botmProdRef = ref.watch(botmProdController);
-    final botmProdRefR = ref.read(botmProdController);
+    final wishRefR = ref.read(wishListController);
+    final wishRef = ref.watch(wishListController);
     final cartRefR = ref.read(cartController);
     return Container(
       padding: EdgeInsets.only(top: 15.h),
@@ -87,8 +88,7 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                         ),
                       ),
                     ),
-                    if (botmProdRef.botmProducts[widget.prodIndex].isOffer ==
-                        true)
+                    if (wishRefR.wishList[widget.prodIndex].isOffer == true)
                       Positioned(
                         top: 10,
                         right: 0,
@@ -102,7 +102,7 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                             ),
                           ),
                           child: Text(
-                            "${botmProdRef.botmProducts[widget.prodIndex].discountPercent}% Off",
+                            "${wishRef.wishList[widget.prodIndex].discountPercent}% Off",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -160,7 +160,7 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                       ),
 
                       Text(
-                        botmProdRef.botmProducts[widget.prodIndex].prodName,
+                        wishRef.wishList[widget.prodIndex].prodName,
                         style: TextStyle(
                           fontSize: 17.sp,
                           fontWeight: FontWeight.bold,
@@ -190,14 +190,12 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                       SizedBox(
                         height: 30.h,
                         child: ListView.builder(
-                          itemCount: botmProdRefR
-                              .botmProducts[widget.prodIndex]
-                              .imgMap
-                              .length,
+                          itemCount:
+                              wishRefR.wishList[widget.prodIndex].imgMap.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            final prodColor = botmProdRefR
-                                .botmProducts[widget.prodIndex]
+                            final prodColor = wishRefR
+                                .wishList[widget.prodIndex]
                                 .imgMap
                                 .keys
                                 .elementAt(index);
@@ -208,17 +206,17 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                                   detRefR.updateColInd(index);
                                   detRefR.clearImgIndex();
                                   detRefR.updateProdImg(
-                                    botmProdRefR
-                                        .botmProducts[widget.prodIndex]
+                                    wishRefR
+                                        .wishList[widget.prodIndex]
                                         .imgMap
                                         .keys
                                         .elementAt(index),
                                     widget.prodIndex,
-                                    botmProdRefR.botmProducts,
+                                    wishRefR.wishList,
                                   );
                                   detRefR.updateImgCol(
-                                    botmProdRefR
-                                        .botmProducts[widget.prodIndex]
+                                    wishRefR
+                                        .wishList[widget.prodIndex]
                                         .imgMap
                                         .keys
                                         .elementAt(index),
@@ -293,10 +291,7 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                             //   "Rs.${botmProdRef.botmProducts[widget.prodIndex].price}",
                             //   style: const TextStyle(fontWeight: FontWeight.bold),
                             // ),
-                            botmProdRef
-                                        .botmProducts[widget.prodIndex]
-                                        .isOffer ==
-                                    true
+                            wishRefR.wishList[widget.prodIndex].isOffer == true
                                 ? Row(
                                     children: [
                                       Text(
@@ -307,7 +302,9 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                                         ),
                                       ),
                                       Text(
-                                        "${botmProdRef.botmProducts[widget.prodIndex].price}",
+                                        wishRef
+                                            .wishList[widget.prodIndex]
+                                            .price,
                                         style: TextStyle(
                                           decoration:
                                               TextDecoration.lineThrough,
@@ -319,7 +316,9 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                                       ),
                                       const SizedBox(width: 5),
                                       Text(
-                                        "${botmProdRef.botmProducts[widget.prodIndex].priceAfterDis}",
+                                        wishRef
+                                            .wishList[widget.prodIndex]
+                                            .priceAfterDis,
                                         style: TextStyle(
                                           color: ComColors.priLightColor,
                                           fontWeight: FontWeight.bold,
@@ -338,7 +337,9 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                                         ),
                                       ),
                                       Text(
-                                        "${botmProdRef.botmProducts[widget.prodIndex].price}",
+                                        wishRefR
+                                            .wishList[widget.prodIndex]
+                                            .price,
                                         style: TextStyle(
                                           color: ComColors.priLightColor,
                                           fontSize: 16.sp,
@@ -355,34 +356,30 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                           onPressed: () {
                             cartRefR.addToCart(
                               CartItemModel(
-                                id: botmProdRefR
-                                    .botmProducts[widget.prodIndex]
-                                    .id,
-                                prodName: botmProdRefR
-                                    .botmProducts[widget.prodIndex]
+                                id: wishRefR.wishList[widget.prodIndex].id,
+                                prodName: wishRefR
+                                    .wishList[widget.prodIndex]
                                     .prodName,
                                 img: detRef.prodImages[0],
                                 // img: botmProdRefR
                                 //     .botmProducts[widget.prodIndex]
                                 //     .img,
-                                category: botmProdRefR
-                                    .botmProducts[widget.prodIndex]
+                                category: wishRefR
+                                    .wishList[widget.prodIndex]
                                     .category,
-                                price: botmProdRefR
-                                    .botmProducts[widget.prodIndex]
-                                    .price,
+                                price:
+                                    wishRefR.wishList[widget.prodIndex].price,
                                 quantity: 1,
-                                isOffer: botmProdRefR
-                                    .botmProducts[widget.prodIndex]
-                                    .isOffer,
-                                discountPercent: botmProdRefR
-                                    .botmProducts[widget.prodIndex]
+                                discountPercent: wishRefR
+                                    .wishList[widget.prodIndex]
                                     .discountPercent,
-                                priceAfterDis: botmProdRefR
-                                    .botmProducts[widget.prodIndex]
+                                priceAfterDis: wishRefR
+                                    .wishList[widget.prodIndex]
                                     .priceAfterDis,
                                 isSelected: true,
                                 color: detRefR.imgColor,
+                                isOffer:
+                                    wishRefR.wishList[widget.prodIndex].isOffer,
                               ),
                             );
                             Navigator.pop(context);

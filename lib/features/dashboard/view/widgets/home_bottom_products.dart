@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/model_list.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/product_detail_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/add_to_cart_bottom_sheet.dart';
+import 'package:kitchen_ecommerce/features/wishlist/controller/wishlist_controller.dart';
 
 class HomeBottomproducts extends ConsumerWidget {
   const HomeBottomproducts({super.key});
@@ -16,6 +18,8 @@ class HomeBottomproducts extends ConsumerWidget {
     final botProdRef = ref.watch(botmProdController);
     final botProdRefR = ref.read(botmProdController);
     final detRefR = ref.read(productDetController);
+    final wishRef = ref.watch(wishListController);
+    final wishRefR = ref.read(wishListController);
 
     return Column(
       spacing: height * 0.02,
@@ -112,15 +116,32 @@ class HomeBottomproducts extends ConsumerWidget {
                               ),
                               child: Align(
                                 alignment: Alignment.centerRight,
-                                child: Container(
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                  ),
-                                  child: Icon(
-                                    Icons.favorite_outline,
-                                    color: ComColors.priLightColor,
+                                child: InkWell(
+                                  onTap: () {
+                                    wishRefR.isWishList(
+                                          botProdRefR.botmProducts[index],
+                                        )
+                                        ? wishRefR.removeFromWishList(
+                                            botProdRefR.botmProducts[index],
+                                          )
+                                        : wishRefR.addToWishList(
+                                            botProdRefR.botmProducts[index],
+                                          );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                    ),
+                                    child: Icon(
+                                      wishRefR.isWishList(
+                                            botProdRefR.botmProducts[index],
+                                          )
+                                          ? Icons.favorite
+                                          : Icons.favorite_outline,
+                                      color: ComColors.priLightColor,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -160,20 +181,47 @@ class HomeBottomproducts extends ConsumerWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              // ProductDetails.dashProdName[index],
-                              botProdRef.botmProducts[index].prodName,
-                              maxLines: 1,
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 16,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            spacing: 10.w,
+                            children: [
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    // ProductDetails.dashProdName[index],
+                                    botProdRef.botmProducts[index].prodName,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.left,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 16,
 
-                                fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
+                              Row(
+                                spacing: 3,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.yellow[800]!,
+                                    size: 16.r,
+                                  ),
+                                  Text(
+                                    botProdRef.botmProducts[index].rating,
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                         Padding(

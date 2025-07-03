@@ -4,7 +4,7 @@ import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/home_screen.dart';
 import 'package:kitchen_ecommerce/features/cart/view/screens/cart_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
-import 'package:kitchen_ecommerce/features/favourites/view/screens/favourite_screen.dart';
+import 'package:kitchen_ecommerce/features/wishlist/view/screens/wishlist_screen.dart';
 import 'package:kitchen_ecommerce/features/settings/view/screens/settings_screen.dart';
 
 class LandingScreen extends ConsumerStatefulWidget {
