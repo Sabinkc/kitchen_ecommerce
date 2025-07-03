@@ -29,8 +29,10 @@ class WishlistModel extends ChangeNotifier {
 
   bool isWishList(ProductDetailModel product) {
     if (wishList.contains(product)) {
+      logger.log("is wishlist");
       return true;
     } else {
+      logger.log("not wishlist");
       return false;
     }
   }

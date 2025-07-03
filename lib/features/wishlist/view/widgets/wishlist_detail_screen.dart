@@ -45,6 +45,7 @@ class _ProductDetailScreenState extends ConsumerState<WishlistDetailScreen> {
     final wishRefR = ref.read(wishListController);
     final wishRef = ref.watch(wishListController);
     final cartRefR = ref.read(cartController);
+    final product = wishRef.wishList[widget.prodIndex];
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -72,13 +73,47 @@ class _ProductDetailScreenState extends ConsumerState<WishlistDetailScreen> {
         actions: [
           Padding(
             padding: const EdgeInsetsGeometry.only(right: 12),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
+            child: InkWell(
+              onTap: () async {
+                // if (wishRefR.isWishList(product)) {
+                //   Navigator.pop(context);
+
+                //   wishRefR.removeFromWishList(product);
+
+                //   showTopSnackBar(
+                //     displayDuration: const Duration(milliseconds: 500),
+                //     Overlay.of(context),
+                //     CustomSnackBar.success(
+                //       backgroundColor: ComColors.priLightColor,
+
+                //       message: "Product removed from wishlist!",
+                //     ),
+                //   );
+                // } else {
+                //   wishRefR.addToWishList(product);
+                //   showTopSnackBar(
+                //     displayDuration: const Duration(milliseconds: 500),
+                //     Overlay.of(context),
+                //     CustomSnackBar.success(
+                //       backgroundColor: ComColors.priLightColor,
+
+                //       message: "Product added to wishlist!",
+                //     ),
+                //   );
+                // }
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
+                child: Icon(
+                  wishRef.isWishList(product)
+                      ? Icons.favorite
+                      : Icons.favorite_outline,
+                ),
               ),
-              child: const Icon(Icons.favorite_outline),
             ),
           ),
         ],

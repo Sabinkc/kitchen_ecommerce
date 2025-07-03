@@ -5,6 +5,7 @@ import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart'
 import 'package:kitchen_ecommerce/features/cart/model/cart_item_model.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
+import 'package:kitchen_ecommerce/features/wishlist/controller/wishlist_controller.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -44,6 +45,9 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
     final botmProdRef = ref.watch(botmProdController);
     final botmProdRefR = ref.read(botmProdController);
     final cartRefR = ref.read(cartController);
+    final wishRefR = ref.read(wishListController);
+    final wishRef = ref.watch(wishListController);
+    final product = botmProdRef.botmProducts[widget.prodIndex];
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -71,13 +75,44 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
         actions: [
           Padding(
             padding: const EdgeInsetsGeometry.only(right: 12),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
+            child: InkWell(
+              onTap: () {
+                if (wishRefR.isWishList(product)) {
+                  wishRefR.removeFromWishList(product);
+                  showTopSnackBar(
+                    displayDuration: const Duration(milliseconds: 500),
+                    Overlay.of(context),
+                    CustomSnackBar.success(
+                      backgroundColor: ComColors.priLightColor,
+
+                      message: "Product removed from wishlist!",
+                    ),
+                  );
+                } else {
+                  wishRefR.addToWishList(product);
+                  showTopSnackBar(
+                    displayDuration: const Duration(milliseconds: 500),
+                    Overlay.of(context),
+                    CustomSnackBar.success(
+                      backgroundColor: ComColors.priLightColor,
+
+                      message: "Product added to wishlist!",
+                    ),
+                  );
+                }
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
+                child: Icon(
+                  wishRef.isWishList(product)
+                      ? Icons.favorite
+                      : Icons.favorite_outline,
+                ),
               ),
-              child: const Icon(Icons.favorite_outline),
             ),
           ),
         ],

@@ -1,6 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:kitchen_ecommerce/features/dashboard/model/product_details_data.dart';
+import 'dart:developer' as logger;
 
 class ProductDetailScreenModel extends ChangeNotifier {
+  ProductDetailModel product = ProductDetailModel(
+    id: 0,
+    prodName: "",
+    img: "",
+    imgMap: {},
+    category: "",
+    productDetails: "",
+    price: "",
+    features: [],
+    specifications: {},
+    rating: "",
+    priceAfterDis: "",
+    isOffer: false,
+    discountPercent: 0,
+  );
+
+  void loadProductDetail(ProductDetailModel product) {
+    product = product;
+    logger.log("product detail: $product");
+    notifyListeners();
+  }
+
   int imgIndex = 0;
   void updateImgInd(int index) {
     imgIndex = index;

@@ -8,6 +8,8 @@ import 'package:kitchen_ecommerce/features/dashboard/model/model_list.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/product_detail_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/add_to_cart_bottom_sheet.dart';
 import 'package:kitchen_ecommerce/features/wishlist/controller/wishlist_controller.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class HomeBottomproducts extends ConsumerWidget {
   const HomeBottomproducts({super.key});
@@ -86,6 +88,7 @@ class HomeBottomproducts extends ConsumerWidget {
                 // final detRefR = ref.read(productDetController);
                 // detRefR.resetProdImg();
                 //this fix hero animation problem
+                detRefR.loadProductDetail(botProdRefR.botmProducts[index]);
                 detRefR.prodImages =
                     botProdRefR.botmProducts[index].imgMap.values.first;
                 Navigator.push(
@@ -127,6 +130,18 @@ class HomeBottomproducts extends ConsumerWidget {
                                         : wishRefR.addToWishList(
                                             botProdRefR.botmProducts[index],
                                           );
+                                    showTopSnackBar(
+                                      displayDuration: const Duration(
+                                        milliseconds: 500,
+                                      ),
+                                      Overlay.of(context),
+                                      CustomSnackBar.success(
+                                        backgroundColor:
+                                            ComColors.priLightColor,
+
+                                        message: "Product added to wishlist!!",
+                                      ),
+                                    );
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.all(6),
