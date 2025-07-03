@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/button.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
@@ -25,7 +26,7 @@ class HomeBannerRow extends ConsumerWidget {
                   horizontal: 10,
                   vertical: 10,
                 ),
-                height: 150,
+                height: 140.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: ComColors.lightGrey,
@@ -39,21 +40,24 @@ class HomeBannerRow extends ConsumerWidget {
                       Expanded(
                         flex: 4,
                         child: Column(
-                          spacing: 5,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               "New Collection",
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: 14.sp,
                               ),
                             ),
-                            const Text(
+                            Text(
                               "Get 50% discount for the first transaction",
-                              style: TextStyle(color: Colors.grey),
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12.sp,
+                              ),
                             ),
                             SizedBox(
                               height: 30,
@@ -100,23 +104,26 @@ class HomeBannerRow extends ConsumerWidget {
                       Expanded(
                         flex: 4,
                         child: Column(
-                          spacing: 5,
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               "Exciting Offers",
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: 14.sp,
                               ),
                             ),
-                            const Text(
+                            Text(
                               "Get 40% discount for the kitchen items till 22 Jan, 2025",
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(color: Colors.grey),
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12.sp,
+                              ),
                             ),
                             SizedBox(
                               height: 30,
@@ -149,7 +156,7 @@ class HomeBannerRow extends ConsumerWidget {
                   horizontal: 10,
                   vertical: 10,
                 ),
-                height: 150,
+                height: 140.h,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: ComColors.lightGrey,
@@ -163,23 +170,27 @@ class HomeBannerRow extends ConsumerWidget {
                       Expanded(
                         flex: 4,
                         child: Column(
-                          spacing: 5,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               "Exciting Offers",
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: 14.sp,
                               ),
                             ),
-                            const Text(
+                            Text(
                               "Get 10% discount for the shower items till 3 Feb, 2025",
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(color: Colors.grey),
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12.sp,
+                              ),
                             ),
                             SizedBox(
                               height: 30,

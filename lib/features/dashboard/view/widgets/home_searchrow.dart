@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 
 class HomeSearchRow extends StatelessWidget {
@@ -13,7 +14,7 @@ class HomeSearchRow extends StatelessWidget {
         Flexible(
           flex: 5,
           child: Container(
-            height: 50,
+            height: 45.h,
             // width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -46,7 +47,7 @@ class HomeSearchRow extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               color: ComColors.priLightColor,
             ),
-            height: 50,
+            height: 45.h,
             child: const Icon(Icons.filter_list, color: Colors.white),
           ),
         ),

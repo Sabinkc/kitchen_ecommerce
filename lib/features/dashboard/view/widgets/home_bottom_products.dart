@@ -24,10 +24,10 @@ class HomeBottomproducts extends ConsumerWidget {
     final wishRefR = ref.read(wishListController);
 
     return Column(
-      spacing: height * 0.02,
+      spacing: height * 0.01,
       children: [
         SizedBox(
-          height: 60,
+          height: 50.h,
           child: Align(
             alignment: Alignment.bottomCenter,
             child: ListView.builder(
@@ -60,6 +60,7 @@ class HomeBottomproducts extends ConsumerWidget {
                                 ? Colors.white
                                 : ComColors.priLightColor,
                             fontWeight: FontWeight.bold,
+                            fontSize: 13.sp,
                           ),
                         ),
                       ),
@@ -102,7 +103,7 @@ class HomeBottomproducts extends ConsumerWidget {
                 builder: (context, conCons) {
                   final conHeght = conCons.maxHeight;
                   return Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: EdgeInsets.symmetric(vertical: 8.h),
                     decoration: BoxDecoration(
                       color: ComColors.lightGrey,
                       borderRadius: BorderRadius.circular(8),
@@ -144,7 +145,7 @@ class HomeBottomproducts extends ConsumerWidget {
                                     );
                                   },
                                   child: Container(
-                                    padding: const EdgeInsets.all(6),
+                                    padding: EdgeInsets.all(5.r),
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.white,
@@ -156,6 +157,7 @@ class HomeBottomproducts extends ConsumerWidget {
                                           ? Icons.favorite
                                           : Icons.favorite_outline,
                                       color: ComColors.priLightColor,
+                                      size: 24.r,
                                     ),
                                   ),
                                 ),
@@ -189,7 +191,7 @@ class HomeBottomproducts extends ConsumerWidget {
                             child: Image.asset(
                               // "assets/images/${ProductDetails.dashBotImg[index]}",
                               "assets/images/${botProdRef.botmProducts[index].img}",
-                              height: conHeght * 0.5,
+                              height: conHeght * 0.45,
                               fit: BoxFit.cover,
                             ),
                           ),

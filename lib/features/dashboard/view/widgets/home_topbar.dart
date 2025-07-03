@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:badges/badges.dart' as b;
 
@@ -13,12 +14,12 @@ class HomeTopbar extends StatelessWidget {
       pinned: true,
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: 10,
+        spacing: 8.w,
         children: [
           const SizedBox(width: 0),
           Container(
-            height: 40,
-            width: 40,
+            height: 35.r,
+            width: 35.r,
             decoration: const BoxDecoration(shape: BoxShape.circle),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
@@ -28,9 +29,9 @@ class HomeTopbar extends StatelessWidget {
               ),
             ),
           ),
-          const Text(
+          Text(
             "Sabin K.C.",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
           ),
         ],
       ),
@@ -38,8 +39,8 @@ class HomeTopbar extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 20),
           child: Container(
-            height: 40,
-            width: 40,
+            height: 35.r,
+            width: 35.r,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: ComColors.lightGrey,

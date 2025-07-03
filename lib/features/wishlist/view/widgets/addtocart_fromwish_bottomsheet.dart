@@ -60,7 +60,7 @@ class _AddToCartBottomSheetState
       child: detRefR.prodImages.isEmpty
           ? Center(child: CircularProgressIndicator(color: ComColors.secColor))
           : Column(
-              spacing: 10.h,
+              spacing: 5.h,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -77,7 +77,7 @@ class _AddToCartBottomSheetState
                 Stack(
                   children: [
                     Container(
-                      height: height * 0.25,
+                      height: height * 0.23,
                       width: double.infinity,
                       decoration: BoxDecoration(color: ComColors.lightGrey),
                       child: Hero(
@@ -119,7 +119,7 @@ class _AddToCartBottomSheetState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: height * 0.1,
+                        height: height * 0.08,
                         width: double.infinity,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
@@ -162,7 +162,7 @@ class _AddToCartBottomSheetState
                       Text(
                         wishRef.wishList[widget.prodIndex].prodName,
                         style: TextStyle(
-                          fontSize: 17.sp,
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -174,21 +174,21 @@ class _AddToCartBottomSheetState
                             "Select Color:",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 14.sp,
+                              fontSize: 13.sp,
                             ),
                           ),
                           Text(
                             detRef.imgColor,
                             style: TextStyle(
                               color: Colors.grey,
-                              fontSize: 14.sp,
+                              fontSize: 13.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 30.h,
+                        height: 25.h,
                         child: ListView.builder(
                           itemCount:
                               wishRefR.wishList[widget.prodIndex].imgMap.length,
@@ -268,7 +268,7 @@ class _AddToCartBottomSheetState
                     ),
                     border: Border(top: BorderSide(color: Colors.grey[300]!)),
                   ),
-                  height: height * 0.08,
+                  height: 70.h,
                   width: double.infinity,
                   child: Row(
                     spacing: 30,
@@ -278,6 +278,7 @@ class _AddToCartBottomSheetState
                         flex: 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               "Total Price",

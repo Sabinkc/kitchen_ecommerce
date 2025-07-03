@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/model_list.dart';
 
@@ -11,18 +12,18 @@ class HomeCategoryrow extends StatelessWidget {
     return Column(
       spacing: height * 0.02,
       children: [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               "Category",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.sp),
             ),
-            Text("See all"),
+            Text("See all", style: TextStyle(fontSize: 14.sp)),
           ],
         ),
         SizedBox(
-          height: 100,
+          height: 90.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: categoryList.length,
@@ -37,19 +38,22 @@ class HomeCategoryrow extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: ComColors.lightGrey,
                       ),
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.all(13.r),
 
                       child: Center(
                         child: Icon(
                           categoryIcons[index],
-                          size: 35,
+                          size: 30.r,
                           color: ComColors.priLightColor,
                         ),
                       ),
                     ),
                     Text(
                       categoryList[index],
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13.sp,
+                      ),
                     ),
                   ],
                 ),

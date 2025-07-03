@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:kitchen_ecommerce/common/auth_passwordfield.dart';
 import 'package:kitchen_ecommerce/common/auth_textfield.dart';
@@ -68,69 +69,99 @@ class SignupScreen extends StatelessWidget {
                               spacing: conHeight * 0.02,
                               children: [
                                 // const SizedBox(height: 1),
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 5),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 5),
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
                                       "Sign up with your account!",
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
                                   ),
                                 ),
                                 SizedBox(height: conHeight * 0.001),
-                                const Text(
+                                Text(
                                   "Full Name",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                ),
-                                const AuthTextfield(
-                                  hintText: "Full Name",
-                                  prefixIcon: Icons.person_2_outlined,
-                                ),
-                                const Text(
-                                  "Email",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                ),
-                                const AuthTextfield(
-                                  hintText: "Email",
-                                  prefixIcon: Icons.email_outlined,
-                                ),
-
-                                const Text(
-                                  "Password",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                ),
-
-                                const AuthPasswordfield(hintText: "Password"),
-                                const Text(
-                                  "Min, 8 char, inc 1 uppercase and lowercase letter, 1 number and 1 special character",
                                   style: TextStyle(
-                                    // color: Colors.grey,
-                                    fontSize: 12,
+                                    fontSize: 13.sp,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                const Text(
-                                  "Confirm Password",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                SizedBox(
+                                  height: 50.h,
+                                  child: const AuthTextfield(
+                                    hintText: "Full Name",
+                                    prefixIcon: Icons.person_2_outlined,
+                                  ),
                                 ),
-                                const AuthPasswordfield(
-                                  hintText: "Confirm Password",
+                                Text(
+                                  "Email",
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 50.h,
+                                  child: const AuthTextfield(
+                                    hintText: "Email",
+                                    prefixIcon: Icons.email_outlined,
+                                  ),
+                                ),
+
+                                Text(
+                                  "Password",
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+
+                                SizedBox(
+                                  height: 50.h,
+                                  child: const AuthPasswordfield(
+                                    hintText: "Password",
+                                  ),
+                                ),
+                                Text(
+                                  "Min, 8 char, inc 1 uppercase and lowercase letter, 1 number and 1 special character",
+                                  style: TextStyle(
+                                    // color: Colors.grey,
+                                    fontSize: 11.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Text(
+                                  "Confirm Password",
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 50.h,
+                                  child: const AuthPasswordfield(
+                                    hintText: "Confirm Password",
+                                  ),
                                 ),
                                 Row(
                                   children: [
                                     const Icon(Icons.check_box_outline_blank),
                                     const SizedBox(width: 5),
-                                    const Text(
+                                    Text(
                                       "I agree to the ",
-                                      style: TextStyle(color: Colors.black),
+                                      style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                     Text(
                                       "Terms & Conditions",
                                       style: TextStyle(
+                                        fontSize: 13.sp,
                                         color: ComColors.secColor,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -141,13 +172,14 @@ class SignupScreen extends StatelessWidget {
                                 SizedBox(height: conHeight * 0.01),
                                 SizedBox(
                                   width: double.infinity,
-                                  height: 55,
+                                  height: 50.h,
                                   child: ComButton(
                                     onPressed: () {
                                       Navigator.pushAndRemoveUntil(
                                         context,
                                         CupertinoPageRoute(
-                                          builder: (context) => const LandingScreen(),
+                                          builder: (context) =>
+                                              const LandingScreen(),
                                         ),
                                         (route) => false,
                                       );
@@ -161,7 +193,10 @@ class SignupScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   spacing: 5,
                                   children: [
-                                    const Text("Already have an account?"),
+                                    Text(
+                                      "Already have an account?",
+                                      style: TextStyle(fontSize: 13.sp),
+                                    ),
                                     InkWell(
                                       onTap: () => Navigator.pushReplacement(
                                         context,
@@ -173,6 +208,7 @@ class SignupScreen extends StatelessWidget {
                                       child: Text(
                                         "Sign In",
                                         style: TextStyle(
+                                          fontSize: 13.sp,
                                           color: ComColors.secColor,
                                           fontWeight: FontWeight.bold,
                                         ),

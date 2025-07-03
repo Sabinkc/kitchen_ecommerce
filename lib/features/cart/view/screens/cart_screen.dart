@@ -72,8 +72,8 @@ class CartScreen extends ConsumerWidget {
           ? Center(
               child: Padding(
                 padding: EdgeInsets.only(
-                  left: 30.w,
-                  right: 30.w,
+                  left: 40.w,
+                  right: 40.w,
                   top: 10.h,
                   bottom: 100.h,
                 ),
@@ -86,11 +86,14 @@ class CartScreen extends ConsumerWidget {
                       "Your Cart is Empty",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 35.sp,
+                        fontSize: 30.sp,
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(15.r),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.r,
+                        vertical: 40.r,
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(20),

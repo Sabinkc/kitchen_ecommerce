@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart';
 import 'package:kitchen_ecommerce/features/cart/model/cart_item_model.dart';
@@ -596,16 +597,18 @@ class _ProductDetailScreenState extends ConsumerState<WishlistDetailScreen> {
           ),
           border: Border(top: BorderSide(color: Colors.grey[300]!)),
         ),
-        height: height * 0.08,
+        height: 70.h,
         width: double.infinity,
         child: Row(
           spacing: 30,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Flexible(
               flex: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     "Total Price",

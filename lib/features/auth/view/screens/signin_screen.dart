@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:kitchen_ecommerce/common/auth_passwordfield.dart';
 import 'package:kitchen_ecommerce/common/auth_textfield.dart';
@@ -38,8 +39,8 @@ class SigninScreen extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: height * 0.22,
-                  bottom: height * 0.22,
+                  top: height * 0.20,
+                  bottom: height * 0.20,
                   left: 30,
                   right: 30,
                   child: LayoutBuilder(
@@ -67,31 +68,45 @@ class SigninScreen extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               spacing: conHeight * 0.02,
                               children: [
-                                const Align(
+                                Align(
                                   alignment: Alignment.center,
                                   child: Text(
                                     "Sign in with your account!",
                                     style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 15.sp,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
                                 SizedBox(height: conHeight * 0.01),
-                                const Text(
+                                Text(
                                   "Email",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                                const AuthTextfield(
-                                  hintText: "Email",
-                                  prefixIcon: Icons.email_outlined,
+                                SizedBox(
+                                  height: 50.h,
+                                  child: const AuthTextfield(
+                                    hintText: "Email",
+                                    prefixIcon: Icons.email_outlined,
+                                  ),
                                 ),
 
-                                const Text(
+                                Text(
                                   "Password",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                                const AuthPasswordfield(hintText: "Password"),
+                                SizedBox(
+                                  height: 50.h,
+                                  child: const AuthPasswordfield(
+                                    hintText: "Password",
+                                  ),
+                                ),
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: Text(
@@ -99,19 +114,21 @@ class SigninScreen extends StatelessWidget {
                                     style: TextStyle(
                                       color: ComColors.secColor,
                                       fontWeight: FontWeight.w500,
+                                      fontSize: 13.sp,
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: conHeight * 0.02),
+                                SizedBox(height: conHeight * 0.01),
                                 SizedBox(
                                   width: double.infinity,
-                                  height: 55,
+                                  height: 50.h,
                                   child: ComButton(
                                     onPressed: () {
                                       Navigator.pushAndRemoveUntil(
                                         context,
                                         CupertinoPageRoute(
-                                          builder: (context) => const LandingScreen(),
+                                          builder: (context) =>
+                                              const LandingScreen(),
                                         ),
                                         (route) => false,
                                       );
@@ -119,12 +136,15 @@ class SigninScreen extends StatelessWidget {
                                     name: "Sign In",
                                   ),
                                 ),
-                                SizedBox(height: conHeight * 0.05),
+                                SizedBox(height: conHeight * 0.01),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   spacing: 5,
                                   children: [
-                                    const Text("Don't have an account?"),
+                                    Text(
+                                      "Don't have an account?",
+                                      style: TextStyle(fontSize: 13.sp),
+                                    ),
                                     InkWell(
                                       onTap: () => Navigator.pushReplacement(
                                         context,
@@ -136,6 +156,7 @@ class SigninScreen extends StatelessWidget {
                                       child: Text(
                                         "Sign Up",
                                         style: TextStyle(
+                                          fontSize: 13.sp,
                                           color: ComColors.secColor,
                                           fontWeight: FontWeight.bold,
                                         ),

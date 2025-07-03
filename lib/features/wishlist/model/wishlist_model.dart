@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/product_details_data.dart';
-import 'dart:developer' as logger;
 
 class WishlistModel extends ChangeNotifier {
   List<ProductDetailModel> wishList = [];
@@ -11,28 +10,28 @@ class WishlistModel extends ChangeNotifier {
       return;
     }
     wishList.add(product);
-    logger.log("wishList: $wishList");
+    // logger.log("wishList: $wishList");
     notifyListeners();
   }
 
   void removeFromWishList(ProductDetailModel product) {
     wishList.remove(product);
-    logger.log("wishList: $wishList");
+    // logger.log("wishList: $wishList");
     notifyListeners();
   }
 
   void clearWishlist() {
     wishList.clear();
-    logger.log("wishList: $wishList");
+    // logger.log("wishList: $wishList");
     notifyListeners();
   }
 
   bool isWishList(ProductDetailModel product) {
     if (wishList.contains(product)) {
-      logger.log("is wishlist");
+      // logger.log("is wishlist");
       return true;
     } else {
-      logger.log("not wishlist");
+      // logger.log("not wishlist");
       return false;
     }
   }
