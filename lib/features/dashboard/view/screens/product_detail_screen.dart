@@ -118,7 +118,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
           ),
         ],
       ),
-      body: detRefR.prodImages.isEmpty
+      body: detRef.prodImages.isEmpty
           ? Center(child: CircularProgressIndicator(color: ComColors.secColor))
           : SingleChildScrollView(
               child: Column(

@@ -61,7 +61,7 @@ class FavouriteScreen extends ConsumerWidget {
                 padding: EdgeInsets.all(8.h),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: ComColors.lightGrey,
+                  border: Border.all(color: ComColors.lightGrey, width: 1.3.r),
                 ),
                 child: const Icon(Icons.delete_outline),
               ),
@@ -69,7 +69,7 @@ class FavouriteScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: wishRefR.wishList.isEmpty
+      body: wishRef.wishList.isEmpty
           ? Center(
               child: Padding(
                 padding: EdgeInsets.only(
@@ -173,289 +173,265 @@ class FavouriteScreen extends ConsumerWidget {
             )
           : Padding(
               padding: EdgeInsets.symmetric(horizontal: 18.w),
-              child: wishRefR.wishList.isEmpty
-                  ? const Center(child: Text("No items in the wishlist"))
-                  : GridView.builder(
-                      padding: const EdgeInsets.only(top: 20, bottom: 100),
+              child: GridView.builder(
+                padding: const EdgeInsets.only(top: 20, bottom: 100),
 
-                      itemCount: wishRefR.wishList.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: 0.70,
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                itemCount: wishRefR.wishList.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 0.70,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      // final detRefR = ref.read(productDetController);
+                      // detRefR.resetProdImg();
+                      //this fix hero animation problem
+                      detRefR.prodImages =
+                          wishRefR.wishList[index].imgMap.values.first;
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) =>
+                              WishlistDetailScreen(prodIndex: index),
+                        ),
+                      );
+                    },
+                    child: LayoutBuilder(
+                      builder: (context, conCons) {
+                        final conHeght = conCons.maxHeight;
+                        return Container(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            color: ComColors.lightGrey,
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            // final detRefR = ref.read(productDetController);
-                            // detRefR.resetProdImg();
-                            //this fix hero animation problem
-                            detRefR.prodImages =
-                                wishRefR.wishList[index].imgMap.values.first;
-                            Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                builder: (context) =>
-                                    WishlistDetailScreen(prodIndex: index),
-                              ),
-                            );
-                          },
-                          child: LayoutBuilder(
-                            builder: (context, conCons) {
-                              final conHeght = conCons.maxHeight;
-                              return Container(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: ComColors.lightGrey,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Column(
-                                  spacing: conHeght * 0.02,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 10,
-                                          ),
-                                          child: Align(
-                                            alignment: Alignment.centerRight,
-                                            child: InkWell(
-                                              onTap: () {
-                                                wishRefR.removeFromWishList(
-                                                  wishRefR.wishList[index],
-                                                );
-                                                showTopSnackBar(
-                                                  displayDuration:
-                                                      const Duration(
-                                                        milliseconds: 500,
-                                                      ),
-                                                  Overlay.of(context),
-                                                  CustomSnackBar.success(
-                                                    backgroundColor:
-                                                        ComColors.priLightColor,
-
-                                                    message:
-                                                        "Product removed from wishlist!!",
-                                                  ),
-                                                );
-                                              },
-                                              child: Container(
-                                                padding: EdgeInsets.all(5.r),
-                                                decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: Colors.white,
-                                                ),
-                                                child: Icon(
-                                                  Icons.favorite,
-                                                  color:
-                                                      ComColors.priLightColor,
-                                                  size: 24.r,
-                                                ),
-                                              ),
+                          child: Column(
+                            spacing: conHeght * 0.02,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                    ),
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: InkWell(
+                                        onTap: () {
+                                          wishRefR.removeFromWishList(
+                                            wishRefR.wishList[index],
+                                          );
+                                          showTopSnackBar(
+                                            displayDuration: const Duration(
+                                              milliseconds: 500,
                                             ),
+                                            Overlay.of(context),
+                                            CustomSnackBar.success(
+                                              backgroundColor:
+                                                  ComColors.priLightColor,
+
+                                              message:
+                                                  "Product removed from wishlist!!",
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.all(5.r),
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.white,
+                                          ),
+                                          child: Icon(
+                                            Icons.favorite,
+                                            color: ComColors.priLightColor,
+                                            size: 24.r,
                                           ),
                                         ),
-                                        wishRefR.wishList[index].isOffer == true
-                                            ? Container(
-                                                padding: const EdgeInsets.all(
-                                                  4,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  color: ComColors.darkRed,
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                        topLeft:
-                                                            Radius.circular(4),
-                                                        bottomLeft:
-                                                            Radius.circular(4),
-                                                      ),
-                                                ),
-                                                child: Text(
-                                                  "${wishRef.wishList[index].discountPercent}% Off",
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  wishRefR.wishList[index].isOffer == true
+                                      ? Container(
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: BoxDecoration(
+                                            color: ComColors.darkRed,
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                                  topLeft: Radius.circular(4),
+                                                  bottomLeft: Radius.circular(
+                                                    4,
                                                   ),
                                                 ),
-                                              )
-                                            : const SizedBox.shrink(),
+                                          ),
+                                          child: Text(
+                                            "${wishRef.wishList[index].discountPercent}% Off",
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox.shrink(),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                child: Hero(
+                                  tag: "hero_tag$index",
+                                  child: Image.asset(
+                                    // "assets/images/${ProductDetails.dashBotImg[index]}",
+                                    "assets/images/${wishRef.wishList[index].img}",
+                                    height: conHeght * 0.45,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  spacing: 10.w,
+                                  children: [
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          // ProductDetails.dashProdName[index],
+                                          wishRef.wishList[index].prodName,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.left,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Row(
+                                      spacing: 3,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: Colors.yellow[800]!,
+                                          size: 16.r,
+                                        ),
+                                        Text(
+                                          wishRef.wishList[index].rating,
+                                          style: const TextStyle(
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                      ),
-                                      child: Hero(
-                                        tag: "hero_tag$index",
-                                        child: Image.asset(
-                                          // "assets/images/${ProductDetails.dashBotImg[index]}",
-                                          "assets/images/${wishRef.wishList[index].img}",
-                                          height: conHeght * 0.45,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        spacing: 10.w,
-                                        children: [
-                                          Expanded(
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                // ProductDetails.dashProdName[index],
-                                                wishRef
-                                                    .wishList[index]
-                                                    .prodName,
-                                                maxLines: 1,
-                                                textAlign: TextAlign.left,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-
-                                                  fontWeight: FontWeight.w500,
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    wishRefR.wishList[index].isOffer == true
+                                        ? Row(
+                                            children: [
+                                              Text(
+                                                "Rs.",
+                                                style: TextStyle(
+                                                  fontSize: conHeght * 0.07,
+                                                  color:
+                                                      ComColors.priLightColor,
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          Row(
-                                            spacing: 3,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                              Text(
+                                                wishRef.wishList[index].price,
+                                                style: TextStyle(
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                  decorationColor: Colors.grey,
+                                                  fontSize: conHeght * 0.07,
+                                                  color:
+                                                      ComColors.priLightColor,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 5),
+                                              Text(
+                                                wishRef
+                                                    .wishList[index]
+                                                    .priceAfterDis,
+                                                style: TextStyle(
+                                                  fontSize: conHeght * 0.07,
+                                                  color:
+                                                      ComColors.priLightColor,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        : Row(
                                             children: [
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.yellow[800]!,
-                                                size: 16.r,
+                                              Text(
+                                                "Rs.",
+                                                style: TextStyle(
+                                                  fontSize: conHeght * 0.07,
+                                                  color:
+                                                      ComColors.priLightColor,
+                                                ),
                                               ),
                                               Text(
-                                                wishRef.wishList[index].rating,
-                                                style: const TextStyle(
-                                                  color: Colors.grey,
-                                                  fontWeight: FontWeight.bold,
+                                                wishRef.wishList[index].price,
+                                                style: TextStyle(
+                                                  fontSize: conHeght * 0.07,
+                                                  color:
+                                                      ComColors.priLightColor,
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          wishRefR.wishList[index].isOffer ==
-                                                  true
-                                              ? Row(
-                                                  children: [
-                                                    Text(
-                                                      "Rs.",
-                                                      style: TextStyle(
-                                                        fontSize:
-                                                            conHeght * 0.07,
-                                                        color: ComColors
-                                                            .priLightColor,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      wishRef
-                                                          .wishList[index]
-                                                          .price,
-                                                      style: TextStyle(
-                                                        decoration:
-                                                            TextDecoration
-                                                                .lineThrough,
-                                                        decorationColor:
-                                                            Colors.grey,
-                                                        fontSize:
-                                                            conHeght * 0.07,
-                                                        color: ComColors
-                                                            .priLightColor,
-                                                      ),
-                                                    ),
-                                                    const SizedBox(width: 5),
-                                                    Text(
-                                                      wishRef
-                                                          .wishList[index]
-                                                          .priceAfterDis,
-                                                      style: TextStyle(
-                                                        fontSize:
-                                                            conHeght * 0.07,
-                                                        color: ComColors
-                                                            .priLightColor,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              : Row(
-                                                  children: [
-                                                    Text(
-                                                      "Rs.",
-                                                      style: TextStyle(
-                                                        fontSize:
-                                                            conHeght * 0.07,
-                                                        color: ComColors
-                                                            .priLightColor,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      wishRef
-                                                          .wishList[index]
-                                                          .price,
-                                                      style: TextStyle(
-                                                        fontSize:
-                                                            conHeght * 0.07,
-                                                        color: ComColors
-                                                            .priLightColor,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                          InkWell(
-                                            onTap: () {
-                                              showModalBottomSheet(
-                                                context: context,
-                                                isScrollControlled: true,
-                                                builder: (context) {
-                                                  return AddToCartFromWishBottomSheet(
-                                                    prodIndex: index,
-                                                  );
-                                                },
-                                              );
-                                            },
-                                            child: const Icon(
-                                              Icons.shopping_cart_outlined,
-                                            ),
-                                          ),
-                                        ],
+                                    InkWell(
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                          context: context,
+                                          isScrollControlled: true,
+                                          builder: (context) {
+                                            return AddToCartFromWishBottomSheet(
+                                              prodIndex: index,
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: const Icon(
+                                        Icons.shopping_cart_outlined,
                                       ),
                                     ),
                                   ],
                                 ),
-                              );
-                            },
+                              ),
+                            ],
                           ),
                         );
                       },
                     ),
+                  );
+                },
+              ),
             ),
     );
   }

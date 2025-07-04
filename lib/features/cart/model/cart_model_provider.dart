@@ -31,7 +31,17 @@ class CartModelProvider extends ChangeNotifier {
   }
 
   void clearCartItems() {
-    cartItems.clear();
+    cartItems.removeWhere((item) => item.isSelected);
+    notifyListeners();
+  }
+
+  void removeCartItem(int index) {
+    cartItems.removeAt(index);
+    notifyListeners();
+  }
+
+  void switchSelection(int index) {
+    cartItems[index].isSelected = !cartItems[index].isSelected;
     notifyListeners();
   }
 

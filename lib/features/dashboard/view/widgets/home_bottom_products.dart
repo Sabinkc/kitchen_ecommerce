@@ -20,8 +20,8 @@ class HomeBottomproducts extends ConsumerWidget {
     final botProdRef = ref.watch(botmProdController);
     final botProdRefR = ref.read(botmProdController);
     final detRefR = ref.read(productDetController);
-    final wishRef = ref.watch(wishListController);
     final wishRefR = ref.read(wishListController);
+    final wishRef = ref.watch(wishListController);
 
     return Column(
       spacing: height * 0.01,
@@ -29,7 +29,7 @@ class HomeBottomproducts extends ConsumerWidget {
         SizedBox(
           height: 50.h,
           child: Align(
-            alignment: Alignment.bottomCenter,
+            alignment: Alignment.topCenter,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: recList.length,
@@ -122,27 +122,43 @@ class HomeBottomproducts extends ConsumerWidget {
                                 alignment: Alignment.centerRight,
                                 child: InkWell(
                                   onTap: () {
-                                    wishRefR.isWishList(
-                                          botProdRefR.botmProducts[index],
-                                        )
-                                        ? wishRefR.removeFromWishList(
-                                            botProdRefR.botmProducts[index],
-                                          )
-                                        : wishRefR.addToWishList(
-                                            botProdRefR.botmProducts[index],
-                                          );
-                                    showTopSnackBar(
-                                      displayDuration: const Duration(
-                                        milliseconds: 500,
-                                      ),
-                                      Overlay.of(context),
-                                      CustomSnackBar.success(
-                                        backgroundColor:
-                                            ComColors.priLightColor,
+                                    if (wishRefR.isWishList(
+                                      botProdRefR.botmProducts[index],
+                                    )) {
+                                      wishRefR.removeFromWishList(
+                                        botProdRefR.botmProducts[index],
+                                      );
+                                      showTopSnackBar(
+                                        displayDuration: const Duration(
+                                          milliseconds: 500,
+                                        ),
+                                        Overlay.of(context),
+                                        CustomSnackBar.success(
+                                          backgroundColor:
+                                              ComColors.priLightColor,
 
-                                        message: "Product added to wishlist!!",
-                                      ),
-                                    );
+                                          message:
+                                              "Product removed from wishlist!!",
+                                        ),
+                                      );
+                                    } else {
+                                      wishRefR.addToWishList(
+                                        botProdRefR.botmProducts[index],
+                                      );
+                                      showTopSnackBar(
+                                        displayDuration: const Duration(
+                                          milliseconds: 500,
+                                        ),
+                                        Overlay.of(context),
+                                        CustomSnackBar.success(
+                                          backgroundColor:
+                                              ComColors.priLightColor,
+
+                                          message:
+                                              "Product added to wishlist!!",
+                                        ),
+                                      );
+                                    }
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(5.r),
@@ -151,7 +167,7 @@ class HomeBottomproducts extends ConsumerWidget {
                                       color: Colors.white,
                                     ),
                                     child: Icon(
-                                      wishRefR.isWishList(
+                                      wishRef.isWishList(
                                             botProdRefR.botmProducts[index],
                                           )
                                           ? Icons.favorite

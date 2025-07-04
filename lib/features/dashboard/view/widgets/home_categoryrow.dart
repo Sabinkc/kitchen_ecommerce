@@ -23,42 +23,44 @@ class HomeCategoryrow extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 90.h,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: categoryList.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Column(
-                  spacing: 5,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: ComColors.lightGrey,
-                      ),
-                      padding: EdgeInsets.all(13.r),
+          height: 80.h,
+          child: Center(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: categoryList.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Column(
+                    spacing: 5,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: ComColors.lightGrey,
+                        ),
+                        padding: EdgeInsets.all(13.r),
 
-                      child: Center(
-                        child: Icon(
-                          categoryIcons[index],
-                          size: 30.r,
-                          color: ComColors.priLightColor,
+                        child: Center(
+                          child: Icon(
+                            categoryIcons[index],
+                            size: 30.h,
+                            color: ComColors.priLightColor,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      categoryList[index],
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13.sp,
+                      Text(
+                        categoryList[index],
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.sp,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ],

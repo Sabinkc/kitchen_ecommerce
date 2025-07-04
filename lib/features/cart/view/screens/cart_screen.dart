@@ -1,10 +1,13 @@
 import 'package:dotted_line/dotted_line.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart';
+import 'package:kitchen_ecommerce/features/cart/view/screens/checkout_screen.dart';
+import 'package:kitchen_ecommerce/features/cart/view/widgets/removefromcart_bottomsheet.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -51,7 +54,7 @@ class CartScreen extends ConsumerWidget {
                     CustomSnackBar.success(
                       backgroundColor: ComColors.priLightColor,
 
-                      message: "Cart items cleared successfully!",
+                      message: "Cart items deleted successfully!",
                     ),
                   );
                 }
@@ -60,7 +63,8 @@ class CartScreen extends ConsumerWidget {
                 padding: EdgeInsets.all(8.h),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: ComColors.lightGrey,
+                  // color: ComColors.lightGrey,
+                  border: Border.all(color: ComColors.lightGrey, width: 1.3.r),
                 ),
                 child: const Icon(Icons.delete_outline),
               ),
@@ -68,7 +72,7 @@ class CartScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: cartRefR.cartItems.isEmpty
+      body: cartRef.cartItems.isEmpty
           ? Center(
               child: Padding(
                 padding: EdgeInsets.only(
@@ -181,7 +185,8 @@ class CartScreen extends ConsumerWidget {
                       itemCount: cartRefR.cartItems.length,
                       itemBuilder: (context, index) {
                         return Slidable(
-                          key: const Key(""),
+                          key: Key("${cartRefR.cartItems[index].id}"),
+
                           direction: Axis.horizontal,
                           endActionPane: ActionPane(
                             motion: const ScrollMotion(),
@@ -191,17 +196,30 @@ class CartScreen extends ConsumerWidget {
                                   vertical: 5.h,
                                   horizontal: 7.w,
                                 ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    color: ComColors.darkRed,
-                                  ),
-                                  width: 100.w,
-                                  height: double.infinity,
-                                  child: Icon(
-                                    Icons.delete_outline,
-                                    color: Colors.white,
-                                    size: 30.r,
+                                child: InkWell(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return RemovefromcartBottomsheet(
+                                          item: cartRefR.cartItems[index],
+                                          cartIndex: index,
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.r),
+                                      color: ComColors.darkRed,
+                                    ),
+                                    width: 100.w,
+                                    height: double.infinity,
+                                    child: Icon(
+                                      Icons.delete_outline,
+                                      color: Colors.white,
+                                      size: 30.r,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -246,9 +264,21 @@ class CartScreen extends ConsumerWidget {
                                               Positioned(
                                                 top: 5.h,
                                                 left: 5.w,
-                                                child: Icon(
-                                                  Icons.check_box,
-                                                  color: ComColors.secColor,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    cartRefR.switchSelection(
+                                                      index,
+                                                    );
+                                                  },
+                                                  child: Icon(
+                                                    cartRef
+                                                            .cartItems[index]
+                                                            .isSelected
+                                                        ? Icons.check_box
+                                                        : Icons
+                                                              .check_box_outline_blank,
+                                                    color: ComColors.secColor,
+                                                  ),
                                                 ),
                                               ),
                                               if (cartRef
@@ -582,16 +612,22 @@ class CartScreen extends ConsumerWidget {
                               backgroundColor: ComColors.priLightColor,
                             ),
                             onPressed: () {
-                              cartRefR.clearCartItems();
-                              showTopSnackBar(
-                                displayDuration: const Duration(
-                                  milliseconds: 500,
-                                ),
-                                Overlay.of(context),
-                                CustomSnackBar.success(
-                                  backgroundColor: ComColors.priLightColor,
+                              // cartRefR.clearCartItems();
+                              // showTopSnackBar(
+                              //   displayDuration: const Duration(
+                              //     milliseconds: 500,
+                              //   ),
+                              //   Overlay.of(context),
+                              //   CustomSnackBar.success(
+                              //     backgroundColor: ComColors.priLightColor,
 
-                                  message: "Checkout successful!",
+                              //     message: "Checkout successful!",
+                              //   ),
+                              // );
+                              Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => CheckoutScreen(),
                                 ),
                               );
                             },

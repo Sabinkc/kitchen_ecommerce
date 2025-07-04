@@ -43,6 +43,7 @@ dependencies:
   top_snackbar_flutter: ^3.3.0
   dotted_line: ^3.2.3
   flutter_slidable: ^4.0.0
+  icons_plus: ^5.0.0
   
 
 dev_dependencies:
