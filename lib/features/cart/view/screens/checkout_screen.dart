@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart';
 import 'package:kitchen_ecommerce/features/cart/view/screens/payment_screen.dart';
+import 'package:kitchen_ecommerce/features/cart/view/screens/shipping_address_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
 
 class CheckoutScreen extends ConsumerWidget {
@@ -69,7 +70,10 @@ class CheckoutScreen extends ConsumerWidget {
                       child: Row(
                         spacing: 3.w,
                         children: [
-                          const Icon(Icons.place_outlined, color: Colors.transparent),
+                          const Icon(
+                            Icons.place_outlined,
+                            color: Colors.transparent,
+                          ),
                           Flexible(
                             child: Text(
                               "1901 Thornridge Cir, Shiloh, Hawali 81063 Chicago 5676",
@@ -85,23 +89,33 @@ class CheckoutScreen extends ConsumerWidget {
                       ),
                     ),
 
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 5.w,
-                        vertical: 2.h,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.r),
-                        border: Border.all(
-                          color: ComColors.lightGrey,
-                          width: 1.3.r,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => ShippingAddressScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 5.w,
+                          vertical: 2.h,
                         ),
-                      ),
-                      child: Text(
-                        "CHANGE",
-                        style: TextStyle(
-                          color: ComColors.priLightColor,
-                          fontSize: 13.sp,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18.r),
+                          border: Border.all(
+                            color: ComColors.lightGrey,
+                            width: 1.3.r,
+                          ),
+                        ),
+                        child: Text(
+                          "CHANGE",
+                          style: TextStyle(
+                            color: ComColors.priLightColor,
+                            fontSize: 13.sp,
+                          ),
                         ),
                       ),
                     ),
@@ -325,7 +339,9 @@ class CheckoutScreen extends ConsumerWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  CupertinoPageRoute(builder: (context) => const PaymentScreen()),
+                  CupertinoPageRoute(
+                    builder: (context) => const PaymentScreen(),
+                  ),
                 );
               },
               child: Text(
