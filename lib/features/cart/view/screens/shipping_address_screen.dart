@@ -145,7 +145,7 @@ class ShippingAddressScreen extends StatelessWidget {
               options: RoundedRectDottedBorderOptions(
                 dashPattern: [4, 4],
                 strokeWidth: 1.5.r,
-                color: Colors.grey,
+                color: ComColors.priLightColor,
                 radius: Radius.circular(10.r),
               ),
               child: Container(
@@ -154,11 +154,14 @@ class ShippingAddressScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.r),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.add),
-                    Text("Add New Shippping Address"),
+                    Icon(Icons.add, color: ComColors.priLightColor),
+                    Text(
+                      "Add New Shippping Address",
+                      style: TextStyle(color: ComColors.priLightColor),
+                    ),
                   ],
                 ),
               ),

@@ -12,6 +12,7 @@ class ProductDetailModel {
   bool isOffer = false;
   int discountPercent = 0;
   String priceAfterDis;
+  String? subCategory;
 
   ProductDetailModel({
     required this.id,
@@ -27,6 +28,7 @@ class ProductDetailModel {
     required this.priceAfterDis,
     required this.isOffer,
     required this.discountPercent,
+    this.subCategory,
   });
 
   @override
@@ -51,6 +53,7 @@ class ProductDetailModel {
 
 final List<ProductDetailModel> products = [
   ProductDetailModel(
+    subCategory: "Chimney",
     isOffer: false,
 
     id: 1,
@@ -87,6 +90,7 @@ final List<ProductDetailModel> products = [
     rating: "4.5",
   ),
   ProductDetailModel(
+    subCategory: "Oven",
     id: 2,
     prodName: "Round Handshowers",
     img: "shower_white.png",
@@ -123,6 +127,7 @@ final List<ProductDetailModel> products = [
   ),
 
   ProductDetailModel(
+    subCategory: "Dishwashers",
     id: 3,
     prodName: "Single Bowl Farmhouse Kitchen Sinks",
     img: "sink_white.png",
@@ -154,6 +159,7 @@ final List<ProductDetailModel> products = [
     rating: "4.0",
   ),
   ProductDetailModel(
+    subCategory: "Tower Rails",
     id: 4,
     prodName: "Under Mount Kitchen Sinks",
     img: "kitchen_item.png",
@@ -177,6 +183,7 @@ final List<ProductDetailModel> products = [
     rating: "3.9",
   ),
   ProductDetailModel(
+    subCategory: "Ceiling Lights",
     id: 5,
     prodName: "Stainless Steel Water Tap",
     img: "tap.png",
@@ -200,6 +207,7 @@ final List<ProductDetailModel> products = [
     rating: "4.7",
   ),
   ProductDetailModel(
+    subCategory: "Sofas",
     id: 6,
     prodName: "Medium Size Trash Cans",
     img: "trashcan_white.png",
@@ -226,6 +234,7 @@ final List<ProductDetailModel> products = [
     rating: "4.1",
   ),
   ProductDetailModel(
+    subCategory: "Bed Frames",
     id: 7,
     prodName: "Flush Mount Lighting Larges",
     img: "light1.png",
@@ -249,6 +258,7 @@ final List<ProductDetailModel> products = [
     rating: "3.7",
   ),
   ProductDetailModel(
+    subCategory: "Planters",
     id: 8,
     prodName: "Small Size Sink Flangers",
     img: "flanger_white.png",
