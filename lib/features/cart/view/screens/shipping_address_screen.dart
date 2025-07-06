@@ -1,9 +1,25 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 
 class ShippingAddressScreen extends StatelessWidget {
-  const ShippingAddressScreen({super.key});
+  ShippingAddressScreen({super.key});
+
+  final List<Map> addresses = [
+    {
+      "place": "Home",
+      "details": "1901 Thornridge Cir, Shiloh, Hawali 81063 Chicago 5676",
+    },
+    {
+      "place": "Office",
+      "details": "1903 Hiroshima sigi, Shiloh, Hayato 81063 DC 5676",
+    },
+    {
+      "place": "Parent's House",
+      "details": "1907 Siri Cumbangi, Shiloh, Naruto 81063 GC 5676",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +52,7 @@ class ShippingAddressScreen extends StatelessWidget {
           SizedBox(height: 5.h),
           Expanded(
             child: ListView.builder(
-              itemCount: 4,
+              itemCount: addresses.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.symmetric(
@@ -52,7 +68,10 @@ class ShippingAddressScreen extends StatelessWidget {
                             Icons.place_outlined,
                             color: ComColors.priLightColor,
                           ),
-                          Text("Home", style: TextStyle(fontSize: 15.sp)),
+                          Text(
+                            addresses[index]["place"],
+                            style: TextStyle(fontSize: 15.sp),
+                          ),
                         ],
                       ),
                       Row(
@@ -70,7 +89,7 @@ class ShippingAddressScreen extends StatelessWidget {
                                 ),
                                 Flexible(
                                   child: Text(
-                                    "1901 Thornridge Cir, Shiloh, Hawali 81063 Chicago 5676",
+                                    addresses[index]["details"],
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -105,20 +124,47 @@ class ShippingAddressScreen extends StatelessWidget {
                                       height: 10.r,
                                       width: 10.r,
                                     )
-                                  : SizedBox.shrink(),
+                                  : const SizedBox.shrink(),
                             ),
                           ),
                         ],
                       ),
                       SizedBox(height: 10.h),
-                      if (index != 3) Divider(color: ComColors.lightGrey),
+                      if (index != addresses.length - 1)
+                        Divider(color: ComColors.lightGrey),
                     ],
                   ),
                 );
               },
             ),
           ),
-          Spacer(),
+
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+            child: DottedBorder(
+              options: RoundedRectDottedBorderOptions(
+                dashPattern: [4, 4],
+                strokeWidth: 1.5.r,
+                color: Colors.grey,
+                radius: Radius.circular(10.r),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: ComColors.lightGrey,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.add),
+                    Text("Add New Shippping Address"),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          // const Spacer(),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
             decoration: BoxDecoration(
@@ -137,7 +183,7 @@ class ShippingAddressScreen extends StatelessWidget {
               ),
               onPressed: () {},
               child: Text(
-                "Continue to Payment",
+                "Apply",
                 style: TextStyle(
                   fontSize: 15.sp,
                   color: Colors.white,

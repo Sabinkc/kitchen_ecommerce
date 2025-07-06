@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart';
 import 'package:kitchen_ecommerce/features/cart/view/screens/payment_success_screen.dart';
@@ -147,9 +148,176 @@ class PaymentScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
+                SizedBox(height: 5.h),
+                Text(
+                  "More Payment Options",
+                  style: TextStyle(
+                    fontSize: 17.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 8.h,
+                      ),
+                      decoration: BoxDecoration(
+                        // border: Border.all(color: Colors.grey[300]!),
+                        border: Border(
+                          top: BorderSide(color: Colors.grey[300]!),
+                          left: BorderSide(color: Colors.grey[300]!),
+                          right: BorderSide(color: Colors.grey[300]!),
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10.r),
+                          topRight: Radius.circular(10.r),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            spacing: 7.w,
+                            children: [
+                              Brand(
+                                Brands.paypal,
+                                // color: ComColors.priLightColor,
+                              ),
+                              Text(
+                                "Paypal",
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: Colors.grey,
+                                  // fontWeight: FontWeight.w600,
+                                  // fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 20.r,
+                            width: 20.r,
+
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.grey[300]!),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 8.h,
+                      ),
+                      decoration: BoxDecoration(
+                        // border: Border.all(color: Colors.grey[300]!),
+                        border: Border(
+                          top: BorderSide(color: Colors.grey[300]!),
+                          left: BorderSide(color: Colors.grey[300]!),
+                          right: BorderSide(color: Colors.grey[300]!),
+                        ),
+                        // borderRadius: BorderRadius.only(
+                        //   topLeft: Radius.circular(10.r),
+                        //   topRight: Radius.circular(10.r),
+                        // ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            spacing: 7.w,
+                            children: [
+                              Brand(
+                                Brands.apple_logo,
+                                // color: ComColors.priLightColor,
+                              ),
+                              Text(
+                                "Apple Pay",
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: Colors.grey,
+                                  // fontWeight: FontWeight.w600,
+                                  // fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 20.r,
+                            width: 20.r,
+
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.grey[300]!),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 8.h,
+                      ),
+                      decoration: BoxDecoration(
+                        // border: Border.all(color: Colors.grey[300]!),
+                        border: Border(
+                          top: BorderSide(color: Colors.grey[300]!),
+                          left: BorderSide(color: Colors.grey[300]!),
+                          right: BorderSide(color: Colors.grey[300]!),
+                          bottom: BorderSide(color: Colors.grey[300]!),
+                        ),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10.r),
+                          bottomRight: Radius.circular(10.r),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            spacing: 7.w,
+                            children: [
+                              Brand(
+                                Brands.google,
+                                // color: ComColors.priLightColor,
+                              ),
+                              Text(
+                                "Google Pay",
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: Colors.grey,
+                                  // fontWeight: FontWeight.w600,
+                                  // fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 20.r,
+                            width: 20.r,
+
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.grey[300]!),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
+
           const Spacer(),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
