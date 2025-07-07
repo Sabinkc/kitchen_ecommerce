@@ -15,6 +15,7 @@ class CheckoutScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cartRef = ref.watch(cartController);
     final cartRefR = ref.read(cartController);
+    // cartRefR.getSelectedItems();
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,

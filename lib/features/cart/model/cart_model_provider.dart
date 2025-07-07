@@ -45,6 +45,13 @@ class CartModelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // List<CartItemModel> selectedItems = [];
+
+  // void getSelectedItems() {
+  //   selectedItems = cartItems.where((item) => item.isSelected == true).toList();
+  //   notifyListeners();
+  // }
+
   int getSubTotal() {
     int subTotal = 0;
     int itemTotal;
@@ -56,6 +63,20 @@ class CartModelProvider extends ChangeNotifier {
     }
     return subTotal;
   }
+
+  // int getSubTotal() {
+  //   getSelectedItems();
+  //   int subTotal = 0;
+  //   int itemTotal;
+  //   int i;
+  //   for (i = 0; i < selectedItems.length; i++) {
+  //     itemTotal =
+  //         double.parse(selectedItems[i].price).toInt() *
+  //         selectedItems[i].quantity;
+  //     subTotal = itemTotal + subTotal;
+  //   }
+  //   return subTotal;
+  // }
 
   int getDiscount() {
     int disc = 0;
@@ -70,6 +91,20 @@ class CartModelProvider extends ChangeNotifier {
     return disc;
   }
 
+  // int getDiscount() {
+  //   getSelectedItems();
+  //   int disc = 0;
+  //   for (int i = 0; i < selectedItems.length; i++) {
+  //     disc =
+  //         disc +
+  //         ((selectedItems[i].discountPercent / 100) *
+  //                 double.parse(selectedItems[i].price).toInt() *
+  //                 selectedItems[i].quantity)
+  //             .toInt();
+  //   }
+  //   return disc;
+  // }
+
   int getTotal() {
     int delivery = 50;
     int subTotal = getSubTotal();
@@ -77,4 +112,13 @@ class CartModelProvider extends ChangeNotifier {
     int total = subTotal - disc + delivery;
     return total;
   }
+
+  // int getTotal() {
+  //   getSelectedItems();
+  //   int delivery = 50;
+  //   int subTotal = getSubTotal();
+  //   int disc = getDiscount();
+  //   int total = subTotal - disc + delivery;
+  //   return total;
+  // }
 }
