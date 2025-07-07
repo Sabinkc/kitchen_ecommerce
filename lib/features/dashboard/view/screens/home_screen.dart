@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/home_banner_row.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/home_bottom_products.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/home_categoryrow.dart';
@@ -24,8 +25,10 @@ class HomeScreen extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 spacing: height * 0.02,
                 children: [
-                  SizedBox(height: height * 0.005),
-                  const HomeSearchRow(),
+                  Padding(
+                    padding: EdgeInsets.only(top: 10.h),
+                    child: const HomeSearchRow(),
+                  ),
                   const HomeBannerRow(),
                   const HomeCategoryrow(),
                   const HomeBottomproducts(),

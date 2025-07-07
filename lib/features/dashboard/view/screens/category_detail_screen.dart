@@ -5,8 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/category_product_detail_screen.dart';
-import 'package:kitchen_ecommerce/features/dashboard/view/screens/product_detail_screen.dart';
-import 'package:kitchen_ecommerce/features/dashboard/view/widgets/add_to_cart_bottom_sheet.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/widgets/addtocart_from_category_botmsheet.dart';
 import 'package:kitchen_ecommerce/features/wishlist/controller/wishlist_controller.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
