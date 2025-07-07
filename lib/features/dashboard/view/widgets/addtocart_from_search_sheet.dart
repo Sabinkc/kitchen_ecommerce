@@ -9,17 +9,17 @@ import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart'
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class AddToCartFromCategoryBottomSheet extends ConsumerStatefulWidget {
+class AddToCartFromSearchBottomSheet extends ConsumerStatefulWidget {
   final int prodIndex;
-  const AddToCartFromCategoryBottomSheet({super.key, required this.prodIndex});
+  const AddToCartFromSearchBottomSheet({super.key, required this.prodIndex});
 
   @override
-  ConsumerState<AddToCartFromCategoryBottomSheet> createState() =>
+  ConsumerState<AddToCartFromSearchBottomSheet> createState() =>
       _AddToCartBottomSheetState();
 }
 
 class _AddToCartBottomSheetState
-    extends ConsumerState<AddToCartFromCategoryBottomSheet> {
+    extends ConsumerState<AddToCartFromSearchBottomSheet> {
   final colorConverter = ColorConverter();
   @override
   void initState() {
@@ -27,13 +27,14 @@ class _AddToCartBottomSheetState
 
     Future.delayed(Duration.zero, () {
       final detRefR = ref.read(productDetController);
-      final catRefR = ref.read(catProdController);
+      final searchRefR = ref.read(searchProdController);
       detRefR.resetProdImg();
       detRefR.clearImgIndex();
       detRefR.clearColIndex();
       detRefR.prodImages =
-          catRefR.catProd[widget.prodIndex].imgMap.values.first;
-      detRefR.imgColor = catRefR.catProd[widget.prodIndex].imgMap.keys.first;
+          searchRefR.searchProd[widget.prodIndex].imgMap.values.first;
+      detRefR.imgColor =
+          searchRefR.searchProd[widget.prodIndex].imgMap.keys.first;
     });
   }
 
@@ -42,10 +43,10 @@ class _AddToCartBottomSheetState
     final height = MediaQuery.sizeOf(context).height;
     final detRef = ref.watch(productDetController);
     final detRefR = ref.read(productDetController);
-    final catRefR = ref.read(catProdController);
-    final catRef = ref.watch(catProdController);
+    final searchRefR = ref.read(searchProdController);
+    final searchRef = ref.watch(searchProdController);
     final cartRefR = ref.read(cartController);
-    // final product = catRef.catProd[widget.prodIndex];
+    // final product = searchRef.searchProd[widget.prodIndex];
     return Container(
       padding: EdgeInsets.only(top: 15.h),
       decoration: BoxDecoration(
@@ -88,7 +89,7 @@ class _AddToCartBottomSheetState
                         ),
                       ),
                     ),
-                    if (catRef.catProd[widget.prodIndex].isOffer == true)
+                    if (searchRef.searchProd[widget.prodIndex].isOffer == true)
                       Positioned(
                         top: 10,
                         right: 0,
@@ -102,7 +103,7 @@ class _AddToCartBottomSheetState
                             ),
                           ),
                           child: Text(
-                            "${catRef.catProd[widget.prodIndex].discountPercent}% Off",
+                            "${searchRef.searchProd[widget.prodIndex].discountPercent}% Off",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -160,7 +161,7 @@ class _AddToCartBottomSheetState
                       ),
 
                       Text(
-                        catRefR.catProd[widget.prodIndex].prodName,
+                        searchRef.searchProd[widget.prodIndex].prodName,
                         style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
@@ -190,12 +191,14 @@ class _AddToCartBottomSheetState
                       SizedBox(
                         height: 25.h,
                         child: ListView.builder(
-                          itemCount:
-                              catRefR.catProd[widget.prodIndex].imgMap.length,
+                          itemCount: searchRefR
+                              .searchProd[widget.prodIndex]
+                              .imgMap
+                              .length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            final prodColor = catRefR
-                                .catProd[widget.prodIndex]
+                            final prodColor = searchRefR
+                                .searchProd[widget.prodIndex]
                                 .imgMap
                                 .keys
                                 .elementAt(index);
@@ -206,17 +209,17 @@ class _AddToCartBottomSheetState
                                   detRefR.updateColInd(index);
                                   detRefR.clearImgIndex();
                                   detRefR.updateProdImg(
-                                    catRefR
-                                        .catProd[widget.prodIndex]
+                                    searchRefR
+                                        .searchProd[widget.prodIndex]
                                         .imgMap
                                         .keys
                                         .elementAt(index),
                                     widget.prodIndex,
-                                    catRefR.catProd,
+                                    searchRefR.searchProd,
                                   );
                                   detRefR.updateImgCol(
-                                    catRefR
-                                        .catProd[widget.prodIndex]
+                                    searchRefR
+                                        .searchProd[widget.prodIndex]
                                         .imgMap
                                         .keys
                                         .elementAt(index),
@@ -292,7 +295,8 @@ class _AddToCartBottomSheetState
                             //   "Rs.${botmProdRef.botmProducts[widget.prodIndex].price}",
                             //   style: const TextStyle(fontWeight: FontWeight.bold),
                             // ),
-                            catRef.catProd[widget.prodIndex].isOffer == true
+                            searchRef.searchProd[widget.prodIndex].isOffer ==
+                                    true
                                 ? Row(
                                     children: [
                                       Text(
@@ -303,7 +307,9 @@ class _AddToCartBottomSheetState
                                         ),
                                       ),
                                       Text(
-                                        "${catRef.catProd[widget.prodIndex].price}",
+                                        searchRef
+                                            .searchProd[widget.prodIndex]
+                                            .price,
                                         style: TextStyle(
                                           decoration:
                                               TextDecoration.lineThrough,
@@ -315,7 +321,9 @@ class _AddToCartBottomSheetState
                                       ),
                                       const SizedBox(width: 5),
                                       Text(
-                                        "${catRef.catProd[widget.prodIndex].priceAfterDis}",
+                                        searchRef
+                                            .searchProd[widget.prodIndex]
+                                            .priceAfterDis,
                                         style: TextStyle(
                                           color: ComColors.priLightColor,
                                           fontWeight: FontWeight.bold,
@@ -334,7 +342,9 @@ class _AddToCartBottomSheetState
                                         ),
                                       ),
                                       Text(
-                                        "${catRef.catProd[widget.prodIndex].price}",
+                                        searchRef
+                                            .searchProd[widget.prodIndex]
+                                            .price,
                                         style: TextStyle(
                                           color: ComColors.priLightColor,
                                           fontSize: 16.sp,
@@ -351,24 +361,29 @@ class _AddToCartBottomSheetState
                           onPressed: () {
                             cartRefR.addToCart(
                               CartItemModel(
-                                id: catRefR.catProd[widget.prodIndex].id,
-                                prodName:
-                                    catRefR.catProd[widget.prodIndex].prodName,
+                                id: searchRefR.searchProd[widget.prodIndex].id,
+                                prodName: searchRefR
+                                    .searchProd[widget.prodIndex]
+                                    .prodName,
                                 img: detRef.prodImages[0],
                                 // img: botmProdRefR
                                 //     .botmProducts[widget.prodIndex]
                                 //     .img,
-                                category:
-                                    catRefR.catProd[widget.prodIndex].category,
-                                price: catRefR.catProd[widget.prodIndex].price,
+                                category: searchRefR
+                                    .searchProd[widget.prodIndex]
+                                    .category,
+                                price: searchRefR
+                                    .searchProd[widget.prodIndex]
+                                    .price,
                                 quantity: 1,
-                                isOffer:
-                                    catRefR.catProd[widget.prodIndex].isOffer,
-                                discountPercent: catRefR
-                                    .catProd[widget.prodIndex]
+                                isOffer: searchRefR
+                                    .searchProd[widget.prodIndex]
+                                    .isOffer,
+                                discountPercent: searchRefR
+                                    .searchProd[widget.prodIndex]
                                     .discountPercent,
-                                priceAfterDis: catRefR
-                                    .catProd[widget.prodIndex]
+                                priceAfterDis: searchRefR
+                                    .searchProd[widget.prodIndex]
                                     .priceAfterDis,
                                 isSelected: true,
                                 color: detRefR.imgColor,

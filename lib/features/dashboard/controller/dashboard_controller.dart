@@ -4,6 +4,7 @@ import 'package:kitchen_ecommerce/features/dashboard/model/dashboard_model.dart'
 import 'package:kitchen_ecommerce/features/dashboard/model/home_botproduct_model.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/landing_screen_model.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/product_detail_screen_model.dart';
+import 'package:kitchen_ecommerce/features/dashboard/model/search_product_model.dart';
 
 final lanController = ChangeNotifierProvider<LandingScreenModel>((ref) {
   return LandingScreenModel();
@@ -25,4 +26,8 @@ final botmProdController = ChangeNotifierProvider<HomeBotproductModel>((ref) {
 
 final catProdController = ChangeNotifierProvider<CategoryModel>((ref) {
   return CategoryModel();
+});
+
+final searchProdController = ChangeNotifierProvider<SearchProductModel>((ref) {
+  return SearchProductModel();
 });

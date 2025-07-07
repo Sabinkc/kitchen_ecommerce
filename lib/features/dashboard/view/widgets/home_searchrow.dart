@@ -19,7 +19,7 @@ class HomeSearchRow extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                CupertinoPageRoute(builder: (context) => SearchScreen()),
+                CupertinoPageRoute(builder: (context) => const SearchScreen()),
               );
             },
             child: Container(
