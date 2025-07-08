@@ -18,6 +18,7 @@ class CartScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // final width = MediaQuery.sizeOf(context).width;
     final cartRef = ref.watch(cartController);
     final cartRefR = ref.read(cartController);
     return Scaffold(
@@ -497,7 +498,7 @@ class CartScreen extends ConsumerWidget {
                   ),
                 ),
                 Container(
-                  height: 300.h,
+                  height: 350.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
@@ -519,6 +520,67 @@ class CartScreen extends ConsumerWidget {
                     child: Column(
                       spacing: 7.h,
                       children: [
+                        SizedBox(
+                          width: double.infinity,
+                          height: 37.h,
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                top: 0,
+                                bottom: 0,
+                                right: 75.w,
+                                left: 0,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 15.w,
+                                  ),
+
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Request for Quote?",
+                                      style: TextStyle(
+                                        color: ComColors.priLightColor,
+                                        fontSize: 16.sp,
+                                      ),
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.r),
+                                    color: ComColors.lightGrey,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                right: 0,
+                                top: 2.h,
+                                bottom: 2.h,
+
+                                child: SizedBox(
+                                  width: 100.w,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: ComColors.priLightColor,
+                                      elevation: 0,
+                                    ),
+                                    onPressed: () {},
+                                    child: Center(
+                                      child: Text(
+                                        "Request",
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 10.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

@@ -52,57 +52,69 @@ class CartModelProvider extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  int getSubTotal() {
-    int subTotal = 0;
-    int itemTotal;
-    int i;
-    for (i = 0; i < cartItems.length; i++) {
-      itemTotal =
-          double.parse(cartItems[i].price).toInt() * cartItems[i].quantity;
-      subTotal = itemTotal + subTotal;
-    }
-    return subTotal;
-  }
-
   // int getSubTotal() {
-  //   getSelectedItems();
   //   int subTotal = 0;
   //   int itemTotal;
   //   int i;
-  //   for (i = 0; i < selectedItems.length; i++) {
+  //   for (i = 0; i < cartItems.length; i++) {
   //     itemTotal =
-  //         double.parse(selectedItems[i].price).toInt() *
-  //         selectedItems[i].quantity;
+  //         double.parse(cartItems[i].price).toInt() * cartItems[i].quantity;
   //     subTotal = itemTotal + subTotal;
   //   }
   //   return subTotal;
   // }
 
+  int getSubTotal() {
+    List<CartItemModel> selectedItems = cartItems
+        .where((item) => item.isSelected == true)
+        .toList();
+    int subTotal = 0;
+    int itemTotal;
+    int i;
+    for (i = 0; i < selectedItems.length; i++) {
+      itemTotal =
+          double.parse(selectedItems[i].price).toInt() *
+          selectedItems[i].quantity;
+      subTotal = itemTotal + subTotal;
+    }
+    return subTotal;
+  }
+
+  // int getDiscount() {
+  //   int disc = 0;
+  //   for (int i = 0; i < cartItems.length; i++) {
+  //     disc =
+  //         disc +
+  //         ((cartItems[i].discountPercent / 100) *
+  //                 double.parse(cartItems[i].price).toInt() *
+  //                 cartItems[i].quantity)
+  //             .toInt();
+  //   }
+  //   return disc;
+  // }
+
   int getDiscount() {
+    List<CartItemModel> selectedItems = cartItems
+        .where((item) => item.isSelected == true)
+        .toList();
     int disc = 0;
-    for (int i = 0; i < cartItems.length; i++) {
+    for (int i = 0; i < selectedItems.length; i++) {
       disc =
           disc +
-          ((cartItems[i].discountPercent / 100) *
-                  double.parse(cartItems[i].price).toInt() *
-                  cartItems[i].quantity)
+          ((selectedItems[i].discountPercent / 100) *
+                  double.parse(selectedItems[i].price).toInt() *
+                  selectedItems[i].quantity)
               .toInt();
     }
     return disc;
   }
 
-  // int getDiscount() {
-  //   getSelectedItems();
-  //   int disc = 0;
-  //   for (int i = 0; i < selectedItems.length; i++) {
-  //     disc =
-  //         disc +
-  //         ((selectedItems[i].discountPercent / 100) *
-  //                 double.parse(selectedItems[i].price).toInt() *
-  //                 selectedItems[i].quantity)
-  //             .toInt();
-  //   }
-  //   return disc;
+  // int getTotal() {
+  //   int delivery = 50;
+  //   int subTotal = getSubTotal();
+  //   int disc = getDiscount();
+  //   int total = subTotal - disc + delivery;
+  //   return total;
   // }
 
   int getTotal() {
@@ -112,13 +124,4 @@ class CartModelProvider extends ChangeNotifier {
     int total = subTotal - disc + delivery;
     return total;
   }
-
-  // int getTotal() {
-  //   getSelectedItems();
-  //   int delivery = 50;
-  //   int subTotal = getSubTotal();
-  //   int disc = getDiscount();
-  //   int total = subTotal - disc + delivery;
-  //   return total;
-  // }
 }
