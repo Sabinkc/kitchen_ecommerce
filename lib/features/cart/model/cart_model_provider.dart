@@ -45,12 +45,14 @@ class CartModelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // List<CartItemModel> selectedItems = [];
+  List<CartItemModel> cartSelectedItems = [];
 
-  // void getSelectedItems() {
-  //   selectedItems = cartItems.where((item) => item.isSelected == true).toList();
-  //   notifyListeners();
-  // }
+  void getSelectedItems() {
+    cartSelectedItems = cartItems
+        .where((item) => item.isSelected == true)
+        .toList();
+    notifyListeners();
+  }
 
   // int getSubTotal() {
   //   int subTotal = 0;

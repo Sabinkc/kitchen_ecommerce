@@ -37,14 +37,15 @@ class CartScreen extends ConsumerWidget {
             padding: EdgeInsetsGeometry.only(right: 12.w),
             child: InkWell(
               onTap: () {
-                if (cartRefR.cartItems.isEmpty) {
+                cartRefR.getSelectedItems();
+                if (cartRefR.cartSelectedItems.isEmpty) {
                   showTopSnackBar(
                     displayDuration: const Duration(milliseconds: 500),
                     Overlay.of(context),
                     CustomSnackBar.info(
-                      backgroundColor: ComColors.priLightColor,
+                      backgroundColor: ComColors.darkRed,
 
-                      message: "No items available in cart!",
+                      message: "No items selected to delete!",
                     ),
                   );
                 } else {
@@ -534,6 +535,10 @@ class CartScreen extends ConsumerWidget {
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 15.w,
                                   ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.r),
+                                    color: ComColors.lightGrey,
+                                  ),
 
                                   child: Align(
                                     alignment: Alignment.centerLeft,
@@ -544,10 +549,6 @@ class CartScreen extends ConsumerWidget {
                                         fontSize: 16.sp,
                                       ),
                                     ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20.r),
-                                    color: ComColors.lightGrey,
                                   ),
                                 ),
                               ),
@@ -674,24 +675,27 @@ class CartScreen extends ConsumerWidget {
                               backgroundColor: ComColors.priLightColor,
                             ),
                             onPressed: () {
-                              // cartRefR.clearCartItems();
-                              // showTopSnackBar(
-                              //   displayDuration: const Duration(
-                              //     milliseconds: 500,
-                              //   ),
-                              //   Overlay.of(context),
-                              //   CustomSnackBar.success(
-                              //     backgroundColor: ComColors.priLightColor,
+                              cartRefR.getSelectedItems();
+                              if (cartRefR.cartSelectedItems.isEmpty) {
+                                showTopSnackBar(
+                                  displayDuration: const Duration(
+                                    milliseconds: 500,
+                                  ),
+                                  Overlay.of(context),
+                                  CustomSnackBar.error(
+                                    backgroundColor: ComColors.darkRed,
 
-                              //     message: "Checkout successful!",
-                              //   ),
-                              // );
-                              Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                  builder: (context) => CheckoutScreen(),
-                                ),
-                              );
+                                    message: "No items selected for checkout!",
+                                  ),
+                                );
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => const CheckoutScreen(),
+                                  ),
+                                );
+                              }
                             },
                             child: Text(
                               "Proceed to chekout",

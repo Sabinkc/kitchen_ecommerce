@@ -1,28 +1,33 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
+import 'package:kitchen_ecommerce/features/cart/controller/address_controller.dart';
+import 'package:kitchen_ecommerce/features/cart/model/address_data.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class ShippingAddressScreen extends StatelessWidget {
-  ShippingAddressScreen({super.key});
+class ShippingAddressScreen extends ConsumerStatefulWidget {
+  const ShippingAddressScreen({super.key});
 
-  final List<Map> addresses = [
-    {
-      "place": "Home",
-      "details": "1901 Thornridge Cir, Shiloh, Hawali 81063 Chicago 5676",
-    },
-    {
-      "place": "Office",
-      "details": "1903 Hiroshima sigi, Shiloh, Hayato 81063 DC 5676",
-    },
-    {
-      "place": "Parent's House",
-      "details": "1907 Siri Cumbangi, Shiloh, Naruto 81063 GC 5676",
-    },
-  ];
+  @override
+  ConsumerState<ShippingAddressScreen> createState() =>
+      _ShippingAddressScreenState();
+}
+
+class _ShippingAddressScreenState extends ConsumerState<ShippingAddressScreen> {
+  @override
+  void initState() {
+    final addRefR = ref.read(addressController);
+    addRefR.selctedInd = addRefR.selectedLocationInd;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final addRef = ref.watch(addressController);
+    final addRefR = ref.read(addressController);
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -52,7 +57,7 @@ class ShippingAddressScreen extends StatelessWidget {
           SizedBox(height: 5.h),
           Expanded(
             child: ListView.builder(
-              itemCount: addresses.length,
+              itemCount: addRef.locations.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.symmetric(
@@ -69,7 +74,7 @@ class ShippingAddressScreen extends StatelessWidget {
                             color: ComColors.priLightColor,
                           ),
                           Text(
-                            addresses[index]["place"],
+                            addRef.locations[index].place,
                             style: TextStyle(fontSize: 15.sp),
                           ),
                         ],
@@ -89,7 +94,7 @@ class ShippingAddressScreen extends StatelessWidget {
                                 ),
                                 Flexible(
                                   child: Text(
-                                    addresses[index]["details"],
+                                    addRef.locations[index].details,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -102,29 +107,34 @@ class ShippingAddressScreen extends StatelessWidget {
                             ),
                           ),
 
-                          Container(
-                            height: 20.r,
-                            width: 20.r,
+                          InkWell(
+                            onTap: () {
+                              addRefR.updateSelectedIndex(index);
+                            },
+                            child: Container(
+                              height: 20.r,
+                              width: 20.r,
 
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color: ComColors.priLightColor,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                  color: ComColors.priLightColor,
+                                ),
+                                shape: BoxShape.circle,
                               ),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Center(
-                              child: index == 0
-                                  ? Container(
-                                      decoration: BoxDecoration(
-                                        color: ComColors.priLightColor,
-                                        shape: BoxShape.circle,
-                                      ),
+                              child: Center(
+                                child: index == addRef.selctedInd
+                                    ? Container(
+                                        decoration: BoxDecoration(
+                                          color: ComColors.priLightColor,
+                                          shape: BoxShape.circle,
+                                        ),
 
-                                      height: 10.r,
-                                      width: 10.r,
-                                    )
-                                  : const SizedBox.shrink(),
+                                        height: 10.r,
+                                        width: 10.r,
+                                      )
+                                    : const SizedBox.shrink(),
+                              ),
                             ),
                           ),
                         ],
@@ -184,7 +194,19 @@ class ShippingAddressScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: ComColors.priLightColor,
               ),
-              onPressed: () {},
+              onPressed: () {
+                addRefR.updateLocation(addRefR.selctedInd);
+                Navigator.pop(context);
+                showTopSnackBar(
+                  displayDuration: const Duration(milliseconds: 500),
+                  Overlay.of(context),
+                  CustomSnackBar.success(
+                    backgroundColor: ComColors.priLightColor,
+
+                    message: "Shipping Address updated successfully!",
+                  ),
+                );
+              },
               child: Text(
                 "Apply",
                 style: TextStyle(
