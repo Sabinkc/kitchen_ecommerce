@@ -5,59 +5,51 @@ final List<Map<String, dynamic>> categoryDetail = [
     "name": "Kitchen",
     "icon": Icons.kitchen,
     "subcategory": [
-      {"name": "Chimney", "icon": Icons.smoke_free},
-      {"name": "Oven", "icon": Icons.restaurant_rounded}, // closest built‑in
-      {"name": "Dishwashers", "icon": Icons.local_laundry_service},
+      {"name": "Sink", "icon": Icons.water_damage}, // faucet/sink symbol
+      {"name": "Trash Can", "icon": Icons.delete}, // trash can
+      {"name": "Flanger", "icon": Icons.build}, // tool icon (no direct match)
     ],
   },
   {
     "name": "Bathroom",
     "icon": Icons.bathroom,
     "subcategory": [
-      {"name": "Towel Rails", "icon": Icons.list},
-      {"name": "Mirrors", "icon": Icons.circle}, // placeholder
-      {"name": "Vanity Cabinets", "icon": Icons.cabin},
+      {"name": "Faucet", "icon": Icons.water}, // water icon
+      {
+        "name": "Mirror",
+        "icon": Icons.add_box,
+      }, // best fit, reflects mirror frame
+      {"name": "Cleaner", "icon": Icons.cleaning_services}, // perfect match
+      {"name": "Shower", "icon": Icons.shower}, // available in Flutter 3.10+
     ],
   },
   {
     "name": "Lighting",
     "icon": Icons.lightbulb,
     "subcategory": [
-      {"name": "Ceiling Lights", "icon": Icons.lightbulb},
-      {"name": "Wall Lamps", "icon": Icons.lightbulb_outline},
-      {"name": "Pendant Lights", "icon": Icons.light},
+      {
+        "name": "Mount Lighting",
+        "icon": Icons.light,
+      }, // ceiling light (Flutter 3.10+)
     ],
   },
-
   {
     "name": "Living Room",
     "icon": Icons.weekend,
     "subcategory": [
-      {"name": "Sofas", "icon": Icons.weekend},
-      {
-        "name": "Coffee Tables",
-        "icon": Icons.table_restaurant,
-      }, // reuse dining table
-      {"name": "TV Stands", "icon": Icons.tv},
+      {"name": "Sofa", "icon": Icons.weekend}, // perfect match
+      {"name": "Table", "icon": Icons.table_bar}, // better table icon
+      {"name": "Bed Frame", "icon": Icons.bed}, // reused
+      {"name": "Pillow", "icon": Icons.king_bed_outlined}, // best alternative
     ],
   },
   {
     "name": "Bedroom",
     "icon": Icons.bed,
     "subcategory": [
-      {"name": "Bed Frames", "icon": Icons.bed},
+      {"name": "Bed Frame", "icon": Icons.bed},
       {"name": "Mattresses", "icon": Icons.bed_outlined},
-      {"name": "Nightstands", "icon": Icons.night_shelter},
-      // available
-    ],
-  },
-  {
-    "name": "Outdoor",
-    "icon": Icons.outdoor_grill,
-    "subcategory": [
-      {"name": "Garden Furniture", "icon": Icons.chair_outlined},
-      {"name": "Landscape Lighting", "icon": Icons.grass}, // workaround
-      {"name": "Planters", "icon": Icons.grass_outlined},
+      {"name": "Nightstands", "icon": Icons.night_shelter}, // decent fit
     ],
   },
 ];

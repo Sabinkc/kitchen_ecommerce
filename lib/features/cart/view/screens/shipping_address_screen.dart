@@ -19,8 +19,10 @@ class ShippingAddressScreen extends ConsumerStatefulWidget {
 class _ShippingAddressScreenState extends ConsumerState<ShippingAddressScreen> {
   @override
   void initState() {
-    final addRefR = ref.read(addressController);
-    addRefR.selctedInd = addRefR.selectedLocationInd;
+    Future.delayed(Duration.zero, () {
+      final addRefR = ref.read(addressController);
+      addRefR.selctedInd = addRefR.selectedLocationInd;
+    });
     super.initState();
   }
 

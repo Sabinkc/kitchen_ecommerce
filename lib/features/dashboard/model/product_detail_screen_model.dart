@@ -21,7 +21,7 @@ class ProductDetailScreenModel extends ChangeNotifier {
 
   void loadProductDetail(ProductDetailModel product) {
     product = product;
-    logger.log("product detail: $product");
+    // logger.log("product detail: $product");
     notifyListeners();
   }
 
