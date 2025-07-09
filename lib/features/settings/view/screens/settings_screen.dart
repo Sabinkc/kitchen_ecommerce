@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
+import 'package:kitchen_ecommerce/features/settings/view/screens/manage_address_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -80,20 +82,30 @@ class SettingsScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 15.w),
                     child: Divider(color: ComColors.lightGrey, height: 0),
                   ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.location_on_outlined,
-                      size: 25.r,
-                      color: ComColors.priLightColor,
-                    ),
-                    title: Text(
-                      "Manage Address",
-                      style: TextStyle(fontSize: 17.sp),
-                    ),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 15.r,
-                      color: ComColors.priLightColor,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const ManageAddressScreen(),
+                        ),
+                      );
+                    },
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.location_on_outlined,
+                        size: 25.r,
+                        color: ComColors.priLightColor,
+                      ),
+                      title: Text(
+                        "Manage Address",
+                        style: TextStyle(fontSize: 17.sp),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15.r,
+                        color: ComColors.priLightColor,
+                      ),
                     ),
                   ),
                   Padding(

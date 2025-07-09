@@ -9,15 +9,15 @@ import 'package:kitchen_ecommerce/features/settings/view/widgets/add_address_wid
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-class ShippingAddressScreen extends ConsumerStatefulWidget {
-  const ShippingAddressScreen({super.key});
+class ManageAddressScreen extends ConsumerStatefulWidget {
+  const ManageAddressScreen({super.key});
 
   @override
-  ConsumerState<ShippingAddressScreen> createState() =>
-      _ShippingAddressScreenState();
+  ConsumerState<ManageAddressScreen> createState() =>
+      _ManageAddressScreenState();
 }
 
-class _ShippingAddressScreenState extends ConsumerState<ShippingAddressScreen> {
+class _ManageAddressScreenState extends ConsumerState<ManageAddressScreen> {
   @override
   void initState() {
     Future.delayed(Duration.zero, () {
@@ -31,11 +31,12 @@ class _ShippingAddressScreenState extends ConsumerState<ShippingAddressScreen> {
   Widget build(BuildContext context) {
     final addRef = ref.watch(addressController);
     final addRefR = ref.read(addressController);
+    final height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: const Text(
-          "Shipping Address",
+          "Manage Address",
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
         centerTitle: true,
