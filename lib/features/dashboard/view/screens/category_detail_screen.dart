@@ -276,7 +276,7 @@ class CategoryDetailScreen extends ConsumerWidget {
                                                     ),
                                                   ),
                                                   Text(
-                                                    "${catRef.catProd[index].price}",
+                                                    catRef.catProd[index].price,
                                                     style: TextStyle(
                                                       decoration: TextDecoration
                                                           .lineThrough,
@@ -289,7 +289,7 @@ class CategoryDetailScreen extends ConsumerWidget {
                                                   ),
                                                   const SizedBox(width: 5),
                                                   Text(
-                                                    "${catRef.catProd[index].priceAfterDis}",
+                                                    catRef.catProd[index].priceAfterDis,
                                                     style: TextStyle(
                                                       fontSize: conHeght * 0.07,
                                                       color: ComColors
@@ -309,7 +309,7 @@ class CategoryDetailScreen extends ConsumerWidget {
                                                     ),
                                                   ),
                                                   Text(
-                                                    "${catRef.catProd[index].price}",
+                                                    catRef.catProd[index].price,
                                                     style: TextStyle(
                                                       fontSize: conHeght * 0.07,
                                                       color: ComColors

@@ -273,7 +273,7 @@ class HomeBottomproducts extends ConsumerWidget {
                                           ),
                                         ),
                                         Text(
-                                          "${botProdRef.botmProducts[index].price}",
+                                          botProdRef.botmProducts[index].price,
                                           style: TextStyle(
                                             decoration:
                                                 TextDecoration.lineThrough,
@@ -284,7 +284,7 @@ class HomeBottomproducts extends ConsumerWidget {
                                         ),
                                         const SizedBox(width: 5),
                                         Text(
-                                          "${botProdRef.botmProducts[index].priceAfterDis}",
+                                          botProdRef.botmProducts[index].priceAfterDis,
                                           style: TextStyle(
                                             fontSize: conHeght * 0.07,
                                             color: ComColors.priLightColor,
@@ -302,7 +302,7 @@ class HomeBottomproducts extends ConsumerWidget {
                                           ),
                                         ),
                                         Text(
-                                          "${botProdRef.botmProducts[index].price}",
+                                          botProdRef.botmProducts[index].price,
                                           style: TextStyle(
                                             fontSize: conHeght * 0.07,
                                             color: ComColors.priLightColor,

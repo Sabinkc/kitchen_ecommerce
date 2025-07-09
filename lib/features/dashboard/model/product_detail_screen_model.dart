@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/product_details_data.dart';
-import 'dart:developer' as logger;
 
 class ProductDetailScreenModel extends ChangeNotifier {
   ProductDetailModel product = ProductDetailModel(
@@ -11,12 +10,11 @@ class ProductDetailScreenModel extends ChangeNotifier {
     category: "",
     productDetails: "",
     price: "",
-    features: [],
-    specifications: {},
     rating: "",
     priceAfterDis: "",
     isOffer: false,
     discountPercent: 0,
+    dynamicData: {},
   );
 
   void loadProductDetail(ProductDetailModel product) {

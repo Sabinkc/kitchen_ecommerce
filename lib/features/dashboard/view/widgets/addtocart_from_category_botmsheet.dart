@@ -303,7 +303,7 @@ class _AddToCartBottomSheetState
                                         ),
                                       ),
                                       Text(
-                                        "${catRef.catProd[widget.prodIndex].price}",
+                                        catRef.catProd[widget.prodIndex].price,
                                         style: TextStyle(
                                           decoration:
                                               TextDecoration.lineThrough,
@@ -315,7 +315,7 @@ class _AddToCartBottomSheetState
                                       ),
                                       const SizedBox(width: 5),
                                       Text(
-                                        "${catRef.catProd[widget.prodIndex].priceAfterDis}",
+                                        catRef.catProd[widget.prodIndex].priceAfterDis,
                                         style: TextStyle(
                                           color: ComColors.priLightColor,
                                           fontWeight: FontWeight.bold,
@@ -334,7 +334,7 @@ class _AddToCartBottomSheetState
                                         ),
                                       ),
                                       Text(
-                                        "${catRef.catProd[widget.prodIndex].price}",
+                                        catRef.catProd[widget.prodIndex].price,
                                         style: TextStyle(
                                           color: ComColors.priLightColor,
                                           fontSize: 16.sp,

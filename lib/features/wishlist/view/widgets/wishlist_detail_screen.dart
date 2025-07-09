@@ -349,235 +349,222 @@ class _ProductDetailScreenState extends ConsumerState<WishlistDetailScreen> {
                             },
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: height * 0.02),
-                          child: InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (context) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    height: height * 0.5,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 20,
-                                        vertical: 10,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+
+                        ListView.builder(
+                          padding: EdgeInsets.only(top: 7.h),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: wishRef
+                              .wishList[widget.prodIndex]
+                              .dynamicData
+                              .length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.symmetric(vertical: 7.h),
+                              child: InkWell(
+                                onTap: () {
+                                  final key = wishRef
+                                      .wishList[widget.prodIndex]
+                                      .dynamicData
+                                      .keys
+                                      .elementAt(index);
+                                  final value = wishRef
+                                      .wishList[widget.prodIndex]
+                                      .dynamicData[key];
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                        height: height * 0.5,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 20,
+                                            vertical: 10,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            spacing: height * 0.01,
                                             children: [
-                                              const Text(
-                                                "Features",
-                                                style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    "$key",
+                                                    style: const TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () =>
+                                                        Navigator.pop(context),
+                                                    child: const Icon(
+                                                      Icons.cancel_outlined,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              InkWell(
-                                                onTap: () =>
-                                                    Navigator.pop(context),
-                                                child: const Icon(
-                                                  Icons.cancel_outlined,
-                                                ),
+                                              // SizedBox(height: height * 0.01),
+                                              Expanded(
+                                                child: value is List
+                                                    ? ListView.builder(
+                                                        itemCount: value.length,
+                                                        itemBuilder: (context, index) {
+                                                          return Padding(
+                                                            padding:
+                                                                const EdgeInsets.symmetric(
+                                                                  vertical: 5,
+                                                                ),
+                                                            child: Row(
+                                                              spacing: 5,
+                                                              children: [
+                                                                const Text(
+                                                                  "➜",
+                                                                  style: TextStyle(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  value[index],
+                                                                  style: const TextStyle(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontSize:
+                                                                        18,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                      )
+                                                    : value is Map
+                                                    ? ListView.builder(
+                                                        itemCount: value.length,
+                                                        itemBuilder: (context, index) {
+                                                          final itemKey = value
+                                                              .keys
+                                                              .elementAt(index);
+
+                                                          final itemValue =
+                                                              value[itemKey] ??
+                                                              "Not available";
+                                                          return Padding(
+                                                            padding:
+                                                                const EdgeInsets.symmetric(
+                                                                  vertical: 5,
+                                                                ),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  itemKey
+                                                                      .toString(),
+                                                                  style: const TextStyle(
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                                ),
+                                                                Row(
+                                                                  spacing: 5,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    const Text(
+                                                                      "➜",
+                                                                      style: TextStyle(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      itemValue
+                                                                          .toString(),
+                                                                      style: const TextStyle(
+                                                                        color: Colors
+                                                                            .grey,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                      )
+                                                    : Text(
+                                                        value,
+                                                        style: TextStyle(
+                                                          fontSize: 15.sp,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: height * 0.02),
-                                          Expanded(
-                                            child: ListView.builder(
-                                              itemCount: wishRef
-                                                  .wishList[widget.prodIndex]
-                                                  .features
-                                                  .length,
-                                              itemBuilder: (context, index) {
-                                                return Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                        vertical: 5,
-                                                      ),
-                                                  child: Row(
-                                                    spacing: 5,
-                                                    children: [
-                                                      const Text(
-                                                        "➜",
-                                                        style: TextStyle(
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        wishRef
-                                                            .wishList[widget
-                                                                .prodIndex]
-                                                            .features[index],
-                                                        style: const TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 18,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                        ),
+                                      );
+                                    },
                                   );
                                 },
-                              );
-                            },
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  spacing: 5,
+                                child: Column(
+                                  spacing: 14.h,
                                   children: [
-                                    Icon(Icons.new_releases_outlined),
-                                    Text(
-                                      "Features",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ],
-                                ),
-                                Icon(Icons.arrow_forward_ios, size: 18),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Divider(height: 0, color: Colors.grey[300]),
-                        InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  height: height * 0.5,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 10,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      spacing: height * 0.01,
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          spacing: 5,
                                           children: [
-                                            const Text(
-                                              "Specifications",
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            InkWell(
-                                              onTap: () =>
-                                                  Navigator.pop(context),
-                                              child: const Icon(
-                                                Icons.cancel_outlined,
+                                            const Icon(Icons.info_outline),
+                                            Text(
+                                              // "Specifications",
+                                              "${wishRef.wishList[widget.prodIndex].dynamicData.keys.elementAt(index)}",
+                                              style: const TextStyle(
+                                                fontSize: 16,
                                               ),
                                             ),
                                           ],
                                         ),
-                                        // SizedBox(height: height * 0.01),
-                                        Expanded(
-                                          child: ListView.builder(
-                                            itemCount: wishRef
-                                                .wishList[widget.prodIndex]
-                                                .specifications
-                                                .length,
-                                            itemBuilder: (context, index) {
-                                              final specMap = wishRef
-                                                  .wishList[widget.prodIndex]
-                                                  .specifications;
-                                              final key = specMap.keys
-                                                  .elementAt(index);
-                                              final value =
-                                                  specMap[key] ??
-                                                  "Not available";
-                                              return Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                      vertical: 5,
-                                                    ),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      key,
-                                                      style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      spacing: 5,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        const Text(
-                                                          "➜",
-                                                          style: TextStyle(
-                                                            color: Colors.grey,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          value,
-                                                          style:
-                                                              const TextStyle(
-                                                                color:
-                                                                    Colors.grey,
-                                                              ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          ),
+                                        const Icon(
+                                          Icons.arrow_forward_ios,
+                                          size: 18,
                                         ),
                                       ],
                                     ),
-                                  ),
-                                );
-                              },
+                                    if (index !=
+                                        wishRef
+                                                .wishList[widget.prodIndex]
+                                                .dynamicData
+                                                .length -
+                                            1)
+                                      Divider(
+                                        height: 0,
+                                        color: Colors.grey[300],
+                                      ),
+                                  ],
+                                ),
+                              ),
                             );
                           },
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                spacing: 5,
-                                children: [
-                                  Icon(Icons.info_outline),
-                                  Text(
-                                    "Specifications",
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ],
-                              ),
-                              Icon(Icons.arrow_forward_ios, size: 18),
-                            ],
-                          ),
                         ),
                       ],
                     ),

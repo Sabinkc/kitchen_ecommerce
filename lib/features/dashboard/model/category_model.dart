@@ -3,10 +3,12 @@ import 'package:kitchen_ecommerce/features/dashboard/model/product_details_data.
 // import 'dart:developer' as logger;
 
 class CategoryModel extends ChangeNotifier {
-  List catProd = [];
+  List<ProductDetailModel> catProd = [];
 
   loadProductDetail(String subCat) {
-    List prod = products.where((cat) => cat.subCategory == subCat).toList();
+    List<ProductDetailModel> prod = products
+        .where((cat) => cat.subCategory == subCat)
+        .toList();
     catProd = prod;
     notifyListeners();
     // logger.log("category prod: $catProd");

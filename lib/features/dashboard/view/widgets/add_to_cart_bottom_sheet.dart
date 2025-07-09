@@ -308,7 +308,7 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                                         ),
                                       ),
                                       Text(
-                                        "${botmProdRef.botmProducts[widget.prodIndex].price}",
+                                        botmProdRef.botmProducts[widget.prodIndex].price,
                                         style: TextStyle(
                                           decoration:
                                               TextDecoration.lineThrough,
@@ -320,7 +320,7 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                                       ),
                                       const SizedBox(width: 5),
                                       Text(
-                                        "${botmProdRef.botmProducts[widget.prodIndex].priceAfterDis}",
+                                        botmProdRef.botmProducts[widget.prodIndex].priceAfterDis,
                                         style: TextStyle(
                                           color: ComColors.priLightColor,
                                           fontWeight: FontWeight.bold,
@@ -339,7 +339,7 @@ class _AddToCartBottomSheetState extends ConsumerState<AddToCartBottomSheet> {
                                         ),
                                       ),
                                       Text(
-                                        "${botmProdRef.botmProducts[widget.prodIndex].price}",
+                                        botmProdRef.botmProducts[widget.prodIndex].price,
                                         style: TextStyle(
                                           color: ComColors.priLightColor,
                                           fontSize: 16.sp,

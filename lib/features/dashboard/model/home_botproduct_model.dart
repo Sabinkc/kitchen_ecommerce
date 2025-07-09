@@ -8,7 +8,7 @@ class HomeBotproductModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  List botmProducts = products;
+  List<ProductDetailModel> botmProducts = products;
 
   void updateBotmProds(int index) {
     switch (index) {
