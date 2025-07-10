@@ -361,6 +361,7 @@
 //   }
 // }
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -371,6 +372,9 @@ import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart'
 import 'package:kitchen_ecommerce/features/cart/view/screens/payment_screen.dart';
 import 'package:kitchen_ecommerce/features/cart/view/screens/shipping_address_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
+import 'package:kitchen_ecommerce/features/settings/view/widgets/add_address_widget.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class CheckoutScreen extends ConsumerStatefulWidget {
   const CheckoutScreen({super.key});
@@ -432,83 +436,133 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
               style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w500),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Column(
-              children: [
-                Row(
-                  spacing: 3.w,
-                  children: [
-                    Icon(Icons.place_outlined, color: ComColors.priLightColor),
-                    Text(
-                      addRef.selectedLocation.place,
-                      style: TextStyle(fontSize: 15.sp),
+          addRef.locations.isEmpty
+              ? Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 10.h,
+                  ),
+                  child: DottedBorder(
+                    options: RoundedRectDottedBorderOptions(
+                      dashPattern: [4, 4],
+                      strokeWidth: 1.5.r,
+                      color: ComColors.priLightColor,
+                      radius: Radius.circular(10.r),
                     ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  spacing: 10.w,
-                  children: [
-                    Expanded(
-                      child: Row(
+                    child: InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (context) {
+                            return const AddAddressWidget();
+                          },
+                        );
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: ComColors.lightGrey,
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 10.h,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.add, color: ComColors.priLightColor),
+                            Text(
+                              "Add New Shippping Address",
+                              style: TextStyle(color: ComColors.priLightColor),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: Column(
+                    children: [
+                      Row(
                         spacing: 3.w,
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.place_outlined,
-                            color: Colors.transparent,
+                            color: ComColors.priLightColor,
                           ),
-                          Flexible(
-                            child: Text(
-                              addRef.selectedLocation.completeAddress,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 13.sp,
+                          Text(
+                            addRef.selectedLocation.place,
+                            style: TextStyle(fontSize: 15.sp),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        spacing: 10.w,
+                        children: [
+                          Expanded(
+                            child: Row(
+                              spacing: 3.w,
+                              children: [
+                                const Icon(
+                                  Icons.place_outlined,
+                                  color: Colors.transparent,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    "${addRef.selectedLocation.completeAddress}, ${addRef.selectedLocation.floor}, ${addRef.selectedLocation.landmark}",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 13.sp,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) =>
+                                      const ShippingAddressScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 5.w,
+                                vertical: 2.h,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(18.r),
+                                border: Border.all(
+                                  color: ComColors.lightGrey,
+                                  width: 1.3.r,
+                                ),
+                              ),
+                              child: Text(
+                                "CHANGE",
+                                style: TextStyle(
+                                  color: ComColors.priLightColor,
+                                  fontSize: 13.sp,
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const ShippingAddressScreen(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 5.w,
-                          vertical: 2.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18.r),
-                          border: Border.all(
-                            color: ComColors.lightGrey,
-                            width: 1.3.r,
-                          ),
-                        ),
-                        child: Text(
-                          "CHANGE",
-                          style: TextStyle(
-                            color: ComColors.priLightColor,
-                            fontSize: 13.sp,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
           SizedBox(height: 3.h),
 
           Padding(
@@ -731,6 +785,18 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                 backgroundColor: ComColors.priLightColor,
               ),
               onPressed: () {
+                if (addRef.locations.isEmpty) {
+                  showTopSnackBar(
+                    displayDuration: const Duration(milliseconds: 500),
+                    Overlay.of(context),
+                    CustomSnackBar.error(
+                      backgroundColor: ComColors.darkRed,
+
+                      message: "You must add at least one shipping address!",
+                    ),
+                  );
+                  return;
+                }
                 Navigator.push(
                   context,
                   CupertinoPageRoute(

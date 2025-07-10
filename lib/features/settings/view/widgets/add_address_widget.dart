@@ -35,7 +35,6 @@ class _AddAddressWidgetState extends ConsumerState<AddAddressWidget> {
     final height = MediaQuery.sizeOf(context).height;
     final addAddRef = ref.watch(addAddressController);
     final addAddRefR = ref.read(addAddressController);
-    final addRef = ref.watch(addressController);
     final addRefR = ref.read(addressController);
 
     return KeyboardDismisser(
@@ -215,6 +214,18 @@ class _AddAddressWidgetState extends ConsumerState<AddAddressWidget> {
                       CustomSnackBar.error(
                         backgroundColor: ComColors.darkRed,
                         message: "All fields are required!",
+                      ),
+                    );
+                    return;
+                  }
+                  if (addRefR.locations.length > 4) {
+                    showTopSnackBar(
+                      displayDuration: const Duration(milliseconds: 500),
+                      Overlay.of(context),
+                      CustomSnackBar.error(
+                        backgroundColor: ComColors.darkRed,
+                        message:
+                            "You cannot add more than 5 addresses! Delete some first.",
                       ),
                     );
                     return;
