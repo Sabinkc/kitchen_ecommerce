@@ -461,7 +461,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                           ),
                           Flexible(
                             child: Text(
-                              addRef.selectedLocation.details,
+                              addRef.selectedLocation.completeAddress,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

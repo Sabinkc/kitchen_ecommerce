@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/cart/controller/address_controller.dart';
-import 'package:kitchen_ecommerce/features/cart/model/address_data.dart';
+import 'package:kitchen_ecommerce/features/settings/model/address_data.dart';
 import 'package:kitchen_ecommerce/features/settings/view/widgets/add_address_widget.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -22,7 +22,7 @@ class _ShippingAddressScreenState extends ConsumerState<ShippingAddressScreen> {
   void initState() {
     Future.delayed(Duration.zero, () {
       final addRefR = ref.read(addressController);
-      addRefR.selctedInd = addRefR.selectedLocationInd;
+      addRefR.resetSelectedInd();
     });
     super.initState();
   }
@@ -97,7 +97,7 @@ class _ShippingAddressScreenState extends ConsumerState<ShippingAddressScreen> {
                                 ),
                                 Flexible(
                                   child: Text(
-                                    addRef.locations[index].details,
+                                    addRef.locations[index].completeAddress,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -167,7 +167,7 @@ class _ShippingAddressScreenState extends ConsumerState<ShippingAddressScreen> {
                     isScrollControlled: true,
                     context: context,
                     builder: (context) {
-                      return AddAddressWidget();
+                      return const AddAddressWidget();
                     },
                   );
                 },

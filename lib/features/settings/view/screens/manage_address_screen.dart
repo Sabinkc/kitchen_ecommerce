@@ -4,7 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/cart/controller/address_controller.dart';
-import 'package:kitchen_ecommerce/features/cart/model/address_data.dart';
+import 'package:kitchen_ecommerce/features/settings/model/address_data.dart';
+
 import 'package:kitchen_ecommerce/features/settings/view/widgets/add_address_widget.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -22,7 +23,7 @@ class _ManageAddressScreenState extends ConsumerState<ManageAddressScreen> {
   void initState() {
     Future.delayed(Duration.zero, () {
       final addRefR = ref.read(addressController);
-      addRefR.selctedInd = addRefR.selectedLocationInd;
+      addRefR.resetSelectedInd();
     });
     super.initState();
   }
@@ -31,7 +32,7 @@ class _ManageAddressScreenState extends ConsumerState<ManageAddressScreen> {
   Widget build(BuildContext context) {
     final addRef = ref.watch(addressController);
     final addRefR = ref.read(addressController);
-    final height = MediaQuery.sizeOf(context).height;
+
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -98,7 +99,7 @@ class _ManageAddressScreenState extends ConsumerState<ManageAddressScreen> {
                                 ),
                                 Flexible(
                                   child: Text(
-                                    addRef.locations[index].details,
+                                    addRef.locations[index].completeAddress,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -168,7 +169,7 @@ class _ManageAddressScreenState extends ConsumerState<ManageAddressScreen> {
                     isScrollControlled: true,
                     context: context,
                     builder: (context) {
-                      return AddAddressWidget();
+                      return const AddAddressWidget();
                     },
                   );
                 },
