@@ -10,6 +10,7 @@ import 'package:kitchen_ecommerce/features/settings/view/widgets/add_address_wid
 import 'package:kitchen_ecommerce/features/settings/view/widgets/delete_address_widget.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'dart:developer' as logger;
 
 class ShippingAddressScreen extends ConsumerStatefulWidget {
   const ShippingAddressScreen({super.key});
@@ -24,7 +25,14 @@ class _ShippingAddressScreenState extends ConsumerState<ShippingAddressScreen> {
   void initState() {
     Future.delayed(Duration.zero, () {
       final addRefR = ref.read(addressController);
+      logger.log("selected ind: ${addRefR.selctedInd}");
+      logger.log("selected location ind: ${addRefR.selectedLocationInd}");
+      logger.log("selected location: ${addRefR.selectedLocation}");
       addRefR.resetSelectedInd();
+      logger.log(
+        "selected location ind after reset: ${addRefR.selectedLocationInd}",
+      );
+      logger.log("selected location after reset: ${addRefR.selectedLocation}");
     });
     super.initState();
   }
@@ -62,7 +70,9 @@ class _ShippingAddressScreenState extends ConsumerState<ShippingAddressScreen> {
           SizedBox(height: 5.h),
           Expanded(
             child: addRef.locations.isEmpty
-                ? const Center(child: Text("No shipping address added till now"))
+                ? const Center(
+                    child: Text("No shipping address added till now"),
+                  )
                 : ListView.builder(
                     itemCount: addRef.locations.length,
                     itemBuilder: (context, index) {

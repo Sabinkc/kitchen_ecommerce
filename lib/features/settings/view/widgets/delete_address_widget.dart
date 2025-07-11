@@ -65,10 +65,23 @@ class DeleteAddressWidget extends ConsumerWidget {
                       elevation: 0,
                     ),
                     onPressed: () {
+                      if (addRefR.locations[index] ==
+                          addRefR.selectedLocation) {
+                        showTopSnackBar(
+                          displayDuration: const Duration(milliseconds: 1000),
+                          Overlay.of(context),
+                          CustomSnackBar.error(
+                            backgroundColor: ComColors.darkRed,
+                            message:
+                                "Applied location cannot be deleted. Apply another location first to delete this location.",
+                          ),
+                        );
+                        return;
+                      }
                       addRefR.deleteLocation(index);
                       Navigator.pop(context);
                       showTopSnackBar(
-                        displayDuration: const Duration(milliseconds: 500),
+                        displayDuration: const Duration(milliseconds: 1000),
                         Overlay.of(context),
                         CustomSnackBar.success(
                           backgroundColor: ComColors.priLightColor,

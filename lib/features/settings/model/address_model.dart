@@ -12,11 +12,6 @@ class AddressModel extends ChangeNotifier {
     // logger.log("locations: $locations");
   }
 
-  void deleteLocation(int index) {
-    locations.removeAt(index);
-    notifyListeners();
-  }
-
   int selctedInd = 0;
 
   updateSelectedIndex(int index) {
@@ -28,6 +23,15 @@ class AddressModel extends ChangeNotifier {
 
   void resetSelectedInd() {
     selctedInd = selectedLocationInd;
+    notifyListeners();
+  }
+
+  void deleteLocation(int index) {
+    locations.removeAt(index);
+    if (index < selectedLocationInd) {
+      selctedInd = selctedInd - 1;
+      selectedLocationInd = selectedLocationInd - 1;
+    }
     notifyListeners();
   }
 
