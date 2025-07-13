@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/settings/view/screens/help_screen.dart';
 import 'package:kitchen_ecommerce/features/settings/view/screens/manage_address_screen.dart';
+import 'package:kitchen_ecommerce/features/settings/view/screens/my_orders_screen.dart';
 import 'package:kitchen_ecommerce/features/settings/view/screens/payment_method_screen.dart';
 import 'package:kitchen_ecommerce/features/settings/view/screens/privacy_policy_screen.dart';
+import 'package:kitchen_ecommerce/features/settings/view/widgets/logout_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -145,17 +147,30 @@ class SettingsScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 15.w),
                     child: Divider(color: ComColors.lightGrey, height: 0),
                   ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.shopping_bag_outlined,
-                      size: 25.r,
-                      color: ComColors.priLightColor,
-                    ),
-                    title: Text("My Orders", style: TextStyle(fontSize: 17.sp)),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 15.r,
-                      color: ComColors.priLightColor,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const MyOrdersScreen(),
+                        ),
+                      );
+                    },
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.shopping_bag_outlined,
+                        size: 25.r,
+                        color: ComColors.priLightColor,
+                      ),
+                      title: Text(
+                        "My Orders",
+                        style: TextStyle(fontSize: 17.sp),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15.r,
+                        color: ComColors.priLightColor,
+                      ),
                     ),
                   ),
                   Padding(
@@ -166,7 +181,9 @@ class SettingsScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        CupertinoPageRoute(builder: (context) => const HelpScreen()),
+                        CupertinoPageRoute(
+                          builder: (context) => const HelpScreen(),
+                        ),
                       );
                     },
                     child: ListTile(
@@ -209,6 +226,33 @@ class SettingsScreen extends StatelessWidget {
                         "Privacy Policy",
                         style: TextStyle(fontSize: 17.sp),
                       ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15.r,
+                        color: ComColors.priLightColor,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: Divider(color: ComColors.lightGrey, height: 0),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return const LogoutWidget();
+                        },
+                      );
+                    },
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.logout_outlined,
+                        size: 25.r,
+                        color: ComColors.priLightColor,
+                      ),
+                      title: Text("Log Out", style: TextStyle(fontSize: 17.sp)),
                       trailing: Icon(
                         Icons.arrow_forward_ios,
                         size: 15.r,

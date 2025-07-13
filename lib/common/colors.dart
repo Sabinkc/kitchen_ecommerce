@@ -8,3 +8,12 @@ class ComColors {
   static Color lightGrey = Colors.grey[200]!;
   static Color darkRed = Colors.red[300]!;
 }
+
+// class ComColors {
+//   static Color priColor = const Color.fromARGB(255, 69, 96, 108);
+//   static Color priLightColor = const Color.fromARGB(255, 69, 96, 108);
+//   static Color secColor = Colors.blueGrey;
+//   static Color secLightColor = Colors.lightGreenAccent;
+//   static Color lightGrey = Colors.grey[200]!;
+//   static Color darkRed = Colors.red[300]!;
+// }

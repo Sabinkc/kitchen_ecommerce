@@ -1,18 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
-import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart';
-import 'package:kitchen_ecommerce/features/cart/view/screens/payment_success_screen.dart';
 
 class PaymentMethodScreen extends ConsumerWidget {
   const PaymentMethodScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cartRefR = ref.read(cartController);
+    // final cartRefR = ref.read(cartController);
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -335,15 +332,7 @@ class PaymentMethodScreen extends ConsumerWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: ComColors.priLightColor,
               ),
-              onPressed: () {
-                cartRefR.clearCartItems();
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const PaymentSuccessScreen(),
-                  ),
-                );
-              },
+              onPressed: () {},
               child: Text(
                 "Save Payment Method",
                 style: TextStyle(
