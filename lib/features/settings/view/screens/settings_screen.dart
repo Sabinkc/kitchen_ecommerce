@@ -44,7 +44,7 @@ class SettingsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => const NotificationScreen(),
+                    builder: (context) => NotificationScreen(),
                   ),
                 );
               },

@@ -3,7 +3,43 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 
 class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+  NotificationScreen({super.key});
+
+  final List<Map<String, dynamic>> todayNotifications = [
+    {
+      "title": "Order Shipped",
+      "icon": Icons.local_shipping_outlined, // physical delivery
+    },
+    {
+      "title": "Flash Sale Alert",
+      "icon": Icons
+          .discount_outlined, // discount tag icon :contentReference[oaicite:0]{index=0}
+    },
+    {
+      "title": "Product Review Request",
+      "icon": Icons.rate_review_outlined, // review
+    },
+  ];
+
+  List<Map> yesterdayNotifications = [
+    {
+      "title": "New PayPal Added",
+      "icon": Icons
+          .paypal_outlined, // PayPal logo :contentReference[oaicite:1]{index=1}
+    },
+    {
+      "title": "Newsletter Subscription",
+      "icon": Icons.email_outlined, // email
+    },
+    {
+      "title": "App Update Available",
+      "icon": Icons.system_update_outlined, // system update
+    },
+    {
+      "title": "Security Alert",
+      "icon": Icons.security_outlined, // security shield
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +108,7 @@ class NotificationScreen extends StatelessWidget {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 3,
+                itemCount: todayNotifications.length,
                 itemBuilder: (context, index) {
                   return Column(
                     spacing: 7.h,
@@ -90,7 +126,7 @@ class NotificationScreen extends StatelessWidget {
                               ),
 
                               child: Icon(
-                                Icons.car_rental_outlined,
+                                todayNotifications[index]["icon"],
                                 color: ComColors.priLightColor,
                                 size: 26.r,
                               ),
@@ -104,7 +140,7 @@ class NotificationScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Order Shipped",
+                                        todayNotifications[index]["title"],
                                         style: TextStyle(fontSize: 16.sp),
                                       ),
                                       Text(
@@ -157,7 +193,7 @@ class NotificationScreen extends StatelessWidget {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 4,
+                itemCount: yesterdayNotifications.length,
                 itemBuilder: (context, index) {
                   return Column(
                     spacing: 7.h,
@@ -175,7 +211,7 @@ class NotificationScreen extends StatelessWidget {
                               ),
 
                               child: Icon(
-                                Icons.car_rental_outlined,
+                                yesterdayNotifications[index]["icon"],
                                 color: ComColors.priLightColor,
                                 size: 26.r,
                               ),
@@ -189,7 +225,7 @@ class NotificationScreen extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Order Shipped",
+                                        yesterdayNotifications[index]["title"],
                                         style: TextStyle(fontSize: 16.sp),
                                       ),
                                       Text(
