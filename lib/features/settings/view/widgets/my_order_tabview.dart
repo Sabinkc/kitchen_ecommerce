@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
+import 'package:kitchen_ecommerce/features/settings/view/screens/track_order_screen.dart';
 
 class MyOrderTabview extends StatelessWidget {
   MyOrderTabview({super.key});
@@ -183,21 +185,31 @@ class MyOrderTabview extends StatelessWidget {
                                 shape: BoxShape.circle,
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 5.h,
-                                vertical: 3.h,
-                              ),
-                              decoration: BoxDecoration(
-                                color: ComColors.priLightColor,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Track Order",
-                                  style: TextStyle(
-                                    fontSize: 10.sp,
-                                    color: Colors.white,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => TrackOrderScreen(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 5.h,
+                                  vertical: 3.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: ComColors.priLightColor,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Track Order",
+                                    style: TextStyle(
+                                      fontSize: 10.sp,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),

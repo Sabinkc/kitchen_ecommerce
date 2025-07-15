@@ -5,7 +5,7 @@ import 'package:kitchen_ecommerce/features/dashboard/view/screens/home_screen.da
 import 'package:kitchen_ecommerce/features/cart/view/screens/cart_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/wishlist/view/screens/wishlist_screen.dart';
-import 'package:kitchen_ecommerce/features/settings/view/screens/settings_screen.dart';
+import 'package:kitchen_ecommerce/features/settings/view/screens/profile_screen.dart';
 
 class LandingScreen extends ConsumerStatefulWidget {
   const LandingScreen({super.key});
@@ -19,7 +19,7 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
     const HomeScreen(),
     CartScreen(),
     const FavouriteScreen(),
-    const SettingsScreen(),
+    const ProfileScreen(),
   ];
 
   @override
@@ -119,8 +119,8 @@ class _LandingScreenState extends ConsumerState<LandingScreen> {
                   ),
                   child: Icon(
                     lanRef.selIndex == 3
-                        ? Icons.settings
-                        : Icons.settings_outlined,
+                        ? Icons.person_2
+                        : Icons.person_2_outlined,
                     color: lanRef.selIndex == 3
                         ? ComColors.priLightColor
                         : Colors.white,
