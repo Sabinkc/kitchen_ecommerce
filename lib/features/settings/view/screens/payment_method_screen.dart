@@ -45,65 +45,6 @@ class PaymentMethodScreen extends ConsumerWidget {
               spacing: 7.h,
               children: [
                 Text(
-                  "Cash",
-                  style: TextStyle(
-                    fontSize: 17.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey[300]!),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        spacing: 7.w,
-                        children: [
-                          Icon(
-                            Icons.money_outlined,
-                            color: ComColors.priLightColor,
-                          ),
-                          Text(
-                            "Cash",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              color: Colors.grey,
-                              // fontWeight: FontWeight.w600,
-                              // fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 20.r,
-                        width: 20.r,
-
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: ComColors.priLightColor),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: ComColors.priLightColor,
-                              shape: BoxShape.circle,
-                            ),
-
-                            height: 10.r,
-                            width: 10.r,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 5.h),
-                Text(
                   "Credit & Debit Card",
                   style: TextStyle(
                     fontSize: 17.sp,
@@ -138,9 +79,12 @@ class PaymentMethodScreen extends ConsumerWidget {
                         ],
                       ),
 
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: ComColors.priLightColor,
+                      Text(
+                        "Link",
+                        style: TextStyle(
+                          color: ComColors.priLightColor,
+                          fontSize: 15.sp,
+                        ),
                       ),
                     ],
                   ),
@@ -193,14 +137,11 @@ class PaymentMethodScreen extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          Container(
-                            height: 20.r,
-                            width: 20.r,
-
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: Colors.grey[300]!),
-                              shape: BoxShape.circle,
+                          Text(
+                            "Link",
+                            style: TextStyle(
+                              color: ComColors.priLightColor,
+                              fontSize: 15.sp,
                             ),
                           ),
                         ],
@@ -244,14 +185,11 @@ class PaymentMethodScreen extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          Container(
-                            height: 20.r,
-                            width: 20.r,
-
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: Colors.grey[300]!),
-                              shape: BoxShape.circle,
+                          Text(
+                            "Link",
+                            style: TextStyle(
+                              color: ComColors.priLightColor,
+                              fontSize: 15.sp,
                             ),
                           ),
                         ],
@@ -296,14 +234,11 @@ class PaymentMethodScreen extends ConsumerWidget {
                               ),
                             ],
                           ),
-                          Container(
-                            height: 20.r,
-                            width: 20.r,
-
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: Colors.grey[300]!),
-                              shape: BoxShape.circle,
+                          Text(
+                            "Link",
+                            style: TextStyle(
+                              color: ComColors.priLightColor,
+                              fontSize: 15.sp,
                             ),
                           ),
                         ],
@@ -312,35 +247,6 @@ class PaymentMethodScreen extends ConsumerWidget {
                   ],
                 ),
               ],
-            ),
-          ),
-
-          const Spacer(),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-              border: Border(top: BorderSide(color: Colors.grey[300]!)),
-            ),
-            height: 70.h,
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ComColors.priLightColor,
-              ),
-              onPressed: () {},
-              child: Text(
-                "Save Payment Method",
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
             ),
           ),
         ],
