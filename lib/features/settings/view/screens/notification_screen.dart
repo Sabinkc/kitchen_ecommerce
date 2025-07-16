@@ -21,7 +21,7 @@ class NotificationScreen extends StatelessWidget {
     },
   ];
 
-  List<Map> yesterdayNotifications = [
+  final List<Map> yesterdayNotifications = [
     {
       "title": "New PayPal Added",
       "icon": Icons

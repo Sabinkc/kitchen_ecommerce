@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
+import 'package:kitchen_ecommerce/features/auth/view/screens/signin_screen.dart';
 
 class LogoutWidget extends StatelessWidget {
   const LogoutWidget({super.key});
@@ -75,7 +77,15 @@ class LogoutWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const SigninScreen(),
+                        ),
+                        (route) => false,
+                      );
+                    },
                     child: const Text(
                       "Yes, Logout",
                       style: TextStyle(

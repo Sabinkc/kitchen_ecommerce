@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 
-class PasswordManagerScreen extends StatelessWidget {
-  const PasswordManagerScreen({super.key});
+class ChangePasswordScreen extends StatelessWidget {
+  const ChangePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,6 @@ class PasswordManagerScreen extends StatelessWidget {
         appBar: AppBar(
           scrolledUnderElevation: 0,
 
-          title: const Text(
-            "Password Manager",
-            style: TextStyle(fontWeight: FontWeight.w500),
-          ),
-          centerTitle: true,
           leading: Padding(
             padding: const EdgeInsetsGeometry.only(left: 12),
             child: InkWell(
@@ -39,9 +34,25 @@ class PasswordManagerScreen extends StatelessWidget {
             spacing: 5.h,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Current Password", style: TextStyle(fontSize: 14.sp)),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "New Password",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30.sp),
+                ),
+              ),
+              Text(
+                "Your new password must be different from previously used passwords.",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey, fontSize: 15.sp),
+              ),
+              SizedBox(height: 15.h),
+              Text("Password", style: TextStyle(fontSize: 14.sp)),
               TextField(
                 decoration: InputDecoration(
+                  fillColor: ComColors.lightGrey,
+                  filled: true,
                   suffixIcon: const Icon(Icons.visibility_off_outlined),
                   hintText: "**************",
                   hintStyle: TextStyle(
@@ -65,52 +76,12 @@ class PasswordManagerScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5.h),
-                  child: Text(
-                    "Forgot Password?",
-
-                    style: TextStyle(
-                      color: ComColors.priLightColor,
-                      fontSize: 14.sp,
-                      decoration: TextDecoration.underline,
-                      decorationColor: ComColors.priLightColor,
-                      decorationStyle: TextDecorationStyle.solid,
-                    ),
-                  ),
-                ),
-              ),
+              SizedBox(height: 3.h),
               Text("New Password", style: TextStyle(fontSize: 14.sp)),
               TextField(
                 decoration: InputDecoration(
-                  suffixIcon: const Icon(Icons.visibility_off_outlined),
-                  hintText: "**************",
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: ComColors.lightGrey,
-                      width: 1.5.r,
-                    ),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: ComColors.secColor,
-                      width: 1.5.r,
-                    ),
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                ),
-              ),
-              Text("Confirm New Password", style: TextStyle(fontSize: 14.sp)),
-              TextField(
-                decoration: InputDecoration(
+                  fillColor: ComColors.lightGrey,
+                  filled: true,
                   suffixIcon: const Icon(Icons.visibility_off_outlined),
                   hintText: "**************",
                   hintStyle: TextStyle(

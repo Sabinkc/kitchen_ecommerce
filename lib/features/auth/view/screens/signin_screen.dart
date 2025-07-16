@@ -6,6 +6,7 @@ import 'package:kitchen_ecommerce/common/auth_passwordfield.dart';
 import 'package:kitchen_ecommerce/common/auth_textfield.dart';
 import 'package:kitchen_ecommerce/common/button.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
+import 'package:kitchen_ecommerce/features/auth/view/screens/forgot_password_screen.dart';
 import 'package:kitchen_ecommerce/features/auth/view/screens/signup_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/landing_screen.dart';
 
@@ -109,12 +110,23 @@ class SigninScreen extends StatelessWidget {
                                 ),
                                 Align(
                                   alignment: Alignment.centerRight,
-                                  child: Text(
-                                    "Forgot Password?",
-                                    style: TextStyle(
-                                      color: ComColors.secColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 13.sp,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                          builder: (context) =>
+                                              const ForgotPasswordScreen(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      "Forgot Password?",
+                                      style: TextStyle(
+                                        color: ComColors.secColor,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 13.sp,
+                                      ),
                                     ),
                                   ),
                                 ),
