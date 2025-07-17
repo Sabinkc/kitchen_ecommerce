@@ -35,302 +35,307 @@ class AddCardScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-              child: Stack(
-                children: [
-                  Container(
-                    height: height * 0.25,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.r),
-                      color: ComColors.priLightColor,
-                    ),
-                  ),
-                  Positioned(
-                    top: -80.r,
-                    right: -5.r,
-                    child: Container(
-                      height: 200.r,
-                      width: 200.r,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                child: Stack(
+                  children: [
+                    Container(
+                      height: height * 0.25,
+                      width: double.infinity,
                       decoration: BoxDecoration(
-                        color: ComColors.lightGrey.withValues(alpha: 0.1),
-                        shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(15.r),
+                        color: ComColors.priLightColor,
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: -80.r,
-                    right: -100.r,
-                    child: Container(
-                      height: 200.r,
-                      width: 200.r,
-                      decoration: BoxDecoration(
-                        color: ComColors.lightGrey.withValues(alpha: 0.1),
-                        shape: BoxShape.circle,
+                    Positioned(
+                      top: -80.r,
+                      right: -5.r,
+                      child: Container(
+                        height: 200.r,
+                        width: 200.r,
+                        decoration: BoxDecoration(
+                          color: ComColors.lightGrey.withValues(alpha: 0.1),
+                          shape: BoxShape.circle,
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 0.h,
-                    right: 15.w,
-                    child: Icon(
-                      BoxIcons.bxl_visa,
-                      color: Colors.white,
-                      size: 60.r,
+                    Positioned(
+                      top: -80.r,
+                      right: -100.r,
+                      child: Container(
+                        height: 200.r,
+                        width: 200.r,
+                        decoration: BoxDecoration(
+                          color: ComColors.lightGrey.withValues(alpha: 0.1),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      top: 0.h,
+                      right: 15.w,
+                      child: Icon(
+                        BoxIcons.bxl_visa,
+                        color: Colors.white,
+                        size: 60.r,
+                      ),
+                    ),
 
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 18.h,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        spacing: 5.h,
-                        children: [
-                          Text(
-                            "4716 9456 3489 9802",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Card Holder Name",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11.sp,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Sabin KC",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Expiry Date",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11.sp,
-                                    ),
-                                  ),
-                                  Text(
-                                    "2026/01/04",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Icon(
-                                BoxIcons.bx_memory_card,
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: 18.h,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 5.h,
+                          children: [
+                            Text(
+                              "4716 9456 3489 9802",
+                              style: TextStyle(
                                 color: Colors.white,
-                                size: 28.r,
+                                fontSize: 24.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Card Holder Name",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11.sp,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Sabin KC",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Expiry Date",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11.sp,
+                                      ),
+                                    ),
+                                    Text(
+                                      "2026/01/04",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Icon(
+                                  BoxIcons.bx_memory_card,
+                                  color: Colors.white,
+                                  size: 28.r,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                child: Column(
+                  spacing: 5.h,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Card Holder Name", style: TextStyle(fontSize: 14.sp)),
+                    TextField(
+                      decoration: InputDecoration(
+                        fillColor: ComColors.lightGrey,
+                        filled: true,
+
+                        hintText: "Sabin KC",
+                        hintStyle: const TextStyle(color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ComColors.lightGrey,
+                            width: 1.5.r,
+                          ),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ComColors.secColor,
+                            width: 1.5.r,
+                          ),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 3.h),
+                    Text("Card Number", style: TextStyle(fontSize: 14.sp)),
+                    TextField(
+                      decoration: InputDecoration(
+                        fillColor: ComColors.lightGrey,
+                        filled: true,
+
+                        hintText: "4716 9456 3489 9802",
+                        hintStyle: const TextStyle(color: Colors.grey),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ComColors.lightGrey,
+                            width: 1.5.r,
+                          ),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: ComColors.secColor,
+                            width: 1.5.r,
+                          ),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 3.h),
+                    Row(
+                      spacing: 20.w,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            spacing: 5.h,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Expiry Date",
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                              TextField(
+                                decoration: InputDecoration(
+                                  fillColor: ComColors.lightGrey,
+                                  filled: true,
+
+                                  hintText: "2026/01/04",
+                                  hintStyle: const TextStyle(
+                                    color: Colors.grey,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: ComColors.lightGrey,
+                                      width: 1.5.r,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: ComColors.secColor,
+                                      width: 1.5.r,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-              child: Column(
-                spacing: 5.h,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Card Holder Name", style: TextStyle(fontSize: 14.sp)),
-                  TextField(
-                    decoration: InputDecoration(
-                      fillColor: ComColors.lightGrey,
-                      filled: true,
+                        ),
+                        Expanded(
+                          child: Column(
+                            spacing: 5,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("CVV", style: TextStyle(fontSize: 14.sp)),
+                              TextField(
+                                decoration: InputDecoration(
+                                  fillColor: ComColors.lightGrey,
+                                  filled: true,
 
-                      hintText: "Sabin KC",
-                      hintStyle: const TextStyle(color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ComColors.lightGrey,
-                          width: 1.5.r,
-                        ),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ComColors.secColor,
-                          width: 1.5.r,
-                        ),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 3.h),
-                  Text("Card Number", style: TextStyle(fontSize: 14.sp)),
-                  TextField(
-                    decoration: InputDecoration(
-                      fillColor: ComColors.lightGrey,
-                      filled: true,
-
-                      hintText: "4716 9456 3489 9802",
-                      hintStyle: const TextStyle(color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ComColors.lightGrey,
-                          width: 1.5.r,
-                        ),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: ComColors.secColor,
-                          width: 1.5.r,
-                        ),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 3.h),
-                  Row(
-                    spacing: 20.w,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          spacing: 5.h,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Expiry Date",
-                              style: TextStyle(fontSize: 14.sp),
-                            ),
-                            TextField(
-                              decoration: InputDecoration(
-                                fillColor: ComColors.lightGrey,
-                                filled: true,
-
-                                hintText: "2026/01/04",
-                                hintStyle: const TextStyle(color: Colors.grey),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: ComColors.lightGrey,
-                                    width: 1.5.r,
+                                  hintText: "000",
+                                  hintStyle: const TextStyle(
+                                    color: Colors.grey,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: ComColors.secColor,
-                                    width: 1.5.r,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: ComColors.lightGrey,
+                                      width: 1.5.r,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.r),
                                   ),
-                                  borderRadius: BorderRadius.circular(10.r),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: ComColors.secColor,
+                                      width: 1.5.r,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          spacing: 5,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("CVV", style: TextStyle(fontSize: 14.sp)),
-                            TextField(
-                              decoration: InputDecoration(
-                                fillColor: ComColors.lightGrey,
-                                filled: true,
-
-                                hintText: "000",
-                                hintStyle: const TextStyle(color: Colors.grey),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: ComColors.lightGrey,
-                                    width: 1.5.r,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: ComColors.secColor,
-                                    width: 1.5.r,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                              ),
-                            ),
-                          ],
+                      ],
+                    ),
+                    SizedBox(height: 4.h),
+                    Row(
+                      spacing: 5.h,
+                      children: [
+                        Icon(
+                          Icons.check_box,
+                          color: ComColors.priLightColor,
+                          size: 24.r,
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 4.h),
-                  Row(
-                    spacing: 5.h,
-                    children: [
-                      Icon(
-                        Icons.check_box,
-                        color: ComColors.priLightColor,
-                        size: 24.r,
-                      ),
-                      Text("Save Card", style: TextStyle(fontSize: 16.sp)),
-                    ],
-                  ),
-                ],
+                        Text("Save Card", style: TextStyle(fontSize: 16.sp)),
+                      ],
+                    ),
+                  ],
+                ),
               ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-            const Spacer(),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
-              decoration: BoxDecoration(
+            border: Border(top: BorderSide(color: Colors.grey[300]!)),
+          ),
+          height: 70.h,
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ComColors.priLightColor,
+            ),
+            onPressed: () {},
+            child: Text(
+              "Add Card",
+              style: TextStyle(
+                fontSize: 15.sp,
                 color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                ),
-                border: Border(top: BorderSide(color: Colors.grey[300]!)),
-              ),
-              height: 70.h,
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ComColors.priLightColor,
-                ),
-                onPressed: () {},
-                child: Text(
-                  "Add Card",
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                fontWeight: FontWeight.bold,
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

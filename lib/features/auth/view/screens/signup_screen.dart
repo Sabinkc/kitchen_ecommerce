@@ -165,7 +165,7 @@ class SignupScreen extends StatelessWidget {
                                           context,
                                           CupertinoPageRoute(
                                             builder: (context) =>
-                                                TermsAndConditionsScreen(),
+                                                const TermsAndConditionsScreen(),
                                           ),
                                         );
                                       },

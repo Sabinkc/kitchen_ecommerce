@@ -558,7 +558,7 @@ class CartScreen extends ConsumerWidget {
                                 bottom: 2.h,
 
                                 child: SizedBox(
-                                  width: 100.w,
+                                  width: 110.w,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: ComColors.priLightColor,
@@ -692,7 +692,8 @@ class CartScreen extends ConsumerWidget {
                                 Navigator.push(
                                   context,
                                   CupertinoPageRoute(
-                                    builder: (context) => const CheckoutScreen(),
+                                    builder: (context) =>
+                                        const CheckoutScreen(),
                                   ),
                                 );
                               }
