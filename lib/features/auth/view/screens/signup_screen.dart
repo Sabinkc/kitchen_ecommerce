@@ -7,6 +7,7 @@ import 'package:kitchen_ecommerce/common/auth_textfield.dart';
 import 'package:kitchen_ecommerce/common/button.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:kitchen_ecommerce/features/auth/view/screens/signin_screen.dart';
+import 'package:kitchen_ecommerce/features/auth/view/screens/terms_and_condition_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/landing_screen.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -158,12 +159,23 @@ class SignupScreen extends StatelessWidget {
                                         color: Colors.black,
                                       ),
                                     ),
-                                    Text(
-                                      "Terms & Conditions",
-                                      style: TextStyle(
-                                        fontSize: 13.sp,
-                                        color: ComColors.secColor,
-                                        fontWeight: FontWeight.w500,
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          CupertinoPageRoute(
+                                            builder: (context) =>
+                                                TermsAndConditionsScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        "Terms & Conditions",
+                                        style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: ComColors.secColor,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ],
