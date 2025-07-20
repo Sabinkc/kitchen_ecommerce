@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +7,7 @@ import 'package:kitchen_ecommerce/features/cart/controller/cart_controller.dart'
 import 'package:kitchen_ecommerce/features/cart/model/cart_item_model.dart';
 import 'package:kitchen_ecommerce/features/dashboard/controller/dashboard_controller.dart';
 import 'package:kitchen_ecommerce/features/dashboard/model/color_converter.dart';
+import 'package:kitchen_ecommerce/features/dashboard/view/screens/view_review_screen.dart';
 import 'package:kitchen_ecommerce/features/wishlist/controller/wishlist_controller.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -223,20 +225,31 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Row(
-                              spacing: 5,
-                              children: [
-                                Icon(Icons.star, color: Colors.yellow[800]),
-                                Text(
-                                  botmProdRef
-                                      .botmProducts[widget.prodIndex]
-                                      .rating,
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) =>
+                                        const ViewReviewScreen(),
                                   ),
-                                ),
-                              ],
+                                );
+                              },
+                              child: Row(
+                                spacing: 5,
+                                children: [
+                                  Icon(Icons.star, color: Colors.yellow[800]),
+                                  Text(
+                                    botmProdRef
+                                        .botmProducts[widget.prodIndex]
+                                        .rating,
+                                    style: const TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),

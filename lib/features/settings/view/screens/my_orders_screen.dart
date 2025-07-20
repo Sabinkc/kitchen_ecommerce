@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
-import 'package:kitchen_ecommerce/features/settings/view/widgets/my_order_tabview.dart';
+import 'package:kitchen_ecommerce/features/settings/view/widgets/active_order_tabview.dart';
+import 'package:kitchen_ecommerce/features/settings/view/widgets/cancelled_order_tabview.dart';
+import 'package:kitchen_ecommerce/features/settings/view/widgets/completed_order_tabview.dart';
 
 class MyOrdersScreen extends StatelessWidget {
   const MyOrdersScreen({super.key});
@@ -56,9 +58,9 @@ class MyOrdersScreen extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    MyOrderTabview(),
-                    MyOrderTabview(),
-                    MyOrderTabview(),
+                    ActiveOrderTabview(),
+                    CompletedOrderTabview(),
+                    CancelledOrderTabview(),
                   ],
                 ),
               ),
