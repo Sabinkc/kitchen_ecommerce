@@ -47,6 +47,9 @@ dependencies:
   dotted_border: ^3.1.0
   pinput: ^5.0.1
   syncfusion_flutter_sliders: ^30.1.40
+  flutter_map: ^8.1.1
+  latlong2: ^0.9.1
+ 
   
  
   

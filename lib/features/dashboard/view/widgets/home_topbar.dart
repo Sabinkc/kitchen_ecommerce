@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
 import 'package:badges/badges.dart' as b;
 import 'package:kitchen_ecommerce/features/settings/view/screens/notification_screen.dart';
+import 'package:kitchen_ecommerce/test_screen.dart';
 
 class HomeTopbar extends StatelessWidget {
   const HomeTopbar({super.key});
@@ -19,15 +20,23 @@ class HomeTopbar extends StatelessWidget {
         spacing: 8.w,
         children: [
           const SizedBox(width: 0),
-          Container(
-            height: 35.r,
-            width: 35.r,
-            decoration: const BoxDecoration(shape: BoxShape.circle),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Image.asset(
-                "assets/images/profile.jpeg",
-                fit: BoxFit.cover,
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => const TestScreen()),
+              );
+            },
+            child: Container(
+              height: 35.r,
+              width: 35.r,
+              decoration: const BoxDecoration(shape: BoxShape.circle),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.asset(
+                  "assets/images/profile.jpeg",
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
