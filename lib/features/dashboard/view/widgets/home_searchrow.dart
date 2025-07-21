@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kitchen_ecommerce/common/colors.dart';
+import 'package:kitchen_ecommerce/features/dashboard/view/screens/filter_screen.dart';
 import 'package:kitchen_ecommerce/features/dashboard/view/screens/search_screen.dart';
 
 class HomeSearchRow extends StatelessWidget {
@@ -51,14 +52,23 @@ class HomeSearchRow extends StatelessWidget {
         ),
         Flexible(
           flex: 1,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: ComColors.priLightColor,
+          child: InkWell(
+            onTap: () {
+              // logger.log("button pressed");
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => const FilterScreen()),
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: ComColors.priLightColor,
+              ),
+              height: 40.h,
+              child: const Icon(Icons.filter_list, color: Colors.white),
             ),
-            height: 40.h,
-            child: const Icon(Icons.filter_list, color: Colors.white),
           ),
         ),
       ],

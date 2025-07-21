@@ -368,14 +368,15 @@ class LeaveReviewScreen extends StatelessWidget {
                   height: 50.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: ComColors.priLightColor,
+                      elevation: 0,
+                      backgroundColor: ComColors.lightGrey,
                     ),
                     onPressed: () {},
                     child: Text(
                       "Cancel",
                       style: TextStyle(
                         fontSize: 15.sp,
-                        color: Colors.white,
+                        color: ComColors.priLightColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -387,6 +388,7 @@ class LeaveReviewScreen extends StatelessWidget {
                   height: 50.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
+                      elevation: 0,
                       backgroundColor: ComColors.priLightColor,
                     ),
                     onPressed: () {},
